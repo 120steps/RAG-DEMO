@@ -1,5 +1,4 @@
 import json
-
 from rag_service import ask_rag
 
 with open("eval/test_case.json", "r", encoding="utf-8") as f:
