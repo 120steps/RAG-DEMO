@@ -1,48 +1,81 @@
+import os
 import chromadb
 from sentence_transformers import SentenceTransformer
+
+DATA_DIR = "./data"
+CHROMA_DIR = "./chroma_db"
+COLLECTION_NAME = "company_knowledge"
 
 # 1. 加载本地Ebedding模型
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # 2. 连接本地Chroma数据库
-client = chromadb.PersistentClient(path="./chroma_db")
+client = chromadb.PersistentClient(path=CHROMA_DIR)
 
 # 3. 创建一个collection
-collection = client.get_or_create_collection(name="company_policy")
+try:
+    client.delete_collection(
+        name = COLLECTION_NAME
+    )
+except Exception:
+    pass
+
+collection = client.get_or_create_collection(name=COLLECTION_NAME)
+
+all_chunks = []
+all_metadatas = []
+all_ids = []
 
 # 4. 读取文件
-with open("data/company_policy.txt", "r", encoding="utf-8") as file:
-    text = file.read()
+for filename in os.listdir(DATA_DIR):
+    if not filename.endswith(".txt"):
+        continue
 
-# 5. chunk
-chunks = [
-    chunk.strip()
-    for chunk in text.split("\n\n")
-    if chunk.strip()
-]
+    file_path = os.path.join(DATA_DIR, filename)
 
-metadatas = []
+    print(f"正在处理文件: {filename}")
 
-for i in range(len(chunks)):
-    metadatas.append({
-        "source": "company_policy",
-        "chunk_id": f"chunk_{i}"
-    })
-    
+    with open(file_path, "r", encoding="utf-8") as file:
+        text = file.read()
 
-# 6. 给所有知识块生成embedding
-embeddings = embedding_model.encode(chunks).tolist()
+    # 5. chunk
+    chunks = [
+        chunk.strip()
+        for chunk in text.split("\n\n")
+        if chunk.strip()
+    ]
 
-# 7. 创建唯一id
-ids = [f"chunk_{i}" for i in range(len(chunks))]
+    # 6. 为每个chunk创建metadata和唯一id
+    for chunk_index, chunk in enumerate(chunks):
+        chunk_id = f"{filename}_chunk_{chunk_index}"
+        metadata = {
+            "source": filename,
+            "chunk_id": chunk_id
+        }
+        all_chunks.append(chunk)
+        all_metadatas.append(metadata)
+        all_ids.append(chunk_id)
+
+# 7. 给所有知识块生成embedding
+embeddings = embedding_model.encode(all_chunks).tolist()
 
 # 8. 将知识块和embedding存入Chroma数据库
 collection.upsert(
-    ids=ids,
-    documents=chunks,
+    ids=all_ids,
+    documents=all_chunks,
     embeddings=embeddings,
-    metadatas=metadatas
+    metadatas=all_metadatas
 )
 
-print(f"成功写入{len(chunks)}条知识块到Chroma数据库。")
-print(f"当前向量库共有 {collection.count()} 条知识块。")
+print()
+print("知识库入库完成")
+print(
+    f"文件数量："
+    f"{len(set(m['source'] for m in all_metadatas))}"
+)
+print(
+    f"知识块数量：{len(all_chunks)}"
+)
+print(
+    f"Chroma数据量：{collection.count()}条"
+)

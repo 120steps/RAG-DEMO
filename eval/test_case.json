@@ -1,0 +1,72 @@
+[
+  {
+    "id": "Q001",
+    "question": "正式员工一年有多少天年假？",
+    "expected_answer": "10天",
+    "expected_source": "leave_policy.txt",
+    "should_answer": true
+  },
+  {
+    "id": "Q002",
+    "question": "工作满5年的员工年假是多少天？",
+    "expected_answer": "15天",
+    "expected_source": "leave_policy.txt",
+    "should_answer": true
+  },
+  {
+    "id": "Q003",
+    "question": "国内出差需要提前多久申请？",
+    "expected_answer": "提前3个工作日",
+    "expected_source": "travel_policy.txt",
+    "should_answer": true
+  },
+  {
+    "id": "Q004",
+    "question": "国际出差由谁批准？",
+    "expected_answer": "部门总经理",
+    "expected_source": "travel_policy.txt",
+    "should_answer": true
+  },
+  {
+    "id": "Q005",
+    "question": "超过5000元的费用需要谁审批？",
+    "expected_answer": "部门总经理",
+    "expected_source": "expense_policy.txt",
+    "should_answer": true
+  },
+  {
+    "id": "Q006",
+    "question": "发现网络安全事件后多久需要报告？",
+    "expected_answer": "1小时内",
+    "expected_source": "security_policy.txt",
+    "should_answer": true
+  },
+  {
+    "id": "Q007",
+    "question": "密码多久需要修改一次？",
+    "expected_answer": "90天",
+    "expected_source": "security_policy.txt",
+    "should_answer": true
+  },
+  {
+    "id": "Q008",
+    "question": "公司的CEO是谁？",
+    "expected_answer": "",
+    "expected_source": "",
+    "should_answer": false
+  },
+  {
+    "id": "Q009",
+    "question": "公司的总部在哪里？",
+    "expected_answer": "",
+    "expected_source": "",
+    "should_answer": false
+  },
+  {
+    "id": "Q010",
+    "question": "员工工资是多少？",
+    "expected_answer": "",
+    "expected_source": "",
+    "should_answer": false
+  }
+]
