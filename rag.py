@@ -25,20 +25,48 @@ results = collection.query(
 
 # 7. 获取检索结果
 retrieved_chunks = results["documents"][0]
+retrieved_metadatas = results["metadatas"][0]
+retrieved_distances = results["distances"][0]
 
 print("\n检索到的知识块:")
 
-for index, chunk in enumerate(
-    retrieved_chunks,
+for index, (chunk, metadata, distance) in enumerate(
+    zip(retrieved_chunks, retrieved_metadatas, retrieved_distances),
     start=1
 ):
     print(f"\n----  Chunk {index}. {chunk}")
+    print(
+        f"Metadata: {metadata['source']}"
+        f"/ Chunk {metadata['chunk_id']}"
+        f"/ Distance: {distance}"
+        )
 
 # 8. 将检索到的知识块和问题一起发送给模型
-context = "\n\n".join(retrieved_chunks)
+context_parts = []
+
+for chunk, metadata in zip(retrieved_chunks, retrieved_metadatas):
+    context_parts.append(f"""
+    context:    {chunk}
+    source:    {metadata['source']}
+    Chunk ID:    {metadata['chunk_id']}
+    """)
+
+context = "\n\n".join(context_parts)
 
 # 9.构建prompt
-prompt = f"根据以下知识块回答问题:\n\n企业制度: {context}\n\n问题: {question}\n\n如果企业制度中没有相关信息，请直接回答“抱歉，我无法回答这个问题。”"
+prompt = f"""
+你是企业知识库助手。
+只能根据以下知识块回答问题。 
+回答要求：
+1.不允许使用知识库之外的信息。 
+2.如果知识库没有答案，请回答：根据当前知识库无法回答。 
+3.回答最后需要列出引用来源。  
+
+知识库: {context}
+
+问题: {question}
+"""
+
 print("\nPrompt:")
 print(prompt)
 

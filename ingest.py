@@ -21,6 +21,15 @@ chunks = [
     if chunk.strip()
 ]
 
+metadatas = []
+
+for i in range(len(chunks)):
+    metadatas.append({
+        "source": "company_policy",
+        "chunk_id": f"chunk_{i}"
+    })
+    
+
 # 6. 给所有知识块生成embedding
 embeddings = embedding_model.encode(chunks).tolist()
 
@@ -31,7 +40,8 @@ ids = [f"chunk_{i}" for i in range(len(chunks))]
 collection.upsert(
     ids=ids,
     documents=chunks,
-    embeddings=embeddings
+    embeddings=embeddings,
+    metadatas=metadatas
 )
 
 print(f"成功写入{len(chunks)}条知识块到Chroma数据库。")
