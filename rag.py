@@ -12,5 +12,19 @@ print("\n AI answer:")
 print(result["answer"])
 
 print("\n Retrieved documents:")
-for metadata in result["metadatas"]:
-    print(f"Source: {metadata['source']}, Chunk ID: {metadata['chunk_id']}")
+for i, (document, metadata, distance) in enumerate(
+    zip(result["documents"], result["metadatas"], result["distances"]),
+    start=1
+    ):
+
+    print()
+    print(f"Top {i}")
+
+    print(
+        f"Source: {metadata['source']}, " 
+        f"Chunk ID: {metadata['chunk_id']}, "
+        f"Page: {metadata['page'] if 'page' in metadata else 'N/A'}, "
+        f"Distance: {distance:.4f}"
+    )
+
+    print(f"Document {i}:" + document)

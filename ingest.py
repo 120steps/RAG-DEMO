@@ -1,8 +1,10 @@
 import os
 import chromadb
 from sentence_transformers import SentenceTransformer
+from document_loader import load_pdf
 
-DATA_DIR = "./data"
+DATA_DIR = "./data/txt"
+PDF_DIR = "./data/pdf"
 CHROMA_DIR = "./chroma_db"
 COLLECTION_NAME = "company_knowledge"
 
@@ -26,7 +28,33 @@ all_chunks = []
 all_metadatas = []
 all_ids = []
 
-# 4. 读取文件
+# 4.1 读取pdf文件
+for filename in os.listdir(PDF_DIR):
+    if not filename.endswith(".pdf"):
+        continue
+
+    file_path = os.path.join(PDF_DIR, filename)
+
+    print(f"正在处理文件: {filename}")
+
+    docs = load_pdf(file_path)
+
+    for doc in docs:
+        document_id = (
+            f"{doc['source']}"
+            f"_page_{doc['page']}"
+            f"_chunk_{doc['chunk_index']}"
+        )
+        metadata = {
+            "source": doc["source"],
+            "chunk_id": doc["chunk_index"],
+            "page": doc["page"]
+        }
+        all_chunks.append(doc["text"])
+        all_metadatas.append(metadata)
+        all_ids.append(document_id)
+
+# 4.2 读取txt文件
 for filename in os.listdir(DATA_DIR):
     if not filename.endswith(".txt"):
         continue

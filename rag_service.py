@@ -30,9 +30,10 @@ def ask_rag(
 
     for document, metadata, distance in zip(documents, metadatas, distances):
         context_parts.append(f"""
-        context:    {document}
-        source:    {metadata['source']}
+        Context:    {document}
+        Source:    {metadata['source']}
         Chunk ID:    {metadata['chunk_id']}
+        Page:    {metadata['page'] if 'page' in metadata else 'N/A'}
         """)
 
         # 调试使用
@@ -49,9 +50,14 @@ def ask_rag(
 
 智能根据下面的知识块回答问题。
 
-如果知识库中没有答案，
-回答：
+要求：
+1.不允许使用知识库之外的信息
+2.如果知识库中没有答案，回答：
 根据当前知识库无法回答该问题。
+3. 回答必须简洁。
+4. 回答最后必须注明引用来源
+5. 引用格式：
+   来源： 文件名，第X页，知识块ID：Y
 
 知识库：
 {context}
