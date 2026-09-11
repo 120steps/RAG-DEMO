@@ -1,9 +1,7 @@
 import chromadb
 
-from sentence_transformers import SentenceTransformer
 from llm import generate_answer
-
-embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+from embedding import embed_text
 
 client = chromadb.PersistentClient(path="./chroma_db")
 
@@ -14,7 +12,7 @@ def ask_rag(
     top_k: int = 3
 ):
     question_embedding = (
-        embedding_model.encode(question).tolist()   
+        embed_text(question)
     )
 
     results = collection.query(

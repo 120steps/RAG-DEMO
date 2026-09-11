@@ -13,12 +13,12 @@ def load_pdf(file_path):
 
         chunks = split_text(text, chunk_size=60, overlap=20)
 
-        for chunk_index, chunk in enumerate(chunks):
+        for chunk_id, chunk in enumerate(chunks):
             documents.append({
                 "text": chunk,
                 "source": filename,
                 "page": page_index + 1,
-                "chunk_index": chunk_index
+                "chunk_id": chunk_id
             })
 
     doc.close()

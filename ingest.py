@@ -1,7 +1,8 @@
 import os
 import chromadb
-from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
 from document_loader import load_pdf
+from embedding import embed_texts
 
 DATA_DIR = "./data/txt"
 PDF_DIR = "./data/pdf"
@@ -9,7 +10,7 @@ CHROMA_DIR = "./chroma_db"
 COLLECTION_NAME = "company_knowledge"
 
 # 1. 加载本地Ebedding模型
-embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+# embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # 2. 连接本地Chroma数据库
 client = chromadb.PersistentClient(path=CHROMA_DIR)
@@ -43,11 +44,11 @@ for filename in os.listdir(PDF_DIR):
         document_id = (
             f"{doc['source']}"
             f"_page_{doc['page']}"
-            f"_chunk_{doc['chunk_index']}"
+            f"_chunk_{doc['chunk_id']}"
         )
         metadata = {
             "source": doc["source"],
-            "chunk_id": doc["chunk_index"],
+            "chunk_id": doc["chunk_id"],
             "page": doc["page"]
         }
         all_chunks.append(doc["text"])
@@ -85,7 +86,7 @@ for filename in os.listdir(PDF_DIR):
 #         all_ids.append(chunk_id)
 
 # 7. 给所有知识块生成embedding
-embeddings = embedding_model.encode(all_chunks).tolist()
+embeddings = embed_texts(all_chunks)
 
 # 8. 将知识块和embedding存入Chroma数据库
 collection.upsert(
