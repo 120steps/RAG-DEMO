@@ -55,34 +55,34 @@ for filename in os.listdir(PDF_DIR):
         all_ids.append(document_id)
 
 # 4.2 读取txt文件
-for filename in os.listdir(DATA_DIR):
-    if not filename.endswith(".txt"):
-        continue
+# for filename in os.listdir(DATA_DIR):
+#     if not filename.endswith(".txt"):
+#         continue
 
-    file_path = os.path.join(DATA_DIR, filename)
+#     file_path = os.path.join(DATA_DIR, filename)
 
-    print(f"正在处理文件: {filename}")
+#     print(f"正在处理文件: {filename}")
 
-    with open(file_path, "r", encoding="utf-8") as file:
-        text = file.read()
+#     with open(file_path, "r", encoding="utf-8") as file:
+#         text = file.read()
 
-    # 5. chunk
-    chunks = [
-        chunk.strip()
-        for chunk in text.split("\n\n")
-        if chunk.strip()
-    ]
+#     # 5. chunk
+#     chunks = [
+#         chunk.strip()
+#         for chunk in text.split("\n\n")
+#         if chunk.strip()
+#     ]
 
-    # 6. 为每个chunk创建metadata和唯一id
-    for chunk_index, chunk in enumerate(chunks):
-        chunk_id = f"{filename}_chunk_{chunk_index}"
-        metadata = {
-            "source": filename,
-            "chunk_id": chunk_id
-        }
-        all_chunks.append(chunk)
-        all_metadatas.append(metadata)
-        all_ids.append(chunk_id)
+#     # 6. 为每个chunk创建metadata和唯一id
+#     for chunk_index, chunk in enumerate(chunks):
+#         chunk_id = f"{filename}_chunk_{chunk_index}"
+#         metadata = {
+#             "source": filename,
+#             "chunk_id": chunk_id
+#         }
+#         all_chunks.append(chunk)
+#         all_metadatas.append(metadata)
+#         all_ids.append(chunk_id)
 
 # 7. 给所有知识块生成embedding
 embeddings = embedding_model.encode(all_chunks).tolist()

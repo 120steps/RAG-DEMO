@@ -46,7 +46,7 @@ def split_text(text, chunk_size=200, overlap=50):
     return chunks
 
 if __name__ == "__main__":
-    pdf_path = "data/pdf/travel_policy.pdf"
+    pdf_path = "data/pdf/company_policy.pdf"
     documents = load_pdf(pdf_path)
     for doc in documents:
         print(f"Page {doc['page']} from {doc['source']}:")
