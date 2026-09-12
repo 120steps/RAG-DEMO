@@ -1,0 +1,971 @@
+{
+  "summary": {
+    "total_cases": 32,
+    "answerable_cases": 28,
+    "refusal_cases": 4,
+    "source_hit_rate": 0.7857142857142857,
+    "top1_source_hit_rate": 0.6071428571428571,
+    "page_hit_rate": 0.42857142857142855,
+    "answer_accuracy": 0.10714285714285714,
+    "refusal_accuracy": 1.0
+  },
+  "details": [
+    {
+      "id": "Q001",
+      "type": "fact",
+      "question": "国内常规出差最迟需要提前多久提交申请？",
+      "should_answer": true,
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 2,
+      "expected_answer": "提前2个工作日",
+      "expected_keywords": null,
+      "actual_answer": "国内常规出差最迟需在出发前2个工作日提交申请。\n\n来源：travel_policy.pdf，第2页，知识块ID：2",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.5152398943901062,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "travel_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        2,
+        3
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q002",
+      "type": "multi_chunk",
+      "question": "国际出差需要提前多久申请，并由谁最终批准？",
+      "should_answer": true,
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 2,
+      "expected_answer": null,
+      "expected_keywords": [
+        "提前10个工作日",
+        "分管副总裁"
+      ],
+      "actual_answer": "国际出差需提前10个工作日申请，并由分管副总裁最终批准。\n\n来源：travel_policy.pdf，第2页，知识块ID：3",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.5388891100883484,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "travel_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        2,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": true,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q003",
+      "type": "fact",
+      "question": "连续飞行超过6小时，哪些员工可以选择公务舱？",
+      "should_answer": true,
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 3,
+      "expected_answer": "总监及以上人员可以选择公务舱；其他员工因医疗原因升舱需提交医院证明并由人力资源负责人批准",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。\n\n来源：travel_policy.pdf，第3页，知识块ID：2",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.4663940668106079,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "travel_policy.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        3,
+        3,
+        3
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q004",
+      "type": "fact",
+      "question": "员工在什么时间段往返机场可以使用出租车？",
+      "should_answer": true,
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 3,
+      "expected_answer": "凌晨23:00至次日06:00",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.7132214903831482,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "security_policy.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        5,
+        2
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q005",
+      "type": "fact",
+      "question": "A类城市普通员工的住宿上限是多少？",
+      "should_answer": true,
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 4,
+      "expected_answer": "650元/晚",
+      "expected_keywords": null,
+      "actual_answer": "A类城市普通员工的住宿上限为650元/晚。\n\n来源：travel_policy.pdf，第4页，知识块ID：0",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.5461950302124023,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "travel_policy.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        4,
+        3,
+        1
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": true,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q006",
+      "type": "multi_chunk",
+      "question": "国内出差补贴标准是多少？如果公司或客户提供两餐及以上，应如何处理？",
+      "should_answer": true,
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 4,
+      "expected_answer": null,
+      "expected_keywords": [
+        "150元/自然日",
+        "补贴减半"
+      ],
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.3287670612335205,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "expense_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        4,
+        1
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q007",
+      "type": "fact",
+      "question": "出差返程后应在多久内提交报销？",
+      "should_answer": true,
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 6,
+      "expected_answer": "10个工作日内",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.7407081723213196,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "security_policy.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        5,
+        2
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q008",
+      "type": "fact",
+      "question": "哪些访问场景必须启用多因素认证(MFA)？",
+      "should_answer": true,
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "expected_answer": "互联网暴露系统、VPN、云管理控制台和特权账号",
+      "expected_keywords": null,
+      "actual_answer": "必须启用多因素认证（MFA）的访问场景包括：\n1. 远程访问\n2. 管理员访问\n\n来源：security_policy.pdf，第2页，知识块ID：2及3",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.5143370628356934,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "security_policy.pdf",
+        "employee_handbook.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        2,
+        6
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q009",
+      "type": "fact",
+      "question": "服务账号的密钥多久至少轮换一次？",
+      "should_answer": true,
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "expected_answer": "至少每90天轮换",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.8877973556518555,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "travel_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        3,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q010",
+      "type": "fact",
+      "question": "连续多久未使用的高权限会被自动暂停？",
+      "should_answer": true,
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "expected_answer": "60天",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.5892602205276489,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "travel_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        3,
+        3,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q011",
+      "type": "multi_chunk",
+      "question": "关键安全补丁和一般高危补丁分别应在多久内完成？",
+      "should_answer": true,
+      "expected_source": "security_policy.pdf",
+      "expected_page": 3,
+      "expected_answer": null,
+      "expected_keywords": [
+        "关键安全补丁",
+        "7天",
+        "一般高危补丁",
+        "14天"
+      ],
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.521454930305481,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "security_policy.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        5,
+        3
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q012",
+      "type": "fact",
+      "question": "经批准使用USB存储设备时，授权最长可以持续多久？",
+      "should_answer": true,
+      "expected_source": "security_policy.pdf",
+      "expected_page": 3,
+      "expected_answer": "最长30天",
+      "expected_keywords": null,
+      "actual_answer": "经批准使用USB存储设备时，授权最长可以持续30天。\n\n来源：security_policy.pdf，第3页，知识块ID：0",
+      "top1_source": "expense_policy.pdf",
+      "top1_page": 1.067620873451233,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "expense_policy.pdf",
+        "employee_handbook.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        2,
+        3
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q013",
+      "type": "fact",
+      "question": "公司的数据分为哪四个分类级别？",
+      "should_answer": true,
+      "expected_source": "security_policy.pdf",
+      "expected_page": 4,
+      "expected_answer": "公开、内部、机密和严格机密",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "expense_policy.pdf",
+      "top1_page": 0.3642691373825073,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "expense_policy.pdf",
+        "travel_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        5,
+        4
+      ],
+      "source_hit": false,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q014",
+      "type": "fact",
+      "question": "发现账号被盗或数据误发后，应在多长时间内报告？",
+      "should_answer": true,
+      "expected_source": "security_policy.pdf",
+      "expected_page": 5,
+      "expected_answer": "15分钟内",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。\n\n来源： security_policy.pdf，第5页，知识块ID：2",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.8747221231460571,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "security_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        2,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q015",
+      "type": "multi_chunk",
+      "question": "信息安全政策例外最长有效多久？涉及严格机密数据时由谁批准？",
+      "should_answer": true,
+      "expected_source": "security_policy.pdf",
+      "expected_page": 6,
+      "expected_answer": null,
+      "expected_keywords": [
+        "180天",
+        "CISO"
+      ],
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "expense_policy.pdf",
+      "top1_page": 0.6436896920204163,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "expense_policy.pdf",
+        "security_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        3,
+        5,
+        2
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q016",
+      "type": "fact",
+      "question": "新员工应在多久内完成合规、安全和隐私必修课？",
+      "should_answer": true,
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 2,
+      "expected_answer": "入职后10个工作日内",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.5088488459587097,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "security_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        5,
+        5
+      ],
+      "source_hit": false,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q017",
+      "type": "multi_chunk",
+      "question": "符合条件的员工每周最多远程办公几天？哪一天是团队共同办公日？",
+      "should_answer": true,
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 3,
+      "expected_answer": null,
+      "expected_keywords": [
+        "每周最多2天",
+        "周二"
+      ],
+      "actual_answer": "根据当前知识库无法回答该问题。\n\n来源：employee_handbook.pdf，第4页，知识块ID：1、2、3",
+      "top1_source": "employee_handbook.pdf",
+      "top1_page": 0.5142656564712524,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "employee_handbook.pdf",
+        "employee_handbook.pdf",
+        "employee_handbook.pdf"
+      ],
+      "retrieved_pages": [
+        4,
+        4,
+        4
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q018",
+      "type": "multi_chunk",
+      "question": "员工入职满一年后最少有多少天年假？最多可以结转多少天？",
+      "should_answer": true,
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 4,
+      "expected_answer": null,
+      "expected_keywords": [
+        "不少于10个工作日",
+        "最多5天"
+      ],
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "employee_handbook.pdf",
+      "top1_page": 0.49774590134620667,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "employee_handbook.pdf",
+        "security_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        4,
+        2,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q019",
+      "type": "fact",
+      "question": "生日假有几天，可以结转到下一年度吗？",
+      "should_answer": true,
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 4,
+      "expected_answer": "1个工作日，不可结转",
+      "expected_keywords": null,
+      "actual_answer": "生日假为1个工作日，不可结转。\n\n来源：employee_handbook.pdf，第4页，知识块ID：2",
+      "top1_source": "employee_handbook.pdf",
+      "top1_page": 0.43690818548202515,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "employee_handbook.pdf",
+        "expense_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        4,
+        5,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": true,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q020",
+      "type": "fact",
+      "question": "普通礼品在什么金额以内可以接受？",
+      "should_answer": true,
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 5,
+      "expected_answer": "单次价值不超过300元，且不得影响商业判断",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。\n\n来源： expense_policy.pdf，第2页，知识块ID：1",
+      "top1_source": "travel_policy.pdf",
+      "top1_page": 0.5288839936256409,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "travel_policy.pdf",
+        "security_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        1,
+        2
+      ],
+      "source_hit": false,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q021",
+      "type": "fact",
+      "question": "员工对正式绩效结果有异议，应在多久内申请复核？",
+      "should_answer": true,
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 6,
+      "expected_answer": "收到正式结果后5个工作日内",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.7143293023109436,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "expense_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        3,
+        3
+      ],
+      "source_hit": false,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q022",
+      "type": "fact",
+      "question": "同一供应商、同一目的的费用，在多少天内发生时应合并判断审批级别？",
+      "should_answer": true,
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 2,
+      "expected_answer": "7天内",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.732227087020874,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "employee_handbook.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        4,
+        6
+      ],
+      "source_hit": false,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q023",
+      "type": "fact",
+      "question": "含税金额为30,000元的费用最低需要哪些审批？",
+      "should_answer": true,
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 2,
+      "expected_answer": "部门总监和财务BP审批",
+      "expected_keywords": null,
+      "actual_answer": "含税金额为30,000元的费用，最低需要部门总监+财务BP审批。\n\n来源：expense_policy.pdf，第2页，知识块ID：2",
+      "top1_source": "expense_policy.pdf",
+      "top1_page": 0.38937515020370483,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "expense_policy.pdf",
+        "travel_policy.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        4,
+        4
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q024",
+      "type": "multi_chunk",
+      "question": "内部工作餐和普通商业客户招待的人均上限分别是多少？",
+      "should_answer": true,
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 3,
+      "expected_answer": null,
+      "expected_keywords": [
+        "内部工作餐",
+        "80元",
+        "普通商业客户",
+        "300元"
+      ],
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "employee_handbook.pdf",
+      "top1_page": 0.5785520672798157,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "employee_handbook.pdf",
+        "security_policy.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        5,
+        1
+      ],
+      "source_hit": false,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q025",
+      "type": "fact",
+      "question": "销售及现场支持岗位每月最多可报销多少业务通信费？",
+      "should_answer": true,
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 4,
+      "expected_answer": "300元/月",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.7978649139404297,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "expense_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        5,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q026",
+      "type": "multi_chunk",
+      "question": "费用应在发生后多久提交？超过多少金额的无票费用需要财务经理批准？",
+      "should_answer": true,
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 5,
+      "expected_answer": null,
+      "expected_keywords": [
+        "15个自然日内",
+        "单笔超过200元",
+        "财务经理批准"
+      ],
+      "actual_answer": "根据当前知识库无法回答该问题。\n\n来源：expense_policy.pdf，第2页，知识块ID：1；expense_policy.pdf，第5页，知识块ID：2；travel_policy.pdf，第1页，知识块ID：3",
+      "top1_source": "expense_policy.pdf",
+      "top1_page": 0.6577839851379395,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "expense_policy.pdf",
+        "travel_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        1,
+        2
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q027",
+      "type": "fact",
+      "question": "预付款应在事项结束后多久完成清算？",
+      "should_answer": true,
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 6,
+      "expected_answer": "10个工作日内",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "expense_policy.pdf",
+      "top1_page": 0.7818400859832764,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "expense_policy.pdf",
+        "travel_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        3,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": false,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q028",
+      "type": "fact",
+      "question": "费用申请人和审批人至少需要保存相关记录多少年？",
+      "should_answer": true,
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 6,
+      "expected_answer": "至少5年，或按照更长的法定期限保存",
+      "expected_keywords": null,
+      "actual_answer": "申请人及审批人应保存相关记录至少 5 年，或按照更长的法定期限保存。\n\n来源：expense_policy.pdf，第6页，知识块ID：2",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.5163755416870117,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "expense_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        5,
+        6,
+        5
+      ],
+      "source_hit": true,
+      "top1_source_hit": null,
+      "page_hit": true,
+      "answer_correct": false,
+      "refusal_correct": null
+    },
+    {
+      "id": "Q029",
+      "type": "refusal",
+      "question": "公司的CEO是谁？",
+      "should_answer": false,
+      "expected_source": "",
+      "expected_page": null,
+      "expected_answer": "",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "expense_policy.pdf",
+      "top1_page": 0.4944705069065094,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "expense_policy.pdf",
+        "employee_handbook.pdf",
+        "travel_policy.pdf"
+      ],
+      "retrieved_pages": [
+        4,
+        5,
+        5
+      ],
+      "source_hit": null,
+      "top1_source_hit": null,
+      "page_hit": null,
+      "answer_correct": null,
+      "refusal_correct": true
+    },
+    {
+      "id": "Q030",
+      "type": "refusal",
+      "question": "普通员工的登录密码必须每90天修改一次吗？",
+      "should_answer": false,
+      "expected_source": "",
+      "expected_page": null,
+      "expected_answer": "",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。\n\n来源：security_policy.pdf，第2页，知识块ID：1",
+      "top1_source": "security_policy.pdf",
+      "top1_page": 0.5556120276451111,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "security_policy.pdf",
+        "employee_handbook.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        4,
+        5
+      ],
+      "source_hit": null,
+      "top1_source_hit": null,
+      "page_hit": null,
+      "answer_correct": null,
+      "refusal_correct": true
+    },
+    {
+      "id": "Q031",
+      "type": "refusal",
+      "question": "公司2026年的营业收入是多少？",
+      "should_answer": false,
+      "expected_source": "",
+      "expected_page": null,
+      "expected_answer": "",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。",
+      "top1_source": "expense_policy.pdf",
+      "top1_page": 0.4123093783855438,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "expense_policy.pdf",
+        "travel_policy.pdf",
+        "security_policy.pdf"
+      ],
+      "retrieved_pages": [
+        6,
+        5,
+        6
+      ],
+      "source_hit": null,
+      "top1_source_hit": null,
+      "page_hit": null,
+      "answer_correct": null,
+      "refusal_correct": true
+    },
+    {
+      "id": "Q032",
+      "type": "refusal",
+      "question": "员工产假具体有多少天？",
+      "should_answer": false,
+      "expected_source": "",
+      "expected_page": null,
+      "expected_answer": "",
+      "expected_keywords": null,
+      "actual_answer": "根据当前知识库无法回答该问题。\n\n来源：无",
+      "top1_source": "employee_handbook.pdf",
+      "top1_page": 0.6642560958862305,
+      "top1_distance": null,
+      "retrieved_sources": [
+        "employee_handbook.pdf",
+        "security_policy.pdf",
+        "expense_policy.pdf"
+      ],
+      "retrieved_pages": [
+        4,
+        2,
+        5
+      ],
+      "source_hit": null,
+      "top1_source_hit": null,
+      "page_hit": null,
+      "answer_correct": null,
+      "refusal_correct": true
+    }
+  ]
+}

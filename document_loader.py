@@ -1,6 +1,8 @@
 import os
 import pymupdf
 
+from config import CHUNK_SIZE, CHUNK_OVERLAP, TOP_K
+
 def load_pdf(file_path):
     documents = []
     filename = os.path.basename(file_path)
@@ -11,7 +13,7 @@ def load_pdf(file_path):
         if not text:
             continue
 
-        chunks = split_text(text, chunk_size=200, overlap=50)
+        chunks = split_text(text, CHUNK_SIZE, CHUNK_OVERLAP)
 
         for chunk_id, chunk in enumerate(chunks):
             documents.append({
@@ -24,7 +26,7 @@ def load_pdf(file_path):
     doc.close()
     return documents
 
-def split_text(text, chunk_size=200, overlap=50):
+def split_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
     """
     将文本分割为指定大小的块，并允许重叠。
     :param text: 输入文本

@@ -1,70 +1,284 @@
 [
   {
     "id": "Q001",
-    "question": "正式员工一年有多少天年假？",
-    "expected_answer": "10天",
-    "expected_source": "leave_policy.txt",
+    "type": "fact",
+    "question": "国内常规出差最迟需要提前多久提交申请？",
+    "expected_answer": "提前2个工作日",
+    "expected_source": "travel_policy.pdf",
+    "expected_page": 2,
     "should_answer": true
   },
   {
     "id": "Q002",
-    "question": "工作满5年的员工年假是多少天？",
-    "expected_answer": "15天",
-    "expected_source": "leave_policy.txt",
+    "type": "multi_chunk",
+    "question": "国际出差需要提前多久申请，并由谁最终批准？",
+    "expected_keywords": ["提前10个工作日", "分管副总裁"],
+    "expected_source": "travel_policy.pdf",
+    "expected_page": 2,
     "should_answer": true
   },
   {
     "id": "Q003",
-    "question": "国内出差需要提前多久申请？",
-    "expected_answer": "提前3个工作日",
-    "expected_source": "travel_policy.txt",
+    "type": "fact",
+    "question": "连续飞行超过6小时，哪些员工可以选择公务舱？",
+    "expected_answer": "总监及以上人员可以选择公务舱；其他员工因医疗原因升舱需提交医院证明并由人力资源负责人批准",
+    "expected_source": "travel_policy.pdf",
+    "expected_page": 3,
     "should_answer": true
   },
   {
     "id": "Q004",
-    "question": "国际出差由谁批准？",
-    "expected_answer": "部门总经理",
-    "expected_source": "travel_policy.txt",
+    "type": "fact",
+    "question": "员工在什么时间段往返机场可以使用出租车？",
+    "expected_answer": "凌晨23:00至次日06:00",
+    "expected_source": "travel_policy.pdf",
+    "expected_page": 3,
     "should_answer": true
   },
   {
     "id": "Q005",
-    "question": "超过5000元的费用需要谁审批？",
-    "expected_answer": "部门总经理",
-    "expected_source": "expense_policy.txt",
+    "type": "fact",
+    "question": "A类城市普通员工的住宿上限是多少？",
+    "expected_answer": "650元/晚",
+    "expected_source": "travel_policy.pdf",
+    "expected_page": 4,
     "should_answer": true
   },
   {
     "id": "Q006",
-    "question": "发现网络安全事件后多久需要报告？",
-    "expected_answer": "1小时内",
-    "expected_source": "security_policy.txt",
+    "type": "multi_chunk",
+    "question": "国内出差补贴标准是多少？如果公司或客户提供两餐及以上，应如何处理？",
+    "expected_keywords": ["150元/自然日", "补贴减半"],
+    "expected_source": "travel_policy.pdf",
+    "expected_page": 4,
     "should_answer": true
   },
   {
     "id": "Q007",
-    "question": "密码多久需要修改一次？",
-    "expected_answer": "90天",
-    "expected_source": "security_policy.txt",
+    "type": "fact",
+    "question": "出差返程后应在多久内提交报销？",
+    "expected_answer": "10个工作日内",
+    "expected_source": "travel_policy.pdf",
+    "expected_page": 6,
     "should_answer": true
   },
   {
     "id": "Q008",
+    "type": "fact",
+    "question": "哪些访问场景必须启用多因素认证(MFA)？",
+    "expected_answer": "互联网暴露系统、VPN、云管理控制台和特权账号",
+    "expected_source": "security_policy.pdf",
+    "expected_page": 2,
+    "should_answer": true
+  },
+  {
+    "id": "Q009",
+    "type": "fact",
+    "question": "服务账号的密钥多久至少轮换一次？",
+    "expected_answer": "至少每90天轮换",
+    "expected_source": "security_policy.pdf",
+    "expected_page": 2,
+    "should_answer": true
+  },
+  {
+    "id": "Q010",
+    "type": "fact",
+    "question": "连续多久未使用的高权限会被自动暂停？",
+    "expected_answer": "60天",
+    "expected_source": "security_policy.pdf",
+    "expected_page": 2,
+    "should_answer": true
+  },
+  {
+    "id": "Q011",
+    "type": "multi_chunk",
+    "question": "关键安全补丁和一般高危补丁分别应在多久内完成？",
+    "expected_keywords": ["关键安全补丁", "7天", "一般高危补丁", "14天"],
+    "expected_source": "security_policy.pdf",
+    "expected_page": 3,
+    "should_answer": true
+  },
+  {
+    "id": "Q012",
+    "type": "fact",
+    "question": "经批准使用USB存储设备时，授权最长可以持续多久？",
+    "expected_answer": "最长30天",
+    "expected_source": "security_policy.pdf",
+    "expected_page": 3,
+    "should_answer": true
+  },
+  {
+    "id": "Q013",
+    "type": "fact",
+    "question": "公司的数据分为哪四个分类级别？",
+    "expected_answer": "公开、内部、机密和严格机密",
+    "expected_source": "security_policy.pdf",
+    "expected_page": 4,
+    "should_answer": true
+  },
+  {
+    "id": "Q014",
+    "type": "fact",
+    "question": "发现账号被盗或数据误发后，应在多长时间内报告？",
+    "expected_answer": "15分钟内",
+    "expected_source": "security_policy.pdf",
+    "expected_page": 5,
+    "should_answer": true
+  },
+  {
+    "id": "Q015",
+    "type": "multi_chunk",
+    "question": "信息安全政策例外最长有效多久？涉及严格机密数据时由谁批准？",
+    "expected_keywords": ["180天", "CISO"],
+    "expected_source": "security_policy.pdf",
+    "expected_page": 6,
+    "should_answer": true
+  },
+  {
+    "id": "Q016",
+    "type": "fact",
+    "question": "新员工应在多久内完成合规、安全和隐私必修课？",
+    "expected_answer": "入职后10个工作日内",
+    "expected_source": "employee_handbook.pdf",
+    "expected_page": 2,
+    "should_answer": true
+  },
+  {
+    "id": "Q017",
+    "type": "multi_chunk",
+    "question": "符合条件的员工每周最多远程办公几天？哪一天是团队共同办公日？",
+    "expected_keywords": ["每周最多2天", "周二"],
+    "expected_source": "employee_handbook.pdf",
+    "expected_page": 3,
+    "should_answer": true
+  },
+  {
+    "id": "Q018",
+    "type": "multi_chunk",
+    "question": "员工入职满一年后最少有多少天年假？最多可以结转多少天？",
+    "expected_keywords": ["不少于10个工作日", "最多5天"],
+    "expected_source": "employee_handbook.pdf",
+    "expected_page": 4,
+    "should_answer": true
+  },
+  {
+    "id": "Q019",
+    "type": "fact",
+    "question": "生日假有几天，可以结转到下一年度吗？",
+    "expected_answer": "1个工作日，不可结转",
+    "expected_source": "employee_handbook.pdf",
+    "expected_page": 4,
+    "should_answer": true
+  },
+  {
+    "id": "Q020",
+    "type": "fact",
+    "question": "普通礼品在什么金额以内可以接受？",
+    "expected_answer": "单次价值不超过300元，且不得影响商业判断",
+    "expected_source": "employee_handbook.pdf",
+    "expected_page": 5,
+    "should_answer": true
+  },
+  {
+    "id": "Q021",
+    "type": "fact",
+    "question": "员工对正式绩效结果有异议，应在多久内申请复核？",
+    "expected_answer": "收到正式结果后5个工作日内",
+    "expected_source": "employee_handbook.pdf",
+    "expected_page": 6,
+    "should_answer": true
+  },
+  {
+    "id": "Q022",
+    "type": "fact",
+    "question": "同一供应商、同一目的的费用，在多少天内发生时应合并判断审批级别？",
+    "expected_answer": "7天内",
+    "expected_source": "expense_policy.pdf",
+    "expected_page": 2,
+    "should_answer": true
+  },
+  {
+    "id": "Q023",
+    "type": "fact",
+    "question": "含税金额为30,000元的费用最低需要哪些审批？",
+    "expected_answer": "部门总监和财务BP审批",
+    "expected_source": "expense_policy.pdf",
+    "expected_page": 2,
+    "should_answer": true
+  },
+  {
+    "id": "Q024",
+    "type": "multi_chunk",
+    "question": "内部工作餐和普通商业客户招待的人均上限分别是多少？",
+    "expected_keywords": ["内部工作餐", "80元", "普通商业客户", "300元"],
+    "expected_source": "expense_policy.pdf",
+    "expected_page": 3,
+    "should_answer": true
+  },
+  {
+    "id": "Q025",
+    "type": "fact",
+    "question": "销售及现场支持岗位每月最多可报销多少业务通信费？",
+    "expected_answer": "300元/月",
+    "expected_source": "expense_policy.pdf",
+    "expected_page": 4,
+    "should_answer": true
+  },
+  {
+    "id": "Q026",
+    "type": "multi_chunk",
+    "question": "费用应在发生后多久提交？超过多少金额的无票费用需要财务经理批准？",
+    "expected_keywords": ["15个自然日内", "单笔超过200元", "财务经理批准"],
+    "expected_source": "expense_policy.pdf",
+    "expected_page": 5,
+    "should_answer": true
+  },
+  {
+    "id": "Q027",
+    "type": "fact",
+    "question": "预付款应在事项结束后多久完成清算？",
+    "expected_answer": "10个工作日内",
+    "expected_source": "expense_policy.pdf",
+    "expected_page": 6,
+    "should_answer": true
+  },
+  {
+    "id": "Q028",
+    "type": "fact",
+    "question": "费用申请人和审批人至少需要保存相关记录多少年？",
+    "expected_answer": "至少5年，或按照更长的法定期限保存",
+    "expected_source": "expense_policy.pdf",
+    "expected_page": 6,
+    "should_answer": true
+  },
+  {
+    "id": "Q029",
+    "type": "refusal",
     "question": "公司的CEO是谁？",
     "expected_answer": "",
     "expected_source": "",
     "should_answer": false
   },
   {
-    "id": "Q009",
-    "question": "公司的总部在哪里？",
+    "id": "Q030",
+    "type": "refusal",
+    "question": "普通员工的登录密码必须每90天修改一次吗？",
     "expected_answer": "",
     "expected_source": "",
     "should_answer": false
   },
   {
-    "id": "Q010",
-    "question": "员工工资是多少？",
+    "id": "Q031",
+    "type": "refusal",
+    "question": "公司2026年的营业收入是多少？",
+    "expected_answer": "",
+    "expected_source": "",
+    "should_answer": false
+  },
+  {
+    "id": "Q032",
+    "type": "refusal",
+    "question": "员工产假具体有多少天？",
     "expected_answer": "",
     "expected_source": "",
     "should_answer": false
