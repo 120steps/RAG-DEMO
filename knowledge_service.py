@@ -42,7 +42,7 @@ def add_pdf_to_knowledge(
         metadatas.append({
             "source": doc['source'],
             "page": doc['page'],
-            "chunkId": doc['chunk_id']
+            "chunk_id": doc['chunk_id']
         })
 
     # 4. 写入chromadb

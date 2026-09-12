@@ -11,7 +11,7 @@ def load_pdf(file_path):
         if not text:
             continue
 
-        chunks = split_text(text, chunk_size=60, overlap=20)
+        chunks = split_text(text, chunk_size=200, overlap=50)
 
         for chunk_id, chunk in enumerate(chunks):
             documents.append({
@@ -24,7 +24,7 @@ def load_pdf(file_path):
     doc.close()
     return documents
 
-def split_text(text, chunk_size=100, overlap=20):
+def split_text(text, chunk_size=200, overlap=50):
     """
     将文本分割为指定大小的块，并允许重叠。
     :param text: 输入文本
