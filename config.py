@@ -9,6 +9,6 @@ LLM_MODEL = "gemini-3.1-flash-lite"
 
 CHUNK_SIZE = 200
 
-CHUNK_OVERLAP = 50
+CHUNK_OVERLAP = 30
 
 TOP_K = 3

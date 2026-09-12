@@ -1,6 +1,6 @@
 from sentence_transformers import SentenceTransformer
 
-embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+embedding_model = SentenceTransformer('intfloat/multilingual-e5-base')
 
 def embed_text(text):
     return embedding_model.encode(text).tolist()
