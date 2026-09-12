@@ -19,6 +19,15 @@ def add_pdf_to_knowledge(
     if not docs:
         raise ValueError(f"PDF文件 {pdf_path} 中没有可用的文本内容。")
 
+    source_name = docs[0]['source']
+
+    # 删除同名旧文档
+    collection.delete(
+        where={
+            "source": source_name
+        }
+    )
+
     texts = [doc["text"] for doc in docs]
 
     # 2. 本地embedding
@@ -59,3 +68,10 @@ def add_pdf_to_knowledge(
         "chunks": len(texts),
         "status": "indexed"
     }
+
+def delete_file_from_db(filename):
+    collection.delete(
+        where={
+            "source": filename
+        }
+    )

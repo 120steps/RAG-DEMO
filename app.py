@@ -8,9 +8,10 @@ from fastapi import File
 from fastapi import UploadFile
 
 from rag_service import ask_rag
-from knowledge_service import add_pdf_to_knowledge
+from knowledge_service import add_pdf_to_knowledge, delete_file_from_db
 
 UPLOAD_DIR = "./data/upload"
+FILE_MAX_SIZE = 20 * 1024 * 1024
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -38,6 +39,12 @@ class QuestionResponse(BaseModel):
     question: str
     answer: str
     source: list[sourceItem]
+
+class DocumentUploadResponse(BaseModel):
+    message: str
+    filename: str
+    chunks: int
+    status: str
 
 @app.get("/")
 def root():
@@ -83,7 +90,10 @@ def chat(question: QuestionRequest):
             detail="RAG service error. Please try again later."
         ) from e
 
-@app.post("/documents")
+@app.post(
+    "/documents",
+    response_model=DocumentUploadResponse
+)
 def upload_document(
     file: UploadFile = File(...)
 ):
@@ -95,6 +105,7 @@ def upload_document(
                 detail="Missing filename"
             )
 
+
         # 2. 只允许pdf
         if not file.filename.lower().endswith(".pdf"):
             raise HTTPException(
@@ -102,6 +113,12 @@ def upload_document(
                 detail="Only PDF file are supported"
             )
 
+        if file.content_type != "application/pdf":
+            raise HTTPException(
+                status_code=400,
+                detail="Only PDF file are supported"
+            )
+        
         # 3.生成本地路径
         file_path = os.path.join(
             UPLOAD_DIR,
@@ -117,6 +134,16 @@ def upload_document(
                 file.file,
                 buffer
             )
+
+        file_size = os.path.getsize(UPLOAD_DIR)
+
+        if file_size > FILE_MAX_SIZE:
+            os.remove(UPLOAD_DIR)
+
+            raise HTTPException(
+                status_code=400,
+                detail="The size of file should smaller than 20MB  "
+            ) 
 
         # 5.自动入库
         result = add_pdf_to_knowledge(file_path)
@@ -141,3 +168,39 @@ def upload_document(
             status_code=500,
             detail="Document indexing failed"
         ) from e
+
+@app.get("/documents")
+def list_documents():
+
+    files = []
+
+    for filename in os.listdir(UPLOAD_DIR):
+        if filename.endswith(".pdf"):
+            files.append(filename)
+
+    return {
+        "count": len(files),
+        "file": files
+    }
+
+@app.delete("/documents/{filename}")
+def delete_file(
+    filename: str
+):
+    file_path = os.path.join(UPLOAD_DIR, filename)
+
+    if not os.path.exists(file_path):
+        raise HTTPException(
+            status_code=404,
+            detail="File not exists!"
+        )
+
+    delete_file_from_db(filename)
+
+    os.remove(file_path)
+
+    return{
+        "message": "Document deleted",
+        "filename": filename
+    }
+    
