@@ -32,6 +32,7 @@ def bind_candidates(documents, metadatas, distances):
             "document": document,
             "metadata": metadata,
             "original_distance": float(distance),
+            "bm25_score": None,
             "rerank_score": None,
         }
         for document, metadata, distance in zip(

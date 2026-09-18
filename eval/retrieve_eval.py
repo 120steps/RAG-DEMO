@@ -11,6 +11,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from config import TOP_K
+from bm25_search import BM25Index, merge_candidates
 from embedding import embed_text
 from reranker import RERANKER_MODEL, bind_candidates, rerank_candidates
 
@@ -20,6 +21,7 @@ CHROMA_DIR = PROJECT_ROOT / "chroma_db"
 RESULT_DIR = PROJECT_ROOT / "eval" / "results"
 COLLECTION_NAME = "company_knowledge"
 INITIAL_RETRIEVAL_K = 10
+BM25_RETRIEVAL_K = 10
 FINAL_TOP_K = TOP_K
 
 
@@ -36,7 +38,14 @@ def load_test_cases():
     ]
 
 
-def retrieve(question, collection, use_reranker=False):
+def retrieve(
+    question,
+    collection,
+    use_reranker=False,
+    use_hybrid=False,
+    bm25_index=None,
+    final_top_k=FINAL_TOP_K,
+):
     question_embedding = embed_text(question)
     results = collection.query(
         query_embeddings=[question_embedding],
@@ -49,14 +58,28 @@ def retrieve(question, collection, use_reranker=False):
         results["distances"][0],
     )
 
+    if use_hybrid:
+        if bm25_index is None:
+            raise ValueError(
+                "bm25_index is required when use_hybrid=True"
+            )
+        bm25_candidates = bm25_index.search(
+            question,
+            top_k=BM25_RETRIEVAL_K,
+        )
+        candidates = merge_candidates(
+            candidates,
+            bm25_candidates,
+        )
+
     if use_reranker:
         return rerank_candidates(
             question,
             candidates,
-            top_n=FINAL_TOP_K,
+            top_n=final_top_k,
         )
 
-    return candidates[:FINAL_TOP_K]
+    return candidates[:final_top_k]
 
 
 def serialize_candidates(candidates):
@@ -69,6 +92,7 @@ def serialize_candidates(candidates):
             "page": candidate["metadata"].get("page"),
             "chunk_id": candidate["metadata"].get("chunk_id"),
             "original_distance": candidate["original_distance"],
+            "bm25_score": candidate["bm25_score"],
             "rerank_score": candidate["rerank_score"],
         }
         for rank, candidate in enumerate(candidates, start=1)
@@ -77,6 +101,8 @@ def serialize_candidates(candidates):
 
 def evaluate_retrieval(
     use_reranker=False,
+    use_hybrid=False,
+    final_top_k=FINAL_TOP_K,
     result_file=None,
     verbose=True,
 ):
@@ -87,16 +113,25 @@ def evaluate_retrieval(
 
     client = chromadb.PersistentClient(path=str(CHROMA_DIR))
     collection = client.get_collection(name=COLLECTION_NAME)
+    bm25_index = (
+        BM25Index.from_chroma(collection)
+        if use_hybrid
+        else None
+    )
     test_cases = load_test_cases()
     details = []
     top1_hit_count = 0
     hit_at_3_count = 0
+    hit_at_5_count = 0
 
     for case in test_cases:
         candidates = retrieve(
             case["question"],
             collection,
             use_reranker=use_reranker,
+            use_hybrid=use_hybrid,
+            bm25_index=bm25_index,
+            final_top_k=final_top_k,
         )
         expected_source = case["expected_source"]
         expected_page = case["expected_page"]
@@ -112,11 +147,14 @@ def evaluate_retrieval(
                 break
 
         top1_hit = hit_rank == 1
-        hit_at_3 = hit_rank is not None
+        hit_at_3 = hit_rank is not None and hit_rank <= 3
+        hit_at_5 = hit_rank is not None and hit_rank <= 5
         if top1_hit:
             top1_hit_count += 1
         if hit_at_3:
             hit_at_3_count += 1
+        if hit_at_5:
+            hit_at_5_count += 1
 
         detail = {
             "id": case["id"],
@@ -125,6 +163,7 @@ def evaluate_retrieval(
             "expected_page": expected_page,
             "top1_hit": top1_hit,
             "hit_at_3": hit_at_3,
+            "hit_at_5": hit_at_5,
             "hit_rank": hit_rank,
             "retrieved": serialize_candidates(candidates),
         }
@@ -135,6 +174,7 @@ def evaluate_retrieval(
                 f"{case['id']}: "
                 f"Top1={'Hit' if top1_hit else 'Miss'}, "
                 f"Hit@3={'Hit' if hit_at_3 else 'Miss'}, "
+                f"Hit@5={'Hit' if hit_at_5 else 'Miss'}, "
                 f"rank={hit_rank}"
             )
 
@@ -153,12 +193,24 @@ def evaluate_retrieval(
             if total_cases
             else 0
         ),
+        "hit_at_5_count": hit_at_5_count,
+        "hit_at_5_rate": (
+            hit_at_5_count / total_cases
+            if total_cases
+            else 0
+        ),
     }
     output = {
         "parameters": {
             "use_reranker": use_reranker,
+            "use_hybrid": use_hybrid,
             "initial_retrieval_k": INITIAL_RETRIEVAL_K,
-            "final_top_k": FINAL_TOP_K,
+            "bm25_retrieval_k": (
+                BM25_RETRIEVAL_K
+                if use_hybrid
+                else None
+            ),
+            "final_top_k": final_top_k,
             "reranker_model": RERANKER_MODEL if use_reranker else None,
         },
         "summary": summary,
@@ -180,9 +232,11 @@ def evaluate_retrieval(
         print("Retrieval Evaluation Summary")
         print("=" * 50)
         print(f"Use Reranker: {use_reranker}")
+        print(f"Use Hybrid: {use_hybrid}")
         print(f"Total Cases: {total_cases}")
         print(f"Top1 Hit Rate: {summary['top1_hit_rate']:.2%}")
         print(f"Hit@3: {summary['hit_at_3_rate']:.2%}")
+        print(f"Hit@5: {summary['hit_at_5_rate']:.2%}")
         print(f"Result saved: {result_file.relative_to(PROJECT_ROOT)}")
 
     return output
@@ -195,8 +249,16 @@ def main():
         action="store_true",
         help="Rerank Chroma Top-10 before keeping Top-3.",
     )
+    parser.add_argument(
+        "--use-hybrid",
+        action="store_true",
+        help="Merge BM25 Top-10 with Vector Top-10.",
+    )
     args = parser.parse_args()
-    evaluate_retrieval(use_reranker=args.use_reranker)
+    evaluate_retrieval(
+        use_reranker=args.use_reranker,
+        use_hybrid=args.use_hybrid,
+    )
 
 
 if __name__ == "__main__":
