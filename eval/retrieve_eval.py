@@ -1,6 +1,7 @@
 import json
 import chromadb
 
+from config import TOP_K
 from embedding import embed_text
 
 
@@ -9,9 +10,6 @@ TEST_CASE_FILE = "eval/test_case.json"
 CHROMA_DIR = "./chroma_db"
 
 COLLECTION_NAME = "company_knowledge"
-
-TOP_K = 3
-
 
 # ==============================
 # 1. 连接 Chroma

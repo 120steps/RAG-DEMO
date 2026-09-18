@@ -1,9 +1,13 @@
 import os
 import pymupdf
 
-from config import CHUNK_SIZE, CHUNK_OVERLAP, TOP_K
+from config import CHUNK_SIZE, CHUNK_OVERLAP
 
-def load_pdf(file_path):
+def load_pdf(
+    file_path,
+    chunk_size=CHUNK_SIZE,
+    chunk_overlap=CHUNK_OVERLAP
+):
     documents = []
     filename = os.path.basename(file_path)
     doc = pymupdf.open(file_path)
@@ -13,7 +17,7 @@ def load_pdf(file_path):
         if not text:
             continue
 
-        chunks = split_text(text, CHUNK_SIZE, CHUNK_OVERLAP)
+        chunks = split_text(text, chunk_size, chunk_overlap)
 
         for chunk_id, chunk in enumerate(chunks):
             documents.append({

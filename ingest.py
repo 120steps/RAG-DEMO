@@ -1,6 +1,7 @@
 import os
 import chromadb
 # from sentence_transformers import SentenceTransformer
+from config import CHUNK_SIZE, CHUNK_OVERLAP
 from document_loader import load_pdf
 from embedding import embed_texts
 
@@ -38,7 +39,11 @@ for filename in os.listdir(PDF_DIR):
 
     print(f"正在处理文件: {filename}")
 
-    docs = load_pdf(file_path)
+    docs = load_pdf(
+        file_path,
+        chunk_size=CHUNK_SIZE,
+        chunk_overlap=CHUNK_OVERLAP
+    )
 
     for doc in docs:
         document_id = (
