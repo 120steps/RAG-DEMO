@@ -1,0 +1,803 @@
+{
+  "parameters": {
+    "chunk_size": 500,
+    "chunk_overlap": 100,
+    "top_k": 3
+  },
+  "collection": {
+    "name": "company_knowledge",
+    "chunk_count": 47
+  },
+  "summary": {
+    "total_cases": 28,
+    "hit_cases": 26,
+    "miss_cases": 2,
+    "hit_rate": 0.9285714285714286
+  },
+  "details": [
+    {
+      "id": "Q001",
+      "question": "国内常规出差最迟需要提前多久提交申请？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 2,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "distance": 0.23222970962524414
+        },
+        {
+          "rank": 2,
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "distance": 0.2985020577907562
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "distance": 0.3007190525531769
+        }
+      ]
+    },
+    {
+      "id": "Q002",
+      "question": "国际出差需要提前多久申请，并由谁最终批准？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 2,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "distance": 0.23250915110111237
+        },
+        {
+          "rank": 2,
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "distance": 0.2799495756626129
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "distance": 0.29203182458877563
+        }
+      ]
+    },
+    {
+      "id": "Q003",
+      "question": "连续飞行超过6小时，哪些员工可以选择公务舱？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 3,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "distance": 0.22976458072662354
+        },
+        {
+          "rank": 2,
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "distance": 0.24150779843330383
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "distance": 0.29689496755599976
+        }
+      ]
+    },
+    {
+      "id": "Q004",
+      "question": "员工在什么时间段往返机场可以使用出租车？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 3,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "distance": 0.27591797709465027
+        },
+        {
+          "rank": 2,
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "distance": 0.30878299474716187
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "distance": 0.3281695246696472
+        }
+      ]
+    },
+    {
+      "id": "Q005",
+      "question": "A类城市普通员工的住宿上限是多少？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 4,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "distance": 0.25604742765426636
+        },
+        {
+          "rank": 2,
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "distance": 0.3048965334892273
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "distance": 0.30496692657470703
+        }
+      ]
+    },
+    {
+      "id": "Q006",
+      "question": "国内出差补贴标准是多少？如果公司或客户提供两餐及以上，应如何处理？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 4,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "distance": 0.20205079019069672
+        },
+        {
+          "rank": 2,
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "distance": 0.24186700582504272
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "distance": 0.2654797434806824
+        }
+      ]
+    },
+    {
+      "id": "Q007",
+      "question": "出差返程后应在多久内提交报销？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 6,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "distance": 0.2628745436668396
+        },
+        {
+          "rank": 2,
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "distance": 0.26633405685424805
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "distance": 0.28136470913887024
+        }
+      ]
+    },
+    {
+      "id": "Q008",
+      "question": "哪些访问场景必须启用多因素认证(MFA)？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "security_policy.pdf",
+          "page": 2,
+          "distance": 0.26543471217155457
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 2,
+          "distance": 0.26883405447006226
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.2969042658805847
+        }
+      ]
+    },
+    {
+      "id": "Q009",
+      "question": "服务账号的密钥多久至少轮换一次？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "security_policy.pdf",
+          "page": 2,
+          "distance": 0.24696139991283417
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 2,
+          "distance": 0.29020950198173523
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 5,
+          "distance": 0.3070877194404602
+        }
+      ]
+    },
+    {
+      "id": "Q010",
+      "question": "连续多久未使用的高权限会被自动暂停？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "hit": true,
+      "hit_rank": 2,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.29491618275642395
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 2,
+          "distance": 0.3209332525730133
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 5,
+          "distance": 0.33127889037132263
+        }
+      ]
+    },
+    {
+      "id": "Q011",
+      "question": "关键安全补丁和一般高危补丁分别应在多久内完成？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 3,
+      "hit": false,
+      "hit_rank": null,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "security_policy.pdf",
+          "page": 5,
+          "distance": 0.28258249163627625
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 5,
+          "distance": 0.30784669518470764
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.3125753700733185
+        }
+      ]
+    },
+    {
+      "id": "Q012",
+      "question": "经批准使用USB存储设备时，授权最长可以持续多久？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 3,
+      "hit": true,
+      "hit_rank": 2,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.3092244565486908
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 3,
+          "distance": 0.31256574392318726
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "distance": 0.3251584470272064
+        }
+      ]
+    },
+    {
+      "id": "Q013",
+      "question": "公司的数据分为哪四个分类级别？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 4,
+      "hit": true,
+      "hit_rank": 2,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "security_policy.pdf",
+          "page": 5,
+          "distance": 0.28765395283699036
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 4,
+          "distance": 0.29439929127693176
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "distance": 0.3085262179374695
+        }
+      ]
+    },
+    {
+      "id": "Q014",
+      "question": "发现账号被盗或数据误发后，应在多长时间内报告？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 5,
+      "hit": true,
+      "hit_rank": 2,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.28175613284111023
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 5,
+          "distance": 0.29679983854293823
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 5,
+          "distance": 0.3184038996696472
+        }
+      ]
+    },
+    {
+      "id": "Q015",
+      "question": "信息安全政策例外最长有效多久？涉及严格机密数据时由谁批准？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 6,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.23218701779842377
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 1,
+          "distance": 0.2703964114189148
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 5,
+          "distance": 0.2847960591316223
+        }
+      ]
+    },
+    {
+      "id": "Q016",
+      "question": "新员工应在多久内完成合规、安全和隐私必修课？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 2,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "distance": 0.2702031135559082
+        },
+        {
+          "rank": 2,
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "distance": 0.29660525918006897
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.2976415753364563
+        }
+      ]
+    },
+    {
+      "id": "Q017",
+      "question": "符合条件的员工每周最多远程办公几天？哪一天是团队共同办公日？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 3,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "distance": 0.2443704605102539
+        },
+        {
+          "rank": 2,
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "distance": 0.3044055700302124
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "distance": 0.30547216534614563
+        }
+      ]
+    },
+    {
+      "id": "Q018",
+      "question": "员工入职满一年后最少有多少天年假？最多可以结转多少天？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 4,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "distance": 0.22663922607898712
+        },
+        {
+          "rank": 2,
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "distance": 0.23859193921089172
+        },
+        {
+          "rank": 3,
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "distance": 0.29420989751815796
+        }
+      ]
+    },
+    {
+      "id": "Q019",
+      "question": "生日假有几天，可以结转到下一年度吗？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 4,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "distance": 0.25799885392189026
+        },
+        {
+          "rank": 2,
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "distance": 0.26757073402404785
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 2,
+          "distance": 0.3208102881908417
+        }
+      ]
+    },
+    {
+      "id": "Q020",
+      "question": "普通礼品在什么金额以内可以接受？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 5,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "distance": 0.31127166748046875
+        },
+        {
+          "rank": 2,
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "distance": 0.3137732148170471
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "distance": 0.32187986373901367
+        }
+      ]
+    },
+    {
+      "id": "Q021",
+      "question": "员工对正式绩效结果有异议，应在多久内申请复核？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 6,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "distance": 0.2528793215751648
+        },
+        {
+          "rank": 2,
+          "source": "security_policy.pdf",
+          "page": 2,
+          "distance": 0.2832144796848297
+        },
+        {
+          "rank": 3,
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "distance": 0.28530561923980713
+        }
+      ]
+    },
+    {
+      "id": "Q022",
+      "question": "同一供应商、同一目的的费用，在多少天内发生时应合并判断审批级别？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 2,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "distance": 0.25052157044410706
+        },
+        {
+          "rank": 2,
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "distance": 0.2714979648590088
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.28266239166259766
+        }
+      ]
+    },
+    {
+      "id": "Q023",
+      "question": "含税金额为30,000元的费用最低需要哪些审批？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 2,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "distance": 0.27898380160331726
+        },
+        {
+          "rank": 2,
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "distance": 0.2902136445045471
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 3,
+          "distance": 0.298214852809906
+        }
+      ]
+    },
+    {
+      "id": "Q024",
+      "question": "内部工作餐和普通商业客户招待的人均上限分别是多少？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 3,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "distance": 0.2176913022994995
+        },
+        {
+          "rank": 2,
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "distance": 0.3010329008102417
+        },
+        {
+          "rank": 3,
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "distance": 0.30251654982566833
+        }
+      ]
+    },
+    {
+      "id": "Q025",
+      "question": "销售及现场支持岗位每月最多可报销多少业务通信费？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 4,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "expense_policy.pdf",
+          "page": 4,
+          "distance": 0.21564075350761414
+        },
+        {
+          "rank": 2,
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "distance": 0.2929910123348236
+        },
+        {
+          "rank": 3,
+          "source": "security_policy.pdf",
+          "page": 6,
+          "distance": 0.2932373285293579
+        }
+      ]
+    },
+    {
+      "id": "Q026",
+      "question": "费用应在发生后多久提交？超过多少金额的无票费用需要财务经理批准？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 5,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "distance": 0.22653953731060028
+        },
+        {
+          "rank": 2,
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "distance": 0.24018730223178864
+        },
+        {
+          "rank": 3,
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "distance": 0.24926111102104187
+        }
+      ]
+    },
+    {
+      "id": "Q027",
+      "question": "预付款应在事项结束后多久完成清算？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 6,
+      "hit": true,
+      "hit_rank": 1,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "distance": 0.30172741413116455
+        },
+        {
+          "rank": 2,
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "distance": 0.3155366778373718
+        },
+        {
+          "rank": 3,
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "distance": 0.31852757930755615
+        }
+      ]
+    },
+    {
+      "id": "Q028",
+      "question": "费用申请人和审批人至少需要保存相关记录多少年？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 6,
+      "hit": false,
+      "hit_rank": null,
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "distance": 0.2857697606086731
+        },
+        {
+          "rank": 2,
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "distance": 0.3003842234611511
+        },
+        {
+          "rank": 3,
+          "source": "expense_policy.pdf",
+          "page": 1,
+          "distance": 0.3017953038215637
+        }
+      ]
+    }
+  ]
+}
