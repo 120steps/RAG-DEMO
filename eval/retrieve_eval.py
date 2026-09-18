@@ -1,4 +1,5 @@
 import json
+import os
 import chromadb
 
 from config import TOP_K
@@ -10,6 +11,10 @@ TEST_CASE_FILE = "eval/test_case.json"
 CHROMA_DIR = "./chroma_db"
 
 COLLECTION_NAME = "company_knowledge"
+
+RESULT_DIR = "eval/results"
+
+RESULT_FILE = os.path.join(RESULT_DIR, "retrieve_baseline.json")
 
 # ==============================
 # 1. 连接 Chroma
@@ -44,6 +49,8 @@ with open(
 total = 0
 
 hit_count = 0
+
+detailed_results = []
 
 
 # ==============================
@@ -185,6 +192,30 @@ for case in test_cases:
         hit_count += 1
 
 
+    retrieved_results = [
+        {
+            "rank": index,
+            "source": metadata.get("source"),
+            "page": metadata.get("page"),
+            "distance": float(distance)
+        }
+        for index, (metadata, distance) in enumerate(
+            zip(metadatas, distances),
+            start=1
+        )
+    ]
+
+    detailed_results.append({
+        "id": case["id"],
+        "question": case["question"],
+        "expected_source": expected_source,
+        "expected_page": expected_page,
+        "hit": hit,
+        "hit_rank": hit_rank,
+        "retrieved": retrieved_results
+    })
+
+
     # ==============================
     # 9. 输出当前结果
     # ==============================
@@ -298,3 +329,27 @@ print(
 print(
     f"Hit Rate：{hit_rate:.2%}"
 )
+
+
+os.makedirs(RESULT_DIR, exist_ok=True)
+
+with open(
+    RESULT_FILE,
+    "w",
+    encoding="utf-8"
+) as file:
+    json.dump(
+        {
+            "summary": {
+                "total_cases": total,
+                "hit_cases": hit_count,
+                "miss_cases": total - hit_count,
+                "hit_rate": hit_rate
+            },
+            "details": detailed_results
+        },
+        file,
+        ensure_ascii=False,
+        indent=2
+    )
+    file.write("\n")
