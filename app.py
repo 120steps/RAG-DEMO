@@ -32,7 +32,7 @@ class sourceItem(BaseModel):
     source: str
     chunk_id: str | int | None = None
     page: int | None = None
-    distance: float
+    distance: float | None = None
     document: str
 
 class QuestionResponse(BaseModel):
@@ -203,4 +203,3 @@ def delete_file(
         "message": "Document deleted",
         "filename": filename
     }
-    

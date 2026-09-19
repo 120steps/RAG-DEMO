@@ -20,11 +20,16 @@ for i, (document, metadata, distance) in enumerate(
     print()
     print(f"Top {i}")
 
+    distance_text = (
+        f"{distance:.4f}"
+        if distance is not None
+        else "N/A (BM25-only candidate)"
+    )
     print(
-        f"Source: {metadata['source']}, " 
+        f"Source: {metadata['source']}, "
         f"Chunk ID: {metadata['chunk_id']}, "
         f"Page: {metadata['page'] if 'page' in metadata else 'N/A'}, "
-        f"Distance: {distance:.4f}"
+        f"Distance: {distance_text}"
     )
 
     print(f"Document {i}:" + document)

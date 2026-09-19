@@ -1,7 +1,8 @@
 import chromadb
 
+from config import TOP_K
 from llm import generate_answer
-from embedding import embed_text
+from retrieval import retrieve_candidates
 
 client = chromadb.PersistentClient(path="./chroma_db")
 
@@ -9,20 +10,24 @@ collection = client.get_or_create_collection(name="company_knowledge")
 
 def ask_rag(
     question: str,
-    top_k: int = 3
+    top_k: int = TOP_K,
+    use_hybrid: bool = True,
+    use_reranker: bool = True,
 ):
-    question_embedding = (
-        embed_text(question)
+    candidates = retrieve_candidates(
+        question,
+        collection,
+        use_hybrid=use_hybrid,
+        use_reranker=use_reranker,
+        final_top_k=top_k,
     )
 
-    results = collection.query(
-        query_embeddings=[question_embedding],
-        n_results=top_k
-    )
-
-    documents = results["documents"][0]
-    metadatas = results["metadatas"][0]
-    distances = results["distances"][0]
+    documents = [candidate["document"] for candidate in candidates]
+    metadatas = [candidate["metadata"] for candidate in candidates]
+    distances = [
+        candidate["original_distance"]
+        for candidate in candidates
+    ]
 
     context_parts = []
 
@@ -70,5 +75,13 @@ def ask_rag(
         "answer": answer,
         "documents": documents,
         "metadatas": metadatas,
-        "distances": distances
+        "distances": distances,
+        "bm25_scores": [
+            candidate["bm25_score"]
+            for candidate in candidates
+        ],
+        "rerank_scores": [
+            candidate["rerank_score"]
+            for candidate in candidates
+        ],
     }

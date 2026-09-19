@@ -11,17 +11,20 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from config import TOP_K
-from bm25_search import BM25Index, merge_candidates
-from embedding import embed_text
-from reranker import RERANKER_MODEL, bind_candidates, rerank_candidates
+from bm25_search import BM25Index
+from reranker import RERANKER_MODEL
+from retrieval import (
+    BM25_RETRIEVAL_K,
+    VECTOR_RETRIEVAL_K,
+    retrieve_candidates,
+)
 
 
 TEST_CASE_FILE = PROJECT_ROOT / "eval" / "test_case.json"
 CHROMA_DIR = PROJECT_ROOT / "chroma_db"
 RESULT_DIR = PROJECT_ROOT / "eval" / "results"
 COLLECTION_NAME = "company_knowledge"
-INITIAL_RETRIEVAL_K = 10
-BM25_RETRIEVAL_K = 10
+INITIAL_RETRIEVAL_K = VECTOR_RETRIEVAL_K
 FINAL_TOP_K = TOP_K
 
 
@@ -46,40 +49,14 @@ def retrieve(
     bm25_index=None,
     final_top_k=FINAL_TOP_K,
 ):
-    question_embedding = embed_text(question)
-    results = collection.query(
-        query_embeddings=[question_embedding],
-        n_results=INITIAL_RETRIEVAL_K,
-        include=["documents", "metadatas", "distances"],
+    return retrieve_candidates(
+        question,
+        collection,
+        use_reranker=use_reranker,
+        use_hybrid=use_hybrid,
+        bm25_index=bm25_index,
+        final_top_k=final_top_k,
     )
-    candidates = bind_candidates(
-        results["documents"][0],
-        results["metadatas"][0],
-        results["distances"][0],
-    )
-
-    if use_hybrid:
-        if bm25_index is None:
-            raise ValueError(
-                "bm25_index is required when use_hybrid=True"
-            )
-        bm25_candidates = bm25_index.search(
-            question,
-            top_k=BM25_RETRIEVAL_K,
-        )
-        candidates = merge_candidates(
-            candidates,
-            bm25_candidates,
-        )
-
-    if use_reranker:
-        return rerank_candidates(
-            question,
-            candidates,
-            top_n=final_top_k,
-        )
-
-    return candidates[:final_top_k]
 
 
 def serialize_candidates(candidates):
