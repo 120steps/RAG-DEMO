@@ -1,7 +1,12 @@
 import chromadb
 
-from config import QUERY_REWRITE_ENABLED, TOP_K
+from config import (
+    QUERY_EXPANSION_ENABLED,
+    QUERY_REWRITE_ENABLED,
+    TOP_K,
+)
 from llm import generate_answer
+from query_expander import expand_query
 from query_rewriter import rewrite_query
 from retrieval import retrieve_candidates
 
@@ -21,6 +26,11 @@ def ask_rag(
         if QUERY_REWRITE_ENABLED
         else original_query
     )
+    expanded_queries = (
+        expand_query(retrieval_query)
+        if QUERY_EXPANSION_ENABLED
+        else [retrieval_query]
+    )
 
     candidates = retrieve_candidates(
         retrieval_query,
@@ -28,6 +38,11 @@ def ask_rag(
         use_hybrid=use_hybrid,
         use_reranker=use_reranker,
         final_top_k=top_k,
+        expanded_queries=(
+            expanded_queries
+            if QUERY_EXPANSION_ENABLED
+            else None
+        ),
     )
 
     documents = [candidate["document"] for candidate in candidates]
@@ -81,7 +96,9 @@ def ask_rag(
     return {
         "question": original_query,
         "original_query": original_query,
+        "rewritten_query": retrieval_query,
         "retrieval_query": retrieval_query,
+        "expanded_queries": expanded_queries,
         "answer": answer,
         "documents": documents,
         "metadatas": metadatas,
@@ -92,6 +109,14 @@ def ask_rag(
         ],
         "rerank_scores": [
             candidate["rerank_score"]
+            for candidate in candidates
+        ],
+        "fusion_scores": [
+            candidate.get("fusion_score")
+            for candidate in candidates
+        ],
+        "matched_queries": [
+            candidate.get("matched_queries", [])
             for candidate in candidates
         ],
     }

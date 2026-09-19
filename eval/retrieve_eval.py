@@ -48,6 +48,7 @@ def retrieve(
     use_hybrid=False,
     bm25_index=None,
     final_top_k=FINAL_TOP_K,
+    expanded_queries=None,
 ):
     return retrieve_candidates(
         question,
@@ -56,6 +57,7 @@ def retrieve(
         use_hybrid=use_hybrid,
         bm25_index=bm25_index,
         final_top_k=final_top_k,
+        expanded_queries=expanded_queries,
     )
 
 
@@ -69,8 +71,11 @@ def serialize_candidates(candidates):
             "page": candidate["metadata"].get("page"),
             "chunk_id": candidate["metadata"].get("chunk_id"),
             "original_distance": candidate["original_distance"],
+            "distance": candidate.get("distance"),
             "bm25_score": candidate["bm25_score"],
+            "fusion_score": candidate.get("fusion_score"),
             "rerank_score": candidate["rerank_score"],
+            "matched_queries": candidate.get("matched_queries", []),
         }
         for rank, candidate in enumerate(candidates, start=1)
     ]
