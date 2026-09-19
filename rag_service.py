@@ -1,7 +1,8 @@
 import chromadb
 
-from config import TOP_K
+from config import QUERY_REWRITE_ENABLED, TOP_K
 from llm import generate_answer
+from query_rewriter import rewrite_query
 from retrieval import retrieve_candidates
 
 client = chromadb.PersistentClient(path="./chroma_db")
@@ -14,8 +15,15 @@ def ask_rag(
     use_hybrid: bool = True,
     use_reranker: bool = True,
 ):
+    original_query = question
+    retrieval_query = (
+        rewrite_query(original_query)
+        if QUERY_REWRITE_ENABLED
+        else original_query
+    )
+
     candidates = retrieve_candidates(
-        question,
+        retrieval_query,
         collection,
         use_hybrid=use_hybrid,
         use_reranker=use_reranker,
@@ -66,12 +74,14 @@ def ask_rag(
 {context}
 
 问题：
-{question}
+{original_query}
 """
 
     answer = generate_answer(prompt)
     return {
-        "question": question,
+        "question": original_query,
+        "original_query": original_query,
+        "retrieval_query": retrieval_query,
         "answer": answer,
         "documents": documents,
         "metadatas": metadatas,

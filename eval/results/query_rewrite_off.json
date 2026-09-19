@@ -1,0 +1,4588 @@
+{
+  "parameters": {
+    "query_rewrite_enabled": false,
+    "use_hybrid": true,
+    "use_reranker": true,
+    "chunk_size": 200,
+    "chunk_overlap": 30,
+    "vector_top_k": 10,
+    "bm25_top_k": 10,
+    "evaluation_top_k": 10,
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1"
+  },
+  "summary": {
+    "total_cases": 28,
+    "hit_at_1_count": 28,
+    "hit_at_1_rate": 1.0,
+    "hit_at_3_count": 28,
+    "hit_at_3_rate": 1.0,
+    "hit_at_5_count": 28,
+    "hit_at_5_rate": 1.0
+  },
+  "details": [
+    {
+      "id": "Q001",
+      "original_query": "国内常规出差最迟需要提前多久提交申请？",
+      "rewritten_query": "国内常规出差申请的最晚提交时限要求是什么？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 2,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "2. 出差申请与审批\n\n\n2.1 申请时限\n\n国内出差原则上应至少提前2 个工作日提交；国际及港澳台出差至少提前10 个工作日提交。紧急出差可先取得直属总\n\n监的书面同意，并在返程后1 个工作日内补齐流程。\n\n2.2 审批路径\n\n  预算内且预计总费用不超过8,000 元：部门负责人审批。\n\n   8,001 至30,000 元：部门负责人及财务BP 审批。\n\n  超过30,000 元或涉及",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.23155556619167328,
+          "bm25_score": 33.70522999191416,
+          "rerank_score": 4.077000141143799
+        },
+        {
+          "rank": 2,
+          "document": "申请时限                 结转\n 年假<5 天                  提前3 个工作日               最多5 天\n 年假≥5 天                   提前10 个工作日              最多5 天\n 病假                            当日10:00 前通知             不适用",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 4,
+            "chunk_id": 2
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.26783227920532227,
+          "bm25_score": 23.823328488415022,
+          "rerank_score": -0.6710455417633057
+        },
+        {
+          "rank": 3,
+          "document": "提交时间               最终审批人\n 国内常规                  出发前2 个工作日             部门负责人\n 国内高额                  出发前3 个工作日              财务BP\n 国际出差                   出发前10 个工作日            分管副总裁\n\n\n\n\n\n星云科技有限公司 - 内部制度示",
+          "metadata": {
+            "page": 2,
+            "source": "travel_policy.pdf",
+            "chunk_id": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.2598166763782501,
+          "bm25_score": 39.75647502470043,
+          "rerank_score": -1.4852778911590576
+        },
+        {
+          "rank": 4,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 20.67193649872136,
+          "rerank_score": -2.4674909114837646
+        },
+        {
+          "rank": 5,
+          "document": "负责人及财务BP 审批。\n\n  超过30,000 元或涉及国际出差：分管副总裁审批。\n\n 出差人员不得审批本人申请；同一项目多人出差应分别提交行程。\n\n2.3 必填信息\n\n申请应包含出差目的、城市、起止日期、客户或项目名称、预计费用、成本中心及同行人员。缺少成本中心的申请将\n\n退回。\n\n 场景                   最晚提交时间               最终审批人\n 国内常规",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.2607358396053314,
+          "bm25_score": 43.71196952452021,
+          "rerank_score": -2.5157432556152344
+        },
+        {
+          "rank": 6,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "page": 1,
+            "source": "travel_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2816685140132904,
+          "bm25_score": 16.358754015102242,
+          "rerank_score": -3.9867665767669678
+        },
+        {
+          "rank": 7,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.2911747097969055,
+          "bm25_score": null,
+          "rerank_score": -4.574981212615967
+        },
+        {
+          "rank": 8,
+          "document": "一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通或公司协议用车；凌晨23:00 至次日06:00 可使用出租车。\n\n 网约车豪华车型、专车等候费和个人绕行费用不予报销。\n\n3.3 自驾\n\n因公使用私家车须事先审批，按1.2 元/公里补贴，补贴已包含燃油和车辆损耗；实际发生的高速公路费与停车费可凭\n\n票另行报销。交通违章及事故罚款由个人承担。\n\n 交通方式",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 1,
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": 0.3018874228000641,
+          "bm25_score": null,
+          "rerank_score": -5.361232280731201
+        },
+        {
+          "rank": 9,
+          "document": "3. 交通标准\n\n\n3.1 航空\n\n飞行时间不超过6 小时应乘坐经济舱。连续飞行超过6 小时，职级为总监及以上人员可选择公务舱；其他员工如因医疗\n\n原因需要升舱，应提交医院证明并由人力资源负责人批准。私人里程兑换升舱不予报销差价。\n\n3.2 铁路与市内交通\n\n 高铁或动车行程不超过5 小时，原则上选择二等座。\n\n  超过5 小时可选择一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 3,
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 17.196051280625536,
+          "rerank_score": -5.631440162658691
+        },
+        {
+          "rank": 10,
+          "document": "罚款由个人承担。\n\n 交通方式                 标准                   例外\n 飞机                   经济舱                     连续飞行>6 小时且符合职级或医疗条件\n 高铁                   二等座                       行程>5 小时可选一等座\n 私家车",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "travel_policy.pdf",
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "original_distance": 0.2991202473640442,
+          "bm25_score": null,
+          "rerank_score": -5.767980098724365
+        }
+      ]
+    },
+    {
+      "id": "Q002",
+      "original_query": "国际出差需要提前多久申请，并由谁最终批准？",
+      "rewritten_query": "国际出差申请的提前申请时限要求及最终审批权限归属是什么？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 2,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "2. 出差申请与审批\n\n\n2.1 申请时限\n\n国内出差原则上应至少提前2 个工作日提交；国际及港澳台出差至少提前10 个工作日提交。紧急出差可先取得直属总\n\n监的书面同意，并在返程后1 个工作日内补齐流程。\n\n2.2 审批路径\n\n  预算内且预计总费用不超过8,000 元：部门负责人审批。\n\n   8,001 至30,000 元：部门负责人及财务BP 审批。\n\n  超过30,000 元或涉及",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "travel_policy.pdf",
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.23609672486782074,
+          "bm25_score": 31.44218457617175,
+          "rerank_score": 3.462157964706421
+        },
+        {
+          "rank": 2,
+          "document": "提交时间               最终审批人\n 国内常规                  出发前2 个工作日             部门负责人\n 国内高额                  出发前3 个工作日              财务BP\n 国际出差                   出发前10 个工作日            分管副总裁\n\n\n\n\n\n星云科技有限公司 - 内部制度示",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "travel_policy.pdf",
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.2518247961997986,
+          "bm25_score": 35.46312813239454,
+          "rerank_score": 0.25415366888046265
+        },
+        {
+          "rank": 3,
+          "document": "负责人及财务BP 审批。\n\n  超过30,000 元或涉及国际出差：分管副总裁审批。\n\n 出差人员不得审批本人申请；同一项目多人出差应分别提交行程。\n\n2.3 必填信息\n\n申请应包含出差目的、城市、起止日期、客户或项目名称、预计费用、成本中心及同行人员。缺少成本中心的申请将\n\n退回。\n\n 场景                   最晚提交时间               最终审批人\n 国内常规",
+          "metadata": {
+            "page": 2,
+            "source": "travel_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.2410963773727417,
+          "bm25_score": 40.50604325249472,
+          "rerank_score": -0.5625702738761902
+        },
+        {
+          "rank": 4,
+          "document": "申请时限                 结转\n 年假<5 天                  提前3 个工作日               最多5 天\n 年假≥5 天                   提前10 个工作日              最多5 天\n 病假                            当日10:00 前通知             不适用",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "chunk_id": 2,
+            "page": 4
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.2859457731246948,
+          "bm25_score": 21.981849151622196,
+          "rerank_score": -3.2039945125579834
+        },
+        {
+          "rank": 5,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "page": 1,
+            "source": "travel_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2520521879196167,
+          "bm25_score": 13.750885040862698,
+          "rerank_score": -3.8283746242523193
+        },
+        {
+          "rank": 6,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 17.262301673316017,
+          "rerank_score": -4.69153356552124
+        },
+        {
+          "rank": 7,
+          "document": "生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申请、交通、住宿、补贴、变更与报销。员工应以安全、必要、经济为原则选择行程，并在出\n\n发前完成审批。\n\n本文件为企业制度类 RAG 测试样本文档。公司名称、人员、金额及流程均为虚构，但条款结构、审批逻辑和例外规则按照真实企业制度的写\n\n法设计。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 1,
+            "chunk_id": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 2,
+          "original_distance": 0.27069640159606934,
+          "bm25_score": 16.588398385847636,
+          "rerank_score": -5.156894207000732
+        },
+        {
+          "rank": 8,
+          "document": "部门                           财务共享服务中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范非差旅类业务",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2870583236217499,
+          "bm25_score": null,
+          "rerank_score": -5.891968250274658
+        },
+        {
+          "rank": 9,
+          "document": "3. 交通标准\n\n\n3.1 航空\n\n飞行时间不超过6 小时应乘坐经济舱。连续飞行超过6 小时，职级为总监及以上人员可选择公务舱；其他员工如因医疗\n\n原因需要升舱，应提交医院证明并由人力资源负责人批准。私人里程兑换升舱不予报销差价。\n\n3.2 铁路与市内交通\n\n 高铁或动车行程不超过5 小时，原则上选择二等座。\n\n  超过5 小时可选择一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 3,
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 20.47721937669203,
+          "rerank_score": -5.948891639709473
+        },
+        {
+          "rank": 10,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "expense_policy.pdf",
+            "page": 5
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.29404550790786743,
+          "bm25_score": null,
+          "rerank_score": -6.106762886047363
+        }
+      ]
+    },
+    {
+      "id": "Q003",
+      "original_query": "连续飞行超过6小时，哪些员工可以选择公务舱？",
+      "rewritten_query": "连续飞行时间超过6小时的员工公务舱报销或选座政策是什么？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 3,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "3. 交通标准\n\n\n3.1 航空\n\n飞行时间不超过6 小时应乘坐经济舱。连续飞行超过6 小时，职级为总监及以上人员可选择公务舱；其他员工如因医疗\n\n原因需要升舱，应提交医院证明并由人力资源负责人批准。私人里程兑换升舱不予报销差价。\n\n3.2 铁路与市内交通\n\n 高铁或动车行程不超过5 小时，原则上选择二等座。\n\n  超过5 小时可选择一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通",
+          "metadata": {
+            "page": 3,
+            "source": "travel_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.2149064540863037,
+          "bm25_score": 75.0945648206047,
+          "rerank_score": 8.33627986907959
+        },
+        {
+          "rank": 2,
+          "document": "罚款由个人承担。\n\n 交通方式                 标准                   例外\n 飞机                   经济舱                     连续飞行>6 小时且符合职级或医疗条件\n 高铁                   二等座                       行程>5 小时可选一等座\n 私家车",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "travel_policy.pdf",
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "original_distance": 0.24250748753547668,
+          "bm25_score": 46.45798443489093,
+          "rerank_score": 0.18019142746925354
+        },
+        {
+          "rank": 3,
+          "document": "行程>5 小时可选一等座\n 私家车                                      1.2 元/公里                须事前审批\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档\n                                                          第 3 页",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 3,
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 3,
+          "original_distance": null,
+          "bm25_score": 14.65989484308933,
+          "rerank_score": -5.169416904449463
+        },
+        {
+          "rank": 4,
+          "document": "3. 餐饮、招待与会议\n\n\n3.1 内部工作餐\n\n因跨部门会议连续超过4 小时且跨越正常用餐时间，可安排工作餐。标准为每人不超过80 元，不得报销酒精饮料。日\n\n常团队聚餐不属于工作餐。\n\n3.2 外部业务招待\n\n应说明客户单位、参与人员、业务目的和日期。普通商业客户标准为每人不超过300 元；涉及政府官员、国有机构敏\n\n感岗位或招投标期间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 3,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.3033905625343323,
+          "bm25_score": 21.759415734404314,
+          "rerank_score": -6.788419723510742
+        },
+        {
+          "rank": 5,
+          "document": "5. 行程变更与安全\n\n\n5.1 变更规则\n\n因客户会议调整、航班取消或公司任务变化导致改签的，合理费用可报销。因个人原因改签、退票或延长停留的增量\n\n费用由员工承担。员工应保留航司通知、客户邮件或会议纪要作为变更依据。\n\n5.2 周末衔接\n\n经批准可将个人休假与出差衔接，但公司仅承担最经济的原定公务行程成本。若混合行程票价更低，可按实际金额报\n\n销；若更高，差额由个人承担。个人停留期间不发放补贴",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 5,
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": 0.3072267174720764,
+          "bm25_score": null,
+          "rerank_score": -7.409646511077881
+        },
+        {
+          "rank": 6,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 18.900760594371704,
+          "rerank_score": -7.6405253410339355
+        },
+        {
+          "rank": 7,
+          "document": "生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申请、交通、住宿、补贴、变更与报销。员工应以安全、必要、经济为原则选择行程，并在出\n\n发前完成审批。\n\n本文件为企业制度类 RAG 测试样本文档。公司名称、人员、金额及流程均为虚构，但条款结构、审批逻辑和例外规则按照真实企业制度的写\n\n法设计。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 1,
+            "chunk_id": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 2,
+          "original_distance": null,
+          "bm25_score": 14.926746168446773,
+          "rerank_score": -7.862420082092285
+        },
+        {
+          "rank": 8,
+          "document": "或邮件通知。本手册不构成固定期限或终身雇\n\n佣承诺。\n\n 咨询事项                           联系渠道\n 薪酬福利                                                  people@example.test\n 行为与申诉                                                  ethi",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 6,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.3059671223163605,
+          "bm25_score": null,
+          "rerank_score": -8.06312084197998
+        },
+        {
+          "rank": 9,
+          "document": "渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交互式登录，密钥至少每90 天轮换。\n\n 紧急账号应封存并在每次使用后24 小时内复核。\n\n2.3 权限复核\n\n系统负责人每季度复核普通权限，每月复核管理员权限。连续60 天未使用的高权限应自动暂停，确认仍有业务需要后\n\n方可恢复。\n\n 账号类型                 认证要求                 复核周期\n 普通员",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 13.56065762477845,
+          "rerank_score": -8.154280662536621
+        },
+        {
+          "rank": 10,
+          "document": "5. 行为准则与利益冲突\n\n\n5.1 尊重与平等\n\n公司禁止歧视、骚扰、霸凌和报复。该要求适用于办公场所、客户现场、出差、线上沟通及公司组织的社交活动。旁\n\n观者可通过经理、人力资源或匿名渠道报告。\n\n5.2 礼品与招待\n\n员工不得索取礼品。单次价值不超过300 元且不影响商业判断的普通礼品可接受；现金、现金等价物及招投标敏感期\n\n礼品一律禁止。超过标准但无法当场退回时，应在2 个工作日内登记并交",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 5,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 12.708125453606083,
+          "rerank_score": -8.413904190063477
+        }
+      ]
+    },
+    {
+      "id": "Q004",
+      "original_query": "员工在什么时间段往返机场可以使用出租车？",
+      "rewritten_query": "员工报销出租车费用的机场往返时间段规定是什么？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 3,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通或公司协议用车；凌晨23:00 至次日06:00 可使用出租车。\n\n 网约车豪华车型、专车等候费和个人绕行费用不予报销。\n\n3.3 自驾\n\n因公使用私家车须事先审批，按1.2 元/公里补贴，补贴已包含燃油和车辆损耗；实际发生的高速公路费与停车费可凭\n\n票另行报销。交通违章及事故罚款由个人承担。\n\n 交通方式",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": 0.29224729537963867,
+          "bm25_score": 42.57320614278113,
+          "rerank_score": 0.864503800868988
+        },
+        {
+          "rank": 2,
+          "document": "3. 交通标准\n\n\n3.1 航空\n\n飞行时间不超过6 小时应乘坐经济舱。连续飞行超过6 小时，职级为总监及以上人员可选择公务舱；其他员工如因医疗\n\n原因需要升舱，应提交医院证明并由人力资源负责人批准。私人里程兑换升舱不予报销差价。\n\n3.2 铁路与市内交通\n\n 高铁或动车行程不超过5 小时，原则上选择二等座。\n\n  超过5 小时可选择一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通",
+          "metadata": {
+            "page": 3,
+            "chunk_id": 0,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.28278809785842896,
+          "bm25_score": 28.852286184872074,
+          "rerank_score": -3.5583136081695557
+        },
+        {
+          "rank": 3,
+          "document": "罚款由个人承担。\n\n 交通方式                 标准                   例外\n 飞机                   经济舱                     连续飞行>6 小时且符合职级或医疗条件\n 高铁                   二等座                       行程>5 小时可选一等座\n 私家车",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 2,
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "original_distance": 0.28120529651641846,
+          "bm25_score": null,
+          "rerank_score": -5.1735992431640625
+        },
+        {
+          "rank": 4,
+          "document": "3. 工作时间与灵活办公\n\n\n3.1 标准工时\n\n标准工作时间为周一至周五09:00-18:00，其中午休1 小时。采用综合工时或轮班制度的岗位以书面排班为准。员工应\n\n如实记录出勤，不得替他人打卡。\n\n3.2 加班\n\n加班须在发生前取得经理批准；突发故障可事后于1 个工作日内补批。公司根据法律及岗位安排提供调休或加班工\n\n资。未经批准的额外工作时间应及时向经理说明，不得隐瞒实际工时。\n\n3.3",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "employee_handbook.pdf",
+            "page": 3
+          },
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.3367546498775482,
+          "bm25_score": 16.245530766957753,
+          "rerank_score": -6.279970645904541
+        },
+        {
+          "rank": 5,
+          "document": "医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10:00 前通知经理或人力资源部。\n\n4.3 其他假期\n\n 婚假、产假、陪产假、育儿假和丧假依当地法律及公司福利方案执行。\n\n 每年提供2 个带薪志愿服务日，须用于公司认可的公益活动。\n\n 生日假为1 个工作日，应在生日当月使用，不可折现或结转。\n\n 假期                   申请时限",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 4,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": 0.3314589858055115,
+          "bm25_score": 12.033960759265915,
+          "rerank_score": -6.809685230255127
+        },
+        {
+          "rank": 6,
+          "document": "5. 行程变更与安全\n\n\n5.1 变更规则\n\n因客户会议调整、航班取消或公司任务变化导致改签的，合理费用可报销。因个人原因改签、退票或延长停留的增量\n\n费用由员工承担。员工应保留航司通知、客户邮件或会议纪要作为变更依据。\n\n5.2 周末衔接\n\n经批准可将个人休假与出差衔接，但公司仅承担最经济的原定公务行程成本。若混合行程票价更低，可按实际金额报\n\n销；若更高，差额由个人承担。个人停留期间不发放补贴",
+          "metadata": {
+            "page": 5,
+            "chunk_id": 0,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": 0.33645161986351013,
+          "bm25_score": null,
+          "rerank_score": -7.307094097137451
+        },
+        {
+          "rank": 7,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 13.055009317805151,
+          "rerank_score": -7.593960762023926
+        },
+        {
+          "rank": 8,
+          "document": "差旅管理制度\n\n\n               文件编号：POL-ADM-TRV-011　版本：V1.1　生效日期：2026 年7 月1 日\n\n\n 文件属性                           内容\n 适用范围                           中国大陆地区全体正式员工、实习生及经批准的外部项目人员\n 归口部门",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 1,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 0,
+          "original_distance": 0.3371748924255371,
+          "bm25_score": null,
+          "rerank_score": -7.958953380584717
+        },
+        {
+          "rank": 9,
+          "document": "渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交互式登录，密钥至少每90 天轮换。\n\n 紧急账号应封存并在每次使用后24 小时内复核。\n\n2.3 权限复核\n\n系统负责人每季度复核普通权限，每月复核管理员权限。连续60 天未使用的高权限应自动暂停，确认仍有业务需要后\n\n方可恢复。\n\n 账号类型                 认证要求                 复核周期\n 普通员",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 11.43980337663882,
+          "rerank_score": -8.022607803344727
+        },
+        {
+          "rank": 10,
+          "document": "额外工作时间应及时向经理说明，不得隐瞒实际工时。\n\n3.3 混合办公\n\n 符合岗位条件的员工每周最多远程办公2 天。\n\n 周二为团队共同办公日，原则上不得安排常规远程办公。\n\n 涉及客户现场、实验室设备或纸质机密材料的工作必须在指定地点完成。\n\n 远程办公不改变员工对信息安全、响应时间和绩效结果的责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 3,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 14.332401109535523,
+          "rerank_score": -8.328023910522461
+        }
+      ]
+    },
+    {
+      "id": "Q005",
+      "original_query": "A类城市普通员工的住宿上限是多少？",
+      "rewritten_query": "A类城市普通员工的住宿费用报销上限标准是多少？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 4,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "4. 住宿与出差补贴\n\n\n4.1 住宿上限\n\n住宿费按实际发生额在限额内报销。限额不等于固定补贴，未住宿或由客户免费提供住宿时不得申报住宿费。两名同\n\n性员工同住一间房不强制，但鼓励在安全与便利的前提下共享协议酒店。\n\n4.2 城市分类\n\n  A 类城市：北京、上海、广州、深圳及境外高成本城市，普通员工上限650 元/晚。\n\n  B 类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": 0.2491404116153717,
+          "bm25_score": 68.0143192074978,
+          "rerank_score": 5.577911376953125
+        },
+        {
+          "rank": 2,
+          "document": "类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n  C 类城市：其他城市，普通员工上限380 元/晚。\n\n  总监及以上人员的对应上限分别为900 元、750 元和600 元。\n\n4.3 补贴\n\n国内出差餐饮及杂费补贴为150 元/自然日；出发日和返程日均按全天计算。公司或客户提供两餐及以上时，当日补贴\n\n减半；提供全部三餐时不发放餐补，但仍可领取30 元杂费补贴。\n\n 城市类别",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 4,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": 0.2673988342285156,
+          "bm25_score": 45.33830245720123,
+          "rerank_score": 2.398411989212036
+        },
+        {
+          "rank": 3,
+          "document": "时不发放餐补，但仍可领取30 元杂费补贴。\n\n 城市类别                 普通员工                 总监及以上\n A 类                                  650 元/晚                             900 元/晚\n B 类                                  500 元/晚",
+          "metadata": {
+            "page": 4,
+            "chunk_id": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.2578465938568115,
+          "bm25_score": 39.13515715103883,
+          "rerank_score": -0.38304010033607483
+        },
+        {
+          "rank": 4,
+          "document": "3. 餐饮、招待与会议\n\n\n3.1 内部工作餐\n\n因跨部门会议连续超过4 小时且跨越正常用餐时间，可安排工作餐。标准为每人不超过80 元，不得报销酒精饮料。日\n\n常团队聚餐不属于工作餐。\n\n3.2 外部业务招待\n\n应说明客户单位、参与人员、业务目的和日期。普通商业客户标准为每人不超过300 元；涉及政府官员、国有机构敏\n\n感岗位或招投标期间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.",
+          "metadata": {
+            "page": 3,
+            "source": "expense_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.32619744539260864,
+          "bm25_score": null,
+          "rerank_score": -4.816329002380371
+        },
+        {
+          "rank": 5,
+          "document": "500 元/晚                             750 元/晚\n C 类                                  380 元/晚                             600 元/晚\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "chunk_id": 3,
+            "source": "travel_policy.pdf",
+            "page": 4
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 3,
+          "original_distance": 0.32937729358673096,
+          "bm25_score": null,
+          "rerank_score": -4.997888088226318
+        },
+        {
+          "rank": 6,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 10.273270350233105,
+          "rerank_score": -5.660820484161377
+        },
+        {
+          "rank": 7,
+          "document": "4. 办公、通信与专业费用\n\n\n4.1 办公用品\n\n常规办公用品由行政集中采购。个人自行购买仅限紧急情况，单次上限500 元，并应说明未使用集中采购的原因。家\n\n具、显示器及耐用设备无论金额大小均须通过资产采购流程。\n\n4.2 通信费用\n\n销售及现场支持岗位可按月报销实际发生的业务通信费，上限300 元；经批准的国际漫游上限800 元/月。家庭宽带费\n\n仅对公司批准的长期远程岗位报销，上限150",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 4,
+            "chunk_id": 0
+          },
+          "source": "expense_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 10.82044230196082,
+          "rerank_score": -6.384170055389404
+        },
+        {
+          "rank": 8,
+          "document": "3. 交通标准\n\n\n3.1 航空\n\n飞行时间不超过6 小时应乘坐经济舱。连续飞行超过6 小时，职级为总监及以上人员可选择公务舱；其他员工如因医疗\n\n原因需要升舱，应提交医院证明并由人力资源负责人批准。私人里程兑换升舱不予报销差价。\n\n3.2 铁路与市内交通\n\n 高铁或动车行程不超过5 小时，原则上选择二等座。\n\n  超过5 小时可选择一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 3,
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.3437458574771881,
+          "bm25_score": null,
+          "rerank_score": -6.933958530426025
+        },
+        {
+          "rank": 9,
+          "document": "罚款由个人承担。\n\n 交通方式                 标准                   例外\n 飞机                   经济舱                     连续飞行>6 小时且符合职级或医疗条件\n 高铁                   二等座                       行程>5 小时可选一等座\n 私家车",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 3,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "original_distance": 0.3388601541519165,
+          "bm25_score": null,
+          "rerank_score": -7.747583866119385
+        },
+        {
+          "rank": 10,
+          "document": "金额报\n\n销；若更高，差额由个人承担。个人停留期间不发放补贴。\n\n5.3 高风险地区\n\n 出发前完成安全培训并登记紧急联系人。\n\n 不得前往公司安全团队发布的禁止区域。\n\n 发生自然灾害、骚乱或公共卫生事件时，应优先保证人身安全并联系24 小时热线。\n\n 护照、公司设备或客户资料遗失须在2 小时内报告。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 5,
+            "source": "travel_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.34423696994781494,
+          "bm25_score": null,
+          "rerank_score": -7.909780025482178
+        }
+      ]
+    },
+    {
+      "id": "Q006",
+      "original_query": "国内出差补贴标准是多少？如果公司或客户提供两餐及以上，应如何处理？",
+      "rewritten_query": "国内出差补贴标准及公司或客户提供两餐及以上时的扣减规定是什么？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 4,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n  C 类城市：其他城市，普通员工上限380 元/晚。\n\n  总监及以上人员的对应上限分别为900 元、750 元和600 元。\n\n4.3 补贴\n\n国内出差餐饮及杂费补贴为150 元/自然日；出发日和返程日均按全天计算。公司或客户提供两餐及以上时，当日补贴\n\n减半；提供全部三餐时不发放餐补，但仍可领取30 元杂费补贴。\n\n 城市类别",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 4
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": 0.203227698802948,
+          "bm25_score": 77.8574513663764,
+          "rerank_score": 4.255125999450684
+        },
+        {
+          "rank": 2,
+          "document": "2. 出差申请与审批\n\n\n2.1 申请时限\n\n国内出差原则上应至少提前2 个工作日提交；国际及港澳台出差至少提前10 个工作日提交。紧急出差可先取得直属总\n\n监的书面同意，并在返程后1 个工作日内补齐流程。\n\n2.2 审批路径\n\n  预算内且预计总费用不超过8,000 元：部门负责人审批。\n\n   8,001 至30,000 元：部门负责人及财务BP 审批。\n\n  超过30,000 元或涉及",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 2,
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.2670067548751831,
+          "bm25_score": 28.882649080770328,
+          "rerank_score": -3.7526462078094482
+        },
+        {
+          "rank": 3,
+          "document": "4. 住宿与出差补贴\n\n\n4.1 住宿上限\n\n住宿费按实际发生额在限额内报销。限额不等于固定补贴，未住宿或由客户免费提供住宿时不得申报住宿费。两名同\n\n性员工同住一间房不强制，但鼓励在安全与便利的前提下共享协议酒店。\n\n4.2 城市分类\n\n  A 类城市：北京、上海、广州、深圳及境外高成本城市，普通员工上限650 元/晚。\n\n  B 类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n",
+          "metadata": {
+            "page": 4,
+            "source": "travel_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": 0.21892651915550232,
+          "bm25_score": 30.640177458867914,
+          "rerank_score": -3.961862325668335
+        },
+        {
+          "rank": 4,
+          "document": "3. 餐饮、招待与会议\n\n\n3.1 内部工作餐\n\n因跨部门会议连续超过4 小时且跨越正常用餐时间，可安排工作餐。标准为每人不超过80 元，不得报销酒精饮料。日\n\n常团队聚餐不属于工作餐。\n\n3.2 外部业务招待\n\n应说明客户单位、参与人员、业务目的和日期。普通商业客户标准为每人不超过300 元；涉及政府官员、国有机构敏\n\n感岗位或招投标期间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.",
+          "metadata": {
+            "page": 3,
+            "chunk_id": 0,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.23141959309577942,
+          "bm25_score": 27.064693474978267,
+          "rerank_score": -4.033631801605225
+        },
+        {
+          "rank": 5,
+          "document": "时不发放餐补，但仍可领取30 元杂费补贴。\n\n 城市类别                 普通员工                 总监及以上\n A 类                                  650 元/晚                             900 元/晚\n B 类                                  500 元/晚",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 4,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.22487103939056396,
+          "bm25_score": 27.465808750645564,
+          "rerank_score": -4.098909854888916
+        },
+        {
+          "rank": 6,
+          "document": "负责人及财务BP 审批。\n\n  超过30,000 元或涉及国际出差：分管副总裁审批。\n\n 出差人员不得审批本人申请；同一项目多人出差应分别提交行程。\n\n2.3 必填信息\n\n申请应包含出差目的、城市、起止日期、客户或项目名称、预计费用、成本中心及同行人员。缺少成本中心的申请将\n\n退回。\n\n 场景                   最晚提交时间               最终审批人\n 国内常规",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 1,
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.26401498913764954,
+          "bm25_score": 29.417936690524677,
+          "rerank_score": -4.940929412841797
+        },
+        {
+          "rank": 7,
+          "document": "一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通或公司协议用车；凌晨23:00 至次日06:00 可使用出租车。\n\n 网约车豪华车型、专车等候费和个人绕行费用不予报销。\n\n3.3 自驾\n\n因公使用私家车须事先审批，按1.2 元/公里补贴，补贴已包含燃油和车辆损耗；实际发生的高速公路费与停车费可凭\n\n票另行报销。交通违章及事故罚款由个人承担。\n\n 交通方式",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": 0.2738536596298218,
+          "bm25_score": null,
+          "rerank_score": -5.100065231323242
+        },
+        {
+          "rank": 8,
+          "document": "律禁止。超过标准但无法当场退回时，应在2 个工作日内登记并交由合规部处理。\n\n5.3 外部兼职\n\n 不得从事与公司竞争或影响本职工作的兼职。\n\n 担任供应商、客户或竞争对手的董事、顾问须提前申报。\n\n 个人投资公开交易基金无需申报；持有业务关联方5%以上权益必须申报。\n\n 使用公司资源开展个人商业活动属于违规。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 5,
+            "source": "employee_handbook.pdf",
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 24.70640521144993,
+          "rerank_score": -6.481990337371826
+        },
+        {
+          "rank": 9,
+          "document": "罚款由个人承担。\n\n 交通方式                 标准                   例外\n 飞机                   经济舱                     连续飞行>6 小时且符合职级或医疗条件\n 高铁                   二等座                       行程>5 小时可选一等座\n 私家车",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 3,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "original_distance": 0.2564737796783447,
+          "bm25_score": null,
+          "rerank_score": -6.518533229827881
+        },
+        {
+          "rank": 10,
+          "document": "金额报\n\n销；若更高，差额由个人承担。个人停留期间不发放补贴。\n\n5.3 高风险地区\n\n 出发前完成安全培训并登记紧急联系人。\n\n 不得前往公司安全团队发布的禁止区域。\n\n 发生自然灾害、骚乱或公共卫生事件时，应优先保证人身安全并联系24 小时热线。\n\n 护照、公司设备或客户资料遗失须在2 小时内报告。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 5
+          },
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.26074713468551636,
+          "bm25_score": null,
+          "rerank_score": -6.626369953155518
+        }
+      ]
+    },
+    {
+      "id": "Q007",
+      "original_query": "出差返程后应在多久内提交报销？",
+      "rewritten_query": "员工出差返程后提交报销申请的规定时限是多少？",
+      "expected_source": "travel_policy.pdf",
+      "expected_page": 6,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 2,
+      "comparison": "degraded",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "6. 报销、违规与附则\n\n\n6.1 报销期限\n\n返程后10 个工作日内提交报销。超过30 个自然日未提交且无合理说明的，财务可拒绝受理。电子发票应上传原始文\n\n件，不得仅上传截图。\n\n6.2 不予报销项目\n\n  迷你吧、付费电影、健身或SPA 等个人消费。\n\n 因个人疏忽产生的证件补办、行李超重和误机费用。\n\n 无业务必要的礼品、旅游景点门票及陪同人员费用。\n\n 已由客户、供应商或其他单位",
+          "metadata": {
+            "page": 6,
+            "source": "travel_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.2470678687095642,
+          "bm25_score": 28.9159332247866,
+          "rerank_score": 2.358391761779785
+        },
+        {
+          "rank": 2,
+          "document": "2. 出差申请与审批\n\n\n2.1 申请时限\n\n国内出差原则上应至少提前2 个工作日提交；国际及港澳台出差至少提前10 个工作日提交。紧急出差可先取得直属总\n\n监的书面同意，并在返程后1 个工作日内补齐流程。\n\n2.2 审批路径\n\n  预算内且预计总费用不超过8,000 元：部门负责人审批。\n\n   8,001 至30,000 元：部门负责人及财务BP 审批。\n\n  超过30,000 元或涉及",
+          "metadata": {
+            "page": 2,
+            "source": "travel_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.26366251707077026,
+          "bm25_score": 29.388960146100278,
+          "rerank_score": 1.9031257629394531
+        },
+        {
+          "rank": 3,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.28565868735313416,
+          "bm25_score": null,
+          "rerank_score": -2.5817010402679443
+        },
+        {
+          "rank": 4,
+          "document": "提交时间               最终审批人\n 国内常规                  出发前2 个工作日             部门负责人\n 国内高额                  出发前3 个工作日              财务BP\n 国际出差                   出发前10 个工作日            分管副总裁\n\n\n\n\n\n星云科技有限公司 - 内部制度示",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "travel_policy.pdf",
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": null,
+          "bm25_score": 14.165332860747224,
+          "rerank_score": -2.759666681289673
+        },
+        {
+          "rank": 5,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.23928198218345642,
+          "bm25_score": 20.852062666889196,
+          "rerank_score": -2.899829149246216
+        },
+        {
+          "rank": 6,
+          "document": "类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误用公司卡时，应主动报告并在5 个工作日内退款。主动、及时纠正的非故意错误通常按流\n\n程更正；故意隐瞒、伪造或重复申报将按严重违规处理。\n\n6.4 抽查\n\n财务和内审可对已支付费用开展抽查，并要求补充业务证明。申请人及审批人应保存相关记录至少5 年，或按照更长\n\n的法定期限保存。\n\n 版本                   日期",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 6,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.286161869764328,
+          "bm25_score": null,
+          "rerank_score": -3.6480393409729004
+        },
+        {
+          "rank": 7,
+          "document": "6. 公司卡、预付款与异常处理\n\n\n6.1 公司卡\n\n公司卡仅限业务用途，不得用于个人消费或提现。持卡人应在账单生成后5 个工作日内完成认领。卡片遗失或可疑交\n\n易须立即通知银行和财务。\n\n6.2 预付款\n\n活动、培训或紧急采购可申请预付款。申请人应在事项结束后10 个工作日内清算，多退少补。前一笔预付款未清算\n\n时，原则上不得申请新的同类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 6,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 14.409560311928733,
+          "rerank_score": -4.138152599334717
+        },
+        {
+          "rank": 8,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 14.11510019499434,
+          "rerank_score": -4.19013786315918
+        },
+        {
+          "rank": 9,
+          "document": "4. 住宿与出差补贴\n\n\n4.1 住宿上限\n\n住宿费按实际发生额在限额内报销。限额不等于固定补贴，未住宿或由客户免费提供住宿时不得申报住宿费。两名同\n\n性员工同住一间房不强制，但鼓励在安全与便利的前提下共享协议酒店。\n\n4.2 城市分类\n\n  A 类城市：北京、上海、广州、深圳及境外高成本城市，普通员工上限650 元/晚。\n\n  B 类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "travel_policy.pdf",
+            "page": 4
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": 0.28859058022499084,
+          "bm25_score": null,
+          "rerank_score": -4.539237976074219
+        },
+        {
+          "rank": 10,
+          "document": "负责人及财务BP 审批。\n\n  超过30,000 元或涉及国际出差：分管副总裁审批。\n\n 出差人员不得审批本人申请；同一项目多人出差应分别提交行程。\n\n2.3 必填信息\n\n申请应包含出差目的、城市、起止日期、客户或项目名称、预计费用、成本中心及同行人员。缺少成本中心的申请将\n\n退回。\n\n 场景                   最晚提交时间               最终审批人\n 国内常规",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.2855919301509857,
+          "bm25_score": 20.59066839761174,
+          "rerank_score": -4.8619704246521
+        }
+      ]
+    },
+    {
+      "id": "Q008",
+      "original_query": "哪些访问场景必须启用多因素认证(MFA)？",
+      "rewritten_query": "企业知识库中关于必须启用多因素认证（MFA）的访问场景规定有哪些？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "2. 身份与访问控制\n\n\n2.1 账号管理\n\n所有用户必须使用实名账号，禁止共享口令。新员工账号由人力资源系统触发创建，默认有效期与劳动关系一致。离\n\n职账号应在离职生效后30 分钟内停用；高风险离职应在面谈开始前停用。\n\n2.2 多因素认证\n\n  互联网暴露系统、VPN、云管理控制台和特权账号必须启用MFA。\n\n 短信验证码仅作为过渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "security_policy.pdf",
+            "page": 2
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.2700952887535095,
+          "bm25_score": 48.29350111106591,
+          "rerank_score": 2.895638942718506
+        },
+        {
+          "rank": 2,
+          "document": "认证要求                 复核周期\n 普通员工                  口令+条件访问              每季度\n 远程访问                    强制MFA                每季度\n 管理员                      MFA+专用终端              每月\n 服务账号                   密",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 2,
+            "chunk_id": 2
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.2448350489139557,
+          "bm25_score": 29.004114737131225,
+          "rerank_score": -3.8181087970733643
+        },
+        {
+          "rank": 3,
+          "document": "6. 第三方、例外与问责\n\n\n6.1 第三方接入\n\n供应商接入应有明确业务负责人、限定系统范围和到期时间。远程维护必须使用公司批准的VPN 和MFA，默认最长授\n\n权90 天；每次高权限操作应留存会话审计。\n\n6.2 政策例外\n\n无法满足控制要求时，申请人须记录业务理由、风险、补偿措施和结束日期。例外最长有效期180 天，不自动续期。\n\n涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 0,
+            "page": 6
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.3117639124393463,
+          "bm25_score": 11.341089575475355,
+          "rerank_score": -4.018290996551514
+        },
+        {
+          "rank": 4,
+          "document": "涉密、客户受限或源代码数\n\n据不得复制到可移动介质。\n\n3.3 网络访问\n\n 办公网络与访客网络必须逻辑隔离。\n\n 未经批准不得搭建无线热点、代理、隧道或远程控制服务。\n\n 生产环境管理流量必须经过堡垒机或受控管理平面。\n\n 扫描、抓包和渗透测试须取得系统负责人及安全团队书面授权。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 3,
+            "source": "security_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": 0.3098302483558655,
+          "bm25_score": 13.748099731800895,
+          "rerank_score": -6.429219722747803
+        },
+        {
+          "rank": 5,
+          "document": "涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处理\n\n故意绕过控制、隐瞒事件、共享特权账号或未经许可外传数据可导致访问权限暂停、纪律处分或合同终止。善意报告\n\n错误不会因报告行为本身受到处罚。\n\n6.4 联系方式\n\n安全事件热线：400-800-7711（7×24 小时）；一般咨询：security@example.test。紧急事件应先电话报告，不应仅\n\n发送邮件。\n\n 版本",
+          "metadata": {
+            "page": 6,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 9.074627176021943,
+          "rerank_score": -6.690704345703125
+        },
+        {
+          "rank": 6,
+          "document": "示例                   最低保护要求\n 公开                   官网新闻稿                完整性保护\n 内部                   内部通讯录                受控共享\n 机密                   客户合同、报价              加密+最小权限\n 严格机密                 密钥",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 2,
+            "page": 4
+          },
+          "source": "security_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.33116376399993896,
+          "bm25_score": null,
+          "rerank_score": -6.829929828643799
+        },
+        {
+          "rank": 7,
+          "document": "或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局部影响且无敏感数据暴露，4 小时内完成初步处置。\n\n 四级：低风险告警或政策偏差，纳入日常工单。\n\n5.3 证据保护\n\n未经授权不得关机、格式化或重装疑似受感染设备。应记录发现时间、现象、已执行操作和相关人员。安全团队负责\n\n镜像、日志保全和取证链记录。\n\n 级别                   典型影响",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.316444993019104,
+          "bm25_score": null,
+          "rerank_score": -6.9971184730529785
+        },
+        {
+          "rank": 8,
+          "document": "负责人及财务BP 审批。\n\n  超过30,000 元或涉及国际出差：分管副总裁审批。\n\n 出差人员不得审批本人申请；同一项目多人出差应分别提交行程。\n\n2.3 必填信息\n\n申请应包含出差目的、城市、起止日期、客户或项目名称、预计费用、成本中心及同行人员。缺少成本中心的申请将\n\n退回。\n\n 场景                   最晚提交时间               最终审批人\n 国内常规",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 12.478320249326732,
+          "rerank_score": -7.555601596832275
+        },
+        {
+          "rank": 9,
+          "document": "渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交互式登录，密钥至少每90 天轮换。\n\n 紧急账号应封存并在每次使用后24 小时内复核。\n\n2.3 权限复核\n\n系统负责人每季度复核普通权限，每月复核管理员权限。连续60 天未使用的高权限应自动暂停，确认仍有业务需要后\n\n方可恢复。\n\n 账号类型                 认证要求                 复核周期\n 普通员",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 1,
+            "page": 2
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.32157406210899353,
+          "bm25_score": 10.632180505723849,
+          "rerank_score": -7.941269397735596
+        },
+        {
+          "rank": 10,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3016566336154938,
+          "bm25_score": null,
+          "rerank_score": -8.19370174407959
+        }
+      ]
+    },
+    {
+      "id": "Q009",
+      "original_query": "服务账号的密钥多久至少轮换一次？",
+      "rewritten_query": "服务账号密钥的最小轮换周期要求是什么？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交互式登录，密钥至少每90 天轮换。\n\n 紧急账号应封存并在每次使用后24 小时内复核。\n\n2.3 权限复核\n\n系统负责人每季度复核普通权限，每月复核管理员权限。连续60 天未使用的高权限应自动暂停，确认仍有业务需要后\n\n方可恢复。\n\n 账号类型                 认证要求                 复核周期\n 普通员",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.2275993674993515,
+          "bm25_score": 42.84552385041408,
+          "rerank_score": 4.9012064933776855
+        },
+        {
+          "rank": 2,
+          "document": "每月\n 服务账号                   密钥/证书                     每90 天轮换\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档\n                                                          第 2 页",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 3,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 3,
+          "original_distance": 0.2114838808774948,
+          "bm25_score": 45.68634673052951,
+          "rerank_score": 4.362044811248779
+        },
+        {
+          "rank": 3,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "page": 1,
+            "source": "security_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2722333073616028,
+          "bm25_score": 16.61211257104177,
+          "rerank_score": -3.5626189708709717
+        },
+        {
+          "rank": 4,
+          "document": "2. 身份与访问控制\n\n\n2.1 账号管理\n\n所有用户必须使用实名账号，禁止共享口令。新员工账号由人力资源系统触发创建，默认有效期与劳动关系一致。离\n\n职账号应在离职生效后30 分钟内停用；高风险离职应在面谈开始前停用。\n\n2.2 多因素认证\n\n  互联网暴露系统、VPN、云管理控制台和特权账号必须启用MFA。\n\n 短信验证码仅作为过渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "security_policy.pdf",
+            "page": 2
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.3036823570728302,
+          "bm25_score": 26.10559700618922,
+          "rerank_score": -4.068114757537842
+        },
+        {
+          "rank": 5,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 1,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.30498117208480835,
+          "bm25_score": 10.350377758418192,
+          "rerank_score": -4.9449143409729
+        },
+        {
+          "rank": 6,
+          "document": "人力资源部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n员工手册说明雇佣关系、工时休假、行为规范、绩效发",
+          "metadata": {
+            "page": 1,
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3260451555252075,
+          "bm25_score": null,
+          "rerank_score": -4.955358028411865
+        },
+        {
+          "rank": 7,
+          "document": "3. 终端与网络安全\n\n\n3.1 公司终端\n\n公司终端必须安装受管EDR、磁盘加密和补丁管理代理。用户不得停用安全软件，不得使用越狱或Root 设备处理公司\n\n数据。关键安全补丁应在7 天内完成，一般高危补丁应在14 天内完成。\n\n3.2 可移动介质\n\n默认禁止使用USB 存储设备。确有业务需要时，应申请加密介质并设置最长30 天的授权。涉密、客户受限或源代码数\n\n据不得复制到可移动介质。\n\n3.",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 0,
+            "page": 3
+          },
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.3246837556362152,
+          "bm25_score": null,
+          "rerank_score": -4.956696033477783
+        },
+        {
+          "rank": 8,
+          "document": "认证要求                 复核周期\n 普通员工                  口令+条件访问              每季度\n 远程访问                    强制MFA                每季度\n 管理员                      MFA+专用终端              每月\n 服务账号                   密",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 2,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.2816846966743469,
+          "bm25_score": 21.96158338429963,
+          "rerank_score": -4.976470470428467
+        },
+        {
+          "rank": 9,
+          "document": "部门                           财务共享服务中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范非差旅类业务",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3112325966358185,
+          "bm25_score": 15.784186990850285,
+          "rerank_score": -5.3113789558410645
+        },
+        {
+          "rank": 10,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 10.122084440672335,
+          "rerank_score": -5.780817031860352
+        }
+      ]
+    },
+    {
+      "id": "Q010",
+      "original_query": "连续多久未使用的高权限会被自动暂停？",
+      "rewritten_query": "高权限账号连续多久未使用会被系统自动暂停？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 2,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交互式登录，密钥至少每90 天轮换。\n\n 紧急账号应封存并在每次使用后24 小时内复核。\n\n2.3 权限复核\n\n系统负责人每季度复核普通权限，每月复核管理员权限。连续60 天未使用的高权限应自动暂停，确认仍有业务需要后\n\n方可恢复。\n\n 账号类型                 认证要求                 复核周期\n 普通员",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "security_policy.pdf",
+            "page": 2
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.29943883419036865,
+          "bm25_score": 53.098299711282614,
+          "rerank_score": 4.616908550262451
+        },
+        {
+          "rank": 2,
+          "document": "6. 第三方、例外与问责\n\n\n6.1 第三方接入\n\n供应商接入应有明确业务负责人、限定系统范围和到期时间。远程维护必须使用公司批准的VPN 和MFA，默认最长授\n\n权90 天；每次高权限操作应留存会话审计。\n\n6.2 政策例外\n\n无法满足控制要求时，申请人须记录业务理由、风险、补偿措施和结束日期。例外最长有效期180 天，不自动续期。\n\n涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 6,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.3161405026912689,
+          "bm25_score": 21.964605144421448,
+          "rerank_score": -0.502993643283844
+        },
+        {
+          "rank": 3,
+          "document": "协作、诚信和目标完成情况，不得以怀孕、疾病或其他受保护特征作为评价依据。\n\n2.3 导师与培训\n\n  新员工应在10 个工作日内完成合规、安全和隐私必修课。\n\n 未按时完成培训的员工将收到提醒；逾期30 天仍未完成可暂停部分系统权限。\n\n 岗位导师负责业务引导，但不代替直属经理的绩效责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 13.542604707680345,
+          "rerank_score": -2.7245922088623047
+        },
+        {
+          "rank": 4,
+          "document": "2. 身份与访问控制\n\n\n2.1 账号管理\n\n所有用户必须使用实名账号，禁止共享口令。新员工账号由人力资源系统触发创建，默认有效期与劳动关系一致。离\n\n职账号应在离职生效后30 分钟内停用；高风险离职应在面谈开始前停用。\n\n2.2 多因素认证\n\n  互联网暴露系统、VPN、云管理控制台和特权账号必须启用MFA。\n\n 短信验证码仅作为过渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 2,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 15.339305684216505,
+          "rerank_score": -4.148539066314697
+        },
+        {
+          "rank": 5,
+          "document": "3. 终端与网络安全\n\n\n3.1 公司终端\n\n公司终端必须安装受管EDR、磁盘加密和补丁管理代理。用户不得停用安全软件，不得使用越狱或Root 设备处理公司\n\n数据。关键安全补丁应在7 天内完成，一般高危补丁应在14 天内完成。\n\n3.2 可移动介质\n\n默认禁止使用USB 存储设备。确有业务需要时，应申请加密介质并设置最长30 天的授权。涉密、客户受限或源代码数\n\n据不得复制到可移动介质。\n\n3.",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "security_policy.pdf",
+            "page": 3
+          },
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 13.15346184183829,
+          "rerank_score": -4.305472373962402
+        },
+        {
+          "rank": 6,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 18.898391649308987,
+          "rerank_score": -5.685075283050537
+        },
+        {
+          "rank": 7,
+          "document": "涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处理\n\n故意绕过控制、隐瞒事件、共享特权账号或未经许可外传数据可导致访问权限暂停、纪律处分或合同终止。善意报告\n\n错误不会因报告行为本身受到处罚。\n\n6.4 联系方式\n\n安全事件热线：400-800-7711（7×24 小时）；一般咨询：security@example.test。紧急事件应先电话报告，不应仅\n\n发送邮件。\n\n 版本",
+          "metadata": {
+            "page": 6,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.3279462456703186,
+          "bm25_score": 15.164045913955675,
+          "rerank_score": -5.965054988861084
+        },
+        {
+          "rank": 8,
+          "document": "罚款由个人承担。\n\n 交通方式                 标准                   例外\n 飞机                   经济舱                     连续飞行>6 小时且符合职级或医疗条件\n 高铁                   二等座                       行程>5 小时可选一等座\n 私家车",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 2,
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "original_distance": null,
+          "bm25_score": 12.113931339256746,
+          "rerank_score": -6.068445682525635
+        },
+        {
+          "rank": 9,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 1,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3263627886772156,
+          "bm25_score": null,
+          "rerank_score": -6.350350856781006
+        },
+        {
+          "rank": 10,
+          "document": "或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局部影响且无敏感数据暴露，4 小时内完成初步处置。\n\n 四级：低风险告警或政策偏差，纳入日常工单。\n\n5.3 证据保护\n\n未经授权不得关机、格式化或重装疑似受感染设备。应记录发现时间、现象、已执行操作和相关人员。安全团队负责\n\n镜像、日志保全和取证链记录。\n\n 级别                   典型影响",
+          "metadata": {
+            "page": 5,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.3279361426830292,
+          "bm25_score": null,
+          "rerank_score": -6.35204553604126
+        }
+      ]
+    },
+    {
+      "id": "Q011",
+      "original_query": "关键安全补丁和一般高危补丁分别应在多久内完成？",
+      "rewritten_query": "关键安全补丁和一般高危补丁的修复时限要求是什么？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 3,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "3. 终端与网络安全\n\n\n3.1 公司终端\n\n公司终端必须安装受管EDR、磁盘加密和补丁管理代理。用户不得停用安全软件，不得使用越狱或Root 设备处理公司\n\n数据。关键安全补丁应在7 天内完成，一般高危补丁应在14 天内完成。\n\n3.2 可移动介质\n\n默认禁止使用USB 存储设备。确有业务需要时，应申请加密介质并设置最长30 天的授权。涉密、客户受限或源代码数\n\n据不得复制到可移动介质。\n\n3.",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "security_policy.pdf",
+            "page": 3
+          },
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.2974281311035156,
+          "bm25_score": 84.28798838443673,
+          "rerank_score": 7.56703519821167
+        },
+        {
+          "rank": 2,
+          "document": "5. 安全事件响应\n\n\n5.1 报告时限\n\n发现账号被盗、恶意软件、数据误发、设备丢失或异常外联时，应立即停止高风险操作，并在15 分钟内通过安全热线\n\n或事件门户报告。员工不得自行删除日志或对外披露事件。\n\n5.2 分级\n\n 一级：可能造成大范围业务中断、重大数据泄露或人身风险，15 分钟内启动应急指挥。\n\n 二级：影响单个关键系统或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 0,
+            "page": 5
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 21.88978209488338,
+          "rerank_score": -1.9947645664215088
+        },
+        {
+          "rank": 3,
+          "document": "协作、诚信和目标完成情况，不得以怀孕、疾病或其他受保护特征作为评价依据。\n\n2.3 导师与培训\n\n  新员工应在10 个工作日内完成合规、安全和隐私必修课。\n\n 未按时完成培训的员工将收到提醒；逾期30 天仍未完成可暂停部分系统权限。\n\n 岗位导师负责业务引导，但不代替直属经理的绩效责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 22.669260235097163,
+          "rerank_score": -3.4871487617492676
+        },
+        {
+          "rank": 4,
+          "document": "金额报\n\n销；若更高，差额由个人承担。个人停留期间不发放补贴。\n\n5.3 高风险地区\n\n 出发前完成安全培训并登记紧急联系人。\n\n 不得前往公司安全团队发布的禁止区域。\n\n 发生自然灾害、骚乱或公共卫生事件时，应优先保证人身安全并联系24 小时热线。\n\n 护照、公司设备或客户资料遗失须在2 小时内报告。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.3337898552417755,
+          "bm25_score": 18.71102202335122,
+          "rerank_score": -3.6882498264312744
+        },
+        {
+          "rank": 5,
+          "document": "或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局部影响且无敏感数据暴露，4 小时内完成初步处置。\n\n 四级：低风险告警或政策偏差，纳入日常工单。\n\n5.3 证据保护\n\n未经授权不得关机、格式化或重装疑似受感染设备。应记录发现时间、现象、已执行操作和相关人员。安全团队负责\n\n镜像、日志保全和取证链记录。\n\n 级别                   典型影响",
+          "metadata": {
+            "page": 5,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.2845306694507599,
+          "bm25_score": 21.761264204823757,
+          "rerank_score": -3.7273828983306885
+        },
+        {
+          "rank": 6,
+          "document": "典型影响                 响应目标\n 一级                    重大中断/重大泄露                      15 分钟\n 二级                   关键系统或机密数据                     30 分钟\n 三级                   局部业务影响",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "security_policy.pdf",
+            "page": 5
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 2,
+          "original_distance": 0.2859272360801697,
+          "bm25_score": 16.655807072353728,
+          "rerank_score": -4.660629749298096
+        },
+        {
+          "rank": 7,
+          "document": "6. 公司卡、预付款与异常处理\n\n\n6.1 公司卡\n\n公司卡仅限业务用途，不得用于个人消费或提现。持卡人应在账单生成后5 个工作日内完成认领。卡片遗失或可疑交\n\n易须立即通知银行和财务。\n\n6.2 预付款\n\n活动、培训或紧急采购可申请预付款。申请人应在事项结束后10 个工作日内清算，多退少补。前一笔预付款未清算\n\n时，原则上不得申请新的同类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 6,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 18.23169531875504,
+          "rerank_score": -5.402709484100342
+        },
+        {
+          "rank": 8,
+          "document": "适用法律为准，并由财务部发布\n\n补充指引。\n\n 版本                   日期                   主要变化\n V1.0                                    2025-01-01               首次发布\n V1.1                                    2026-07-01",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 6,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.3341386318206787,
+          "bm25_score": null,
+          "rerank_score": -5.638418197631836
+        },
+        {
+          "rank": 9,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.33706390857696533,
+          "bm25_score": null,
+          "rerank_score": -6.024990558624268
+        },
+        {
+          "rank": 10,
+          "document": "人力资源部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n员工手册说明雇佣关系、工时休假、行为规范、绩效发",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 1,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3370385766029358,
+          "bm25_score": null,
+          "rerank_score": -6.39543342590332
+        }
+      ]
+    },
+    {
+      "id": "Q012",
+      "original_query": "经批准使用USB存储设备时，授权最长可以持续多久？",
+      "rewritten_query": "经批准使用USB存储设备的授权有效期最长为多久？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 3,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "3. 终端与网络安全\n\n\n3.1 公司终端\n\n公司终端必须安装受管EDR、磁盘加密和补丁管理代理。用户不得停用安全软件，不得使用越狱或Root 设备处理公司\n\n数据。关键安全补丁应在7 天内完成，一般高危补丁应在14 天内完成。\n\n3.2 可移动介质\n\n默认禁止使用USB 存储设备。确有业务需要时，应申请加密介质并设置最长30 天的授权。涉密、客户受限或源代码数\n\n据不得复制到可移动介质。\n\n3.",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 3,
+            "chunk_id": 0
+          },
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.2660154104232788,
+          "bm25_score": 41.45924075115121,
+          "rerank_score": 2.639760971069336
+        },
+        {
+          "rank": 2,
+          "document": "6. 第三方、例外与问责\n\n\n6.1 第三方接入\n\n供应商接入应有明确业务负责人、限定系统范围和到期时间。远程维护必须使用公司批准的VPN 和MFA，默认最长授\n\n权90 天；每次高权限操作应留存会话审计。\n\n6.2 政策例外\n\n无法满足控制要求时，申请人须记录业务理由、风险、补偿措施和结束日期。例外最长有效期180 天，不自动续期。\n\n涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处",
+          "metadata": {
+            "page": 6,
+            "source": "security_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.30819931626319885,
+          "bm25_score": 27.216656738815548,
+          "rerank_score": -3.5306434631347656
+        },
+        {
+          "rank": 3,
+          "document": "或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局部影响且无敏感数据暴露，4 小时内完成初步处置。\n\n 四级：低风险告警或政策偏差，纳入日常工单。\n\n5.3 证据保护\n\n未经授权不得关机、格式化或重装疑似受感染设备。应记录发现时间、现象、已执行操作和相关人员。安全团队负责\n\n镜像、日志保全和取证链记录。\n\n 级别                   典型影响",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.31305593252182007,
+          "bm25_score": 14.603738751805766,
+          "rerank_score": -4.642004489898682
+        },
+        {
+          "rank": 4,
+          "document": "渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交互式登录，密钥至少每90 天轮换。\n\n 紧急账号应封存并在每次使用后24 小时内复核。\n\n2.3 权限复核\n\n系统负责人每季度复核普通权限，每月复核管理员权限。连续60 天未使用的高权限应自动暂停，确认仍有业务需要后\n\n方可恢复。\n\n 账号类型                 认证要求                 复核周期\n 普通员",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 16.63133064611946,
+          "rerank_score": -5.730947971343994
+        },
+        {
+          "rank": 5,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3162427246570587,
+          "bm25_score": null,
+          "rerank_score": -5.783781051635742
+        },
+        {
+          "rank": 6,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 14.235466710289783,
+          "rerank_score": -5.927332878112793
+        },
+        {
+          "rank": 7,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 5,
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.32165172696113586,
+          "bm25_score": null,
+          "rerank_score": -6.277154445648193
+        },
+        {
+          "rank": 8,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "page": 1,
+            "chunk_id": 1,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.31084969639778137,
+          "bm25_score": null,
+          "rerank_score": -6.491905212402344
+        },
+        {
+          "rank": 9,
+          "document": "适用法律为准，并由财务部发布\n\n补充指引。\n\n 版本                   日期                   主要变化\n V1.0                                    2025-01-01               首次发布\n V1.1                                    2026-07-01",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "travel_policy.pdf",
+            "page": 6
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.32994216680526733,
+          "bm25_score": null,
+          "rerank_score": -6.959697246551514
+        },
+        {
+          "rank": 10,
+          "document": "提交时间               最终审批人\n 国内常规                  出发前2 个工作日             部门负责人\n 国内高额                  出发前3 个工作日              财务BP\n 国际出差                   出发前10 个工作日            分管副总裁\n\n\n\n\n\n星云科技有限公司 - 内部制度示",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 2,
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.3249679207801819,
+          "bm25_score": null,
+          "rerank_score": -7.631774425506592
+        }
+      ]
+    },
+    {
+      "id": "Q013",
+      "original_query": "公司的数据分为哪四个分类级别？",
+      "rewritten_query": "公司数据分类的四个级别是什么？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 4,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "4. 数据分类与处理\n\n\n4.1 分类级别\n\n数据分为公开、内部、机密和严格机密四级。数据所有者负责确定分类；若无法确认，应暂按机密数据处理。分类标\n\n签应体现在文件页眉、存储位置或系统元数据中。\n\n4.2 传输与存储\n\n 内部数据可存储于公司批准的协作平台。\n\n 机密数据在传输和静态存储时必须加密。\n\n 严格机密数据不得上传至个人网盘、公开生成式AI 或未经批准的SaaS。\n\n 包含个人",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 4,
+            "chunk_id": 0
+          },
+          "source": "security_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": 0.28294751048088074,
+          "bm25_score": 47.23809703345953,
+          "rerank_score": 4.847090721130371
+        },
+        {
+          "rank": 2,
+          "document": "典型影响                 响应目标\n 一级                    重大中断/重大泄露                      15 分钟\n 二级                   关键系统或机密数据                     30 分钟\n 三级                   局部业务影响",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "security_policy.pdf",
+            "page": 5
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 2,
+          "original_distance": 0.3036111891269684,
+          "bm25_score": 16.486260813786902,
+          "rerank_score": -2.523698091506958
+        },
+        {
+          "rank": 3,
+          "document": "5. 安全事件响应\n\n\n5.1 报告时限\n\n发现账号被盗、恶意软件、数据误发、设备丢失或异常外联时，应立即停止高风险操作，并在15 分钟内通过安全热线\n\n或事件门户报告。员工不得自行删除日志或对外披露事件。\n\n5.2 分级\n\n 一级：可能造成大范围业务中断、重大数据泄露或人身风险，15 分钟内启动应急指挥。\n\n 二级：影响单个关键系统或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 0,
+            "page": 5
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 16.642752046037224,
+          "rerank_score": -2.8187639713287354
+        },
+        {
+          "rank": 4,
+          "document": "网盘、公开生成式AI 或未经批准的SaaS。\n\n 包含个人信息的数据跨境传输前必须完成隐私与法律评估。\n\n4.3 保留与销毁\n\n业务记录按照法务发布的保留计划保存。超过保留期限且不存在诉讼保全要求的数据应安全删除；纸质机密文件应使\n\n用符合DIN 66399 P-4 或更高等级的设备销毁。\n\n 级别                   示例                   最低保护要求\n 公",
+          "metadata": {
+            "page": 4,
+            "source": "security_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 21.358193289069224,
+          "rerank_score": -3.07617449760437
+        },
+        {
+          "rank": 5,
+          "document": "或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局部影响且无敏感数据暴露，4 小时内完成初步处置。\n\n 四级：低风险告警或政策偏差，纳入日常工单。\n\n5.3 证据保护\n\n未经授权不得关机、格式化或重装疑似受感染设备。应记录发现时间、现象、已执行操作和相关人员。安全团队负责\n\n镜像、日志保全和取证链记录。\n\n 级别                   典型影响",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "security_policy.pdf",
+            "page": 5
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.3139914572238922,
+          "bm25_score": 19.12972752405441,
+          "rerank_score": -3.1274526119232178
+        },
+        {
+          "rank": 6,
+          "document": "人力资源部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n员工手册说明雇佣关系、工时休假、行为规范、绩效发",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.30093976855278015,
+          "bm25_score": null,
+          "rerank_score": -3.2711079120635986
+        },
+        {
+          "rank": 7,
+          "document": "紧急事件应先电话报告，不应仅\n\n发送邮件。\n\n 版本                   日期                   主要变化\n V2.0                                    2025-09-01               统一数据分类\n V2.1                                    2026-07-01",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 6,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": null,
+          "bm25_score": 23.90897405126328,
+          "rerank_score": -3.505415201187134
+        },
+        {
+          "rank": 8,
+          "document": "求\n ≤2,000 元                          直属经理\n 2,001-10,000 元                         经理+预算负责人\n 10,001-50,000 元                          部门总监+财务BP\n >50,000 元                           分管副总裁+采购负责人\n\n\n\n\n\n星云科",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 2,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.3214816451072693,
+          "bm25_score": null,
+          "rerank_score": -3.575439929962158
+        },
+        {
+          "rank": 9,
+          "document": "局部业务影响                          4 小时\n 四级                   低风险偏差                            1 个工作日\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档\n                                                          第 5 页",
+          "metadata": {
+            "page": 5,
+            "chunk_id": 3,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 3,
+          "original_distance": 0.3161608576774597,
+          "bm25_score": null,
+          "rerank_score": -4.071113109588623
+        },
+        {
+          "rank": 10,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "security_policy.pdf",
+            "page": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3199795186519623,
+          "bm25_score": null,
+          "rerank_score": -4.107809543609619
+        }
+      ]
+    },
+    {
+      "id": "Q014",
+      "original_query": "发现账号被盗或数据误发后，应在多长时间内报告？",
+      "rewritten_query": "账号被盗或数据误发后的报告时限要求是什么？",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 5,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "5. 安全事件响应\n\n\n5.1 报告时限\n\n发现账号被盗、恶意软件、数据误发、设备丢失或异常外联时，应立即停止高风险操作，并在15 分钟内通过安全热线\n\n或事件门户报告。员工不得自行删除日志或对外披露事件。\n\n5.2 分级\n\n 一级：可能造成大范围业务中断、重大数据泄露或人身风险，15 分钟内启动应急指挥。\n\n 二级：影响单个关键系统或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局",
+          "metadata": {
+            "page": 5,
+            "chunk_id": 0,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": 0.2876494526863098,
+          "bm25_score": 53.623532654423066,
+          "rerank_score": 8.276646614074707
+        },
+        {
+          "rank": 2,
+          "document": "类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误用公司卡时，应主动报告并在5 个工作日内退款。主动、及时纠正的非故意错误通常按流\n\n程更正；故意隐瞒、伪造或重复申报将按严重违规处理。\n\n6.4 抽查\n\n财务和内审可对已支付费用开展抽查，并要求补充业务证明。申请人及审批人应保存相关记录至少5 年，或按照更长\n\n的法定期限保存。\n\n 版本                   日期",
+          "metadata": {
+            "page": 6,
+            "source": "expense_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.2908775210380554,
+          "bm25_score": 21.43482510763348,
+          "rerank_score": -2.1821682453155518
+        },
+        {
+          "rank": 3,
+          "document": "涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处理\n\n故意绕过控制、隐瞒事件、共享特权账号或未经许可外传数据可导致访问权限暂停、纪律处分或合同终止。善意报告\n\n错误不会因报告行为本身受到处罚。\n\n6.4 联系方式\n\n安全事件热线：400-800-7711（7×24 小时）；一般咨询：security@example.test。紧急事件应先电话报告，不应仅\n\n发送邮件。\n\n 版本",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 6,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.26878711581230164,
+          "bm25_score": 27.944216086524687,
+          "rerank_score": -3.3570735454559326
+        },
+        {
+          "rank": 4,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "page": 1,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2923450469970703,
+          "bm25_score": null,
+          "rerank_score": -3.5389673709869385
+        },
+        {
+          "rank": 5,
+          "document": "或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局部影响且无敏感数据暴露，4 小时内完成初步处置。\n\n 四级：低风险告警或政策偏差，纳入日常工单。\n\n5.3 证据保护\n\n未经授权不得关机、格式化或重装疑似受感染设备。应记录发现时间、现象、已执行操作和相关人员。安全团队负责\n\n镜像、日志保全和取证链记录。\n\n 级别                   典型影响",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "security_policy.pdf",
+            "page": 5
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.30628645420074463,
+          "bm25_score": 23.177022316412636,
+          "rerank_score": -4.189835071563721
+        },
+        {
+          "rank": 6,
+          "document": "6. 公司卡、预付款与异常处理\n\n\n6.1 公司卡\n\n公司卡仅限业务用途，不得用于个人消费或提现。持卡人应在账单生成后5 个工作日内完成认领。卡片遗失或可疑交\n\n易须立即通知银行和财务。\n\n6.2 预付款\n\n活动、培训或紧急采购可申请预付款。申请人应在事项结束后10 个工作日内清算，多退少补。前一笔预付款未清算\n\n时，原则上不得申请新的同类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 6,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 23.066653112839656,
+          "rerank_score": -4.304171085357666
+        },
+        {
+          "rank": 7,
+          "document": "典型影响                 响应目标\n 一级                    重大中断/重大泄露                      15 分钟\n 二级                   关键系统或机密数据                     30 分钟\n 三级                   局部业务影响",
+          "metadata": {
+            "page": 5,
+            "source": "security_policy.pdf",
+            "chunk_id": 2
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 2,
+          "original_distance": 0.3160078227519989,
+          "bm25_score": null,
+          "rerank_score": -4.407532215118408
+        },
+        {
+          "rank": 8,
+          "document": "金额报\n\n销；若更高，差额由个人承担。个人停留期间不发放补贴。\n\n5.3 高风险地区\n\n 出发前完成安全培训并登记紧急联系人。\n\n 不得前往公司安全团队发布的禁止区域。\n\n 发生自然灾害、骚乱或公共卫生事件时，应优先保证人身安全并联系24 小时热线。\n\n 护照、公司设备或客户资料遗失须在2 小时内报告。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 5
+          },
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.3148425817489624,
+          "bm25_score": 16.788683740299298,
+          "rerank_score": -4.695282459259033
+        },
+        {
+          "rank": 9,
+          "document": "申请时限                 结转\n 年假<5 天                  提前3 个工作日               最多5 天\n 年假≥5 天                   提前10 个工作日              最多5 天\n 病假                            当日10:00 前通知             不适用",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "chunk_id": 2,
+            "page": 4
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.3153409957885742,
+          "bm25_score": null,
+          "rerank_score": -5.303076267242432
+        },
+        {
+          "rank": 10,
+          "document": "紧急事件应先电话报告，不应仅\n\n发送邮件。\n\n 版本                   日期                   主要变化\n V2.0                                    2025-09-01               统一数据分类\n V2.1                                    2026-07-01",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 6,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.29052412509918213,
+          "bm25_score": 19.88994311592452,
+          "rerank_score": -5.395668029785156
+        }
+      ]
+    },
+    {
+      "id": "Q015",
+      "original_query": "信息安全政策例外最长有效多久？涉及严格机密数据时由谁批准？",
+      "rewritten_query": "信息安全政策例外的最长有效期是多少，以及涉及严格机密数据时的例外审批权限归属。",
+      "expected_source": "security_policy.pdf",
+      "expected_page": 6,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "6. 第三方、例外与问责\n\n\n6.1 第三方接入\n\n供应商接入应有明确业务负责人、限定系统范围和到期时间。远程维护必须使用公司批准的VPN 和MFA，默认最长授\n\n权90 天；每次高权限操作应留存会话审计。\n\n6.2 政策例外\n\n无法满足控制要求时，申请人须记录业务理由、风险、补偿措施和结束日期。例外最长有效期180 天，不自动续期。\n\n涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 6,
+            "chunk_id": 0
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.24717822670936584,
+          "bm25_score": 71.83406360435613,
+          "rerank_score": 5.982203483581543
+        },
+        {
+          "rank": 2,
+          "document": "涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处理\n\n故意绕过控制、隐瞒事件、共享特权账号或未经许可外传数据可导致访问权限暂停、纪律处分或合同终止。善意报告\n\n错误不会因报告行为本身受到处罚。\n\n6.4 联系方式\n\n安全事件热线：400-800-7711（7×24 小时）；一般咨询：security@example.test。紧急事件应先电话报告，不应仅\n\n发送邮件。\n\n 版本",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 6,
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.24524585902690887,
+          "bm25_score": 44.41742726233017,
+          "rerank_score": 0.8379788398742676
+        },
+        {
+          "rank": 3,
+          "document": "或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局部影响且无敏感数据暴露，4 小时内完成初步处置。\n\n 四级：低风险告警或政策偏差，纳入日常工单。\n\n5.3 证据保护\n\n未经授权不得关机、格式化或重装疑似受感染设备。应记录发现时间、现象、已执行操作和相关人员。安全团队负责\n\n镜像、日志保全和取证链记录。\n\n 级别                   典型影响",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.28524482250213623,
+          "bm25_score": 37.17818023946695,
+          "rerank_score": -2.0148065090179443
+        },
+        {
+          "rank": 4,
+          "document": "5. 安全事件响应\n\n\n5.1 报告时限\n\n发现账号被盗、恶意软件、数据误发、设备丢失或异常外联时，应立即停止高风险操作，并在15 分钟内通过安全热线\n\n或事件门户报告。员工不得自行删除日志或对外披露事件。\n\n5.2 分级\n\n 一级：可能造成大范围业务中断、重大数据泄露或人身风险，15 分钟内启动应急指挥。\n\n 二级：影响单个关键系统或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 0,
+            "page": 5
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 28.966285561299067,
+          "rerank_score": -4.021224498748779
+        },
+        {
+          "rank": 5,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2791283130645752,
+          "bm25_score": null,
+          "rerank_score": -4.035284996032715
+        },
+        {
+          "rank": 6,
+          "document": "3. 终端与网络安全\n\n\n3.1 公司终端\n\n公司终端必须安装受管EDR、磁盘加密和补丁管理代理。用户不得停用安全软件，不得使用越狱或Root 设备处理公司\n\n数据。关键安全补丁应在7 天内完成，一般高危补丁应在14 天内完成。\n\n3.2 可移动介质\n\n默认禁止使用USB 存储设备。确有业务需要时，应申请加密介质并设置最长30 天的授权。涉密、客户受限或源代码数\n\n据不得复制到可移动介质。\n\n3.",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "security_policy.pdf",
+            "page": 3
+          },
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 24.24886137813469,
+          "rerank_score": -4.278453826904297
+        },
+        {
+          "rank": 7,
+          "document": "典型影响                 响应目标\n 一级                    重大中断/重大泄露                      15 分钟\n 二级                   关键系统或机密数据                     30 分钟\n 三级                   局部业务影响",
+          "metadata": {
+            "page": 5,
+            "source": "security_policy.pdf",
+            "chunk_id": 2
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 2,
+          "original_distance": 0.28099364042282104,
+          "bm25_score": null,
+          "rerank_score": -4.571328163146973
+        },
+        {
+          "rank": 8,
+          "document": "网盘、公开生成式AI 或未经批准的SaaS。\n\n 包含个人信息的数据跨境传输前必须完成隐私与法律评估。\n\n4.3 保留与销毁\n\n业务记录按照法务发布的保留计划保存。超过保留期限且不存在诉讼保全要求的数据应安全删除；纸质机密文件应使\n\n用符合DIN 66399 P-4 或更高等级的设备销毁。\n\n 级别                   示例                   最低保护要求\n 公",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 4,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": 0.2901289761066437,
+          "bm25_score": 27.907656343528576,
+          "rerank_score": -5.156248569488525
+        },
+        {
+          "rank": 9,
+          "document": "信息安全管理制度\n\n\n                文件编号：POL-SEC-001　版本：V2.1　生效日期：2026 年7 月1 日\n\n\n 文件属性                           内容\n 适用范围                           全体员工、承包商、供应商驻场人员及访问公司信息系统的第三方\n 归口部门",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "security_policy.pdf",
+            "page": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 0,
+          "original_distance": 0.2780812382698059,
+          "bm25_score": null,
+          "rerank_score": -5.195908546447754
+        },
+        {
+          "rank": 10,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 1,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2920255661010742,
+          "bm25_score": null,
+          "rerank_score": -5.451493740081787
+        }
+      ]
+    },
+    {
+      "id": "Q016",
+      "original_query": "新员工应在多久内完成合规、安全和隐私必修课？",
+      "rewritten_query": "新员工完成合规、安全和隐私必修课的规定时限是多少？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 2,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "协作、诚信和目标完成情况，不得以怀孕、疾病或其他受保护特征作为评价依据。\n\n2.3 导师与培训\n\n  新员工应在10 个工作日内完成合规、安全和隐私必修课。\n\n 未按时完成培训的员工将收到提醒；逾期30 天仍未完成可暂停部分系统权限。\n\n 岗位导师负责业务引导，但不代替直属经理的绩效责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 2,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.22954556345939636,
+          "bm25_score": 71.01723846735796,
+          "rerank_score": 8.700997352600098
+        },
+        {
+          "rank": 2,
+          "document": "3. 终端与网络安全\n\n\n3.1 公司终端\n\n公司终端必须安装受管EDR、磁盘加密和补丁管理代理。用户不得停用安全软件，不得使用越狱或Root 设备处理公司\n\n数据。关键安全补丁应在7 天内完成，一般高危补丁应在14 天内完成。\n\n3.2 可移动介质\n\n默认禁止使用USB 存储设备。确有业务需要时，应申请加密介质并设置最长30 天的授权。涉密、客户受限或源代码数\n\n据不得复制到可移动介质。\n\n3.",
+          "metadata": {
+            "page": 3,
+            "chunk_id": 0,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.30398911237716675,
+          "bm25_score": 25.443815983753257,
+          "rerank_score": -4.0887017250061035
+        },
+        {
+          "rank": 3,
+          "document": "2. 入职与试用期\n\n\n2.1 入职资料\n\n员工应在入职后5 个工作日内提交身份、学历、工作许可及工资账户信息。故意提供虚假材料可能导致录用决定撤\n\n销。人力资源部仅为合法用工、薪酬和福利目的处理相关信息。\n\n2.2 试用期\n\n试用期以劳动合同约定为准，通常为3 个月。部门应在入职第30、60 和80 天开展反馈。试用期考核关注岗位能力、\n\n协作、诚信和目标完成情况，不得以怀孕、疾病或其他受保护特",
+          "metadata": {
+            "page": 2,
+            "source": "employee_handbook.pdf",
+            "chunk_id": 0
+          },
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.29157257080078125,
+          "bm25_score": 17.526417528063792,
+          "rerank_score": -4.7707390785217285
+        },
+        {
+          "rank": 4,
+          "document": "人力资源部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n员工手册说明雇佣关系、工时休假、行为规范、绩效发",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf",
+            "page": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2905604839324951,
+          "bm25_score": null,
+          "rerank_score": -4.8292365074157715
+        },
+        {
+          "rank": 5,
+          "document": "或涉及机密数据，30 分钟内由安全团队牵头。\n\n 三级：局部影响且无敏感数据暴露，4 小时内完成初步处置。\n\n 四级：低风险告警或政策偏差，纳入日常工单。\n\n5.3 证据保护\n\n未经授权不得关机、格式化或重装疑似受感染设备。应记录发现时间、现象、已执行操作和相关人员。安全团队负责\n\n镜像、日志保全和取证链记录。\n\n 级别                   典型影响",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 1,
+            "page": 5
+          },
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.30427277088165283,
+          "bm25_score": 20.966938320904884,
+          "rerank_score": -5.348951816558838
+        },
+        {
+          "rank": 6,
+          "document": "2. 身份与访问控制\n\n\n2.1 账号管理\n\n所有用户必须使用实名账号，禁止共享口令。新员工账号由人力资源系统触发创建，默认有效期与劳动关系一致。离\n\n职账号应在离职生效后30 分钟内停用；高风险离职应在面谈开始前停用。\n\n2.2 多因素认证\n\n  互联网暴露系统、VPN、云管理控制台和特权账号必须启用MFA。\n\n 短信验证码仅作为过渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 2,
+            "chunk_id": 0
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.2805540859699249,
+          "bm25_score": 16.571829969860378,
+          "rerank_score": -5.455220699310303
+        },
+        {
+          "rank": 7,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3055380582809448,
+          "bm25_score": null,
+          "rerank_score": -5.924676418304443
+        },
+        {
+          "rank": 8,
+          "document": "额外工作时间应及时向经理说明，不得隐瞒实际工时。\n\n3.3 混合办公\n\n 符合岗位条件的员工每周最多远程办公2 天。\n\n 周二为团队共同办公日，原则上不得安排常规远程办公。\n\n 涉及客户现场、实验室设备或纸质机密材料的工作必须在指定地点完成。\n\n 远程办公不改变员工对信息安全、响应时间和绩效结果的责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 3,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 24.206599454048032,
+          "rerank_score": -5.956449031829834
+        },
+        {
+          "rank": 9,
+          "document": "5. 行为准则与利益冲突\n\n\n5.1 尊重与平等\n\n公司禁止歧视、骚扰、霸凌和报复。该要求适用于办公场所、客户现场、出差、线上沟通及公司组织的社交活动。旁\n\n观者可通过经理、人力资源或匿名渠道报告。\n\n5.2 礼品与招待\n\n员工不得索取礼品。单次价值不超过300 元且不影响商业判断的普通礼品可接受；现金、现金等价物及招投标敏感期\n\n礼品一律禁止。超过标准但无法当场退回时，应在2 个工作日内登记并交",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 5,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": 0.3070743680000305,
+          "bm25_score": null,
+          "rerank_score": -6.291132926940918
+        },
+        {
+          "rank": 10,
+          "document": "网盘、公开生成式AI 或未经批准的SaaS。\n\n 包含个人信息的数据跨境传输前必须完成隐私与法律评估。\n\n4.3 保留与销毁\n\n业务记录按照法务发布的保留计划保存。超过保留期限且不存在诉讼保全要求的数据应安全删除；纸质机密文件应使\n\n用符合DIN 66399 P-4 或更高等级的设备销毁。\n\n 级别                   示例                   最低保护要求\n 公",
+          "metadata": {
+            "page": 4,
+            "source": "security_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 22.68995002328978,
+          "rerank_score": -7.104895114898682
+        }
+      ]
+    },
+    {
+      "id": "Q017",
+      "original_query": "符合条件的员工每周最多远程办公几天？哪一天是团队共同办公日？",
+      "rewritten_query": "符合条件的员工每周远程办公天数上限是多少，以及团队共同办公日是哪一天？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 3,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "额外工作时间应及时向经理说明，不得隐瞒实际工时。\n\n3.3 混合办公\n\n 符合岗位条件的员工每周最多远程办公2 天。\n\n 周二为团队共同办公日，原则上不得安排常规远程办公。\n\n 涉及客户现场、实验室设备或纸质机密材料的工作必须在指定地点完成。\n\n 远程办公不改变员工对信息安全、响应时间和绩效结果的责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 3,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": 0.22936397790908813,
+          "bm25_score": 105.46479248756062,
+          "rerank_score": 7.478429317474365
+        },
+        {
+          "rank": 2,
+          "document": "3. 工作时间与灵活办公\n\n\n3.1 标准工时\n\n标准工作时间为周一至周五09:00-18:00，其中午休1 小时。采用综合工时或轮班制度的岗位以书面排班为准。员工应\n\n如实记录出勤，不得替他人打卡。\n\n3.2 加班\n\n加班须在发生前取得经理批准；突发故障可事后于1 个工作日内补批。公司根据法律及岗位安排提供调休或加班工\n\n资。未经批准的额外工作时间应及时向经理说明，不得隐瞒实际工时。\n\n3.3",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 3,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.29262465238571167,
+          "bm25_score": 18.726279689510775,
+          "rerank_score": -4.723839282989502
+        },
+        {
+          "rank": 3,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 21.590564966189753,
+          "rerank_score": -6.853280544281006
+        },
+        {
+          "rank": 4,
+          "document": "3. 餐饮、招待与会议\n\n\n3.1 内部工作餐\n\n因跨部门会议连续超过4 小时且跨越正常用餐时间，可安排工作餐。标准为每人不超过80 元，不得报销酒精饮料。日\n\n常团队聚餐不属于工作餐。\n\n3.2 外部业务招待\n\n应说明客户单位、参与人员、业务目的和日期。普通商业客户标准为每人不超过300 元；涉及政府官员、国有机构敏\n\n感岗位或招投标期间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 3,
+            "chunk_id": 0
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.3085826635360718,
+          "bm25_score": null,
+          "rerank_score": -7.041050434112549
+        },
+        {
+          "rank": 5,
+          "document": "申请时限                 结转\n 年假<5 天                  提前3 个工作日               最多5 天\n 年假≥5 天                   提前10 个工作日              最多5 天\n 病假                            当日10:00 前通知             不适用",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 4,
+            "chunk_id": 2
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": null,
+          "bm25_score": 25.361491321492853,
+          "rerank_score": -7.194322109222412
+        },
+        {
+          "rank": 6,
+          "document": "息，但仍会被评估。\n\n6.3 离职交接\n\n 员工应按劳动合同或法律要求提前通知。\n\n 最后工作日前归还电脑、门禁卡、文件和其他资产。\n\n 业务文件应移交到公司批准的位置，不得发送到个人邮箱。\n\n 离职薪资、未休假期及费用报销按法律和公司流程结算。\n\n6.4 手册更新\n\n公司可在符合法律程序的前提下更新本手册。重大变化将通过员工门户或邮件通知。本手册不构成固定期限或终身雇\n\n佣承诺。\n\n 咨",
+          "metadata": {
+            "page": 6,
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.31188714504241943,
+          "bm25_score": 18.300776251978835,
+          "rerank_score": -8.273859977722168
+        },
+        {
+          "rank": 7,
+          "document": "认证要求                 复核周期\n 普通员工                  口令+条件访问              每季度\n 远程访问                    强制MFA                每季度\n 管理员                      MFA+专用终端              每月\n 服务账号                   密",
+          "metadata": {
+            "page": 2,
+            "source": "security_policy.pdf",
+            "chunk_id": 2
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.2799452543258667,
+          "bm25_score": 28.67113555619729,
+          "rerank_score": -8.44103717803955
+        },
+        {
+          "rank": 8,
+          "document": "罚款由个人承担。\n\n 交通方式                 标准                   例外\n 飞机                   经济舱                     连续飞行>6 小时且符合职级或医疗条件\n 高铁                   二等座                       行程>5 小时可选一等座\n 私家车",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 2,
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "original_distance": null,
+          "bm25_score": 20.64208222838508,
+          "rerank_score": -8.885262489318848
+        },
+        {
+          "rank": 9,
+          "document": "员工手册\n\n\n                文件编号：HR-HBK-001　版本：V4.0　生效日期：2026 年7 月1 日\n\n\n 文件属性                           内容\n 适用范围                           星云科技有限公司在中国大陆地区聘用的全体员工\n 归口部门                           人力资源部\n 审批人",
+          "metadata": {
+            "page": 1,
+            "chunk_id": 0,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 1,
+          "chunk_id": 0,
+          "original_distance": 0.3070864677429199,
+          "bm25_score": null,
+          "rerank_score": -9.009099006652832
+        },
+        {
+          "rank": 10,
+          "document": "涉密、客户受限或源代码数\n\n据不得复制到可移动介质。\n\n3.3 网络访问\n\n 办公网络与访客网络必须逻辑隔离。\n\n 未经批准不得搭建无线热点、代理、隧道或远程控制服务。\n\n 生产环境管理流量必须经过堡垒机或受控管理平面。\n\n 扫描、抓包和渗透测试须取得系统负责人及安全团队书面授权。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 3,
+            "source": "security_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 21.368234750009787,
+          "rerank_score": -9.063325881958008
+        }
+      ]
+    },
+    {
+      "id": "Q018",
+      "original_query": "员工入职满一年后最少有多少天年假？最多可以结转多少天？",
+      "rewritten_query": "员工入职满一年后的法定年假天数是多少，以及年假最长可以结转多少天？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 4,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "chunk_id": 0,
+            "page": 4
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": 0.23970499634742737,
+          "bm25_score": 86.80595566260345,
+          "rerank_score": 7.327914714813232
+        },
+        {
+          "rank": 2,
+          "document": "申请时限                 结转\n 年假<5 天                  提前3 个工作日               最多5 天\n 年假≥5 天                   提前10 个工作日              最多5 天\n 病假                            当日10:00 前通知             不适用",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.22825153172016144,
+          "bm25_score": 64.94475012639087,
+          "rerank_score": 2.013016939163208
+        },
+        {
+          "rank": 3,
+          "document": "2. 入职与试用期\n\n\n2.1 入职资料\n\n员工应在入职后5 个工作日内提交身份、学历、工作许可及工资账户信息。故意提供虚假材料可能导致录用决定撤\n\n销。人力资源部仅为合法用工、薪酬和福利目的处理相关信息。\n\n2.2 试用期\n\n试用期以劳动合同约定为准，通常为3 个月。部门应在入职第30、60 和80 天开展反馈。试用期考核关注岗位能力、\n\n协作、诚信和目标完成情况，不得以怀孕、疾病或其他受保护特",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 0,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.29849135875701904,
+          "bm25_score": 25.581720616884216,
+          "rerank_score": -2.289346933364868
+        },
+        {
+          "rank": 4,
+          "document": "额外工作时间应及时向经理说明，不得隐瞒实际工时。\n\n3.3 混合办公\n\n 符合岗位条件的员工每周最多远程办公2 天。\n\n 周二为团队共同办公日，原则上不得安排常规远程办公。\n\n 涉及客户现场、实验室设备或纸质机密材料的工作必须在指定地点完成。\n\n 远程办公不改变员工对信息安全、响应时间和绩效结果的责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 3,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 20.66310606546727,
+          "rerank_score": -3.711390256881714
+        },
+        {
+          "rank": 5,
+          "document": "医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10:00 前通知经理或人力资源部。\n\n4.3 其他假期\n\n 婚假、产假、陪产假、育儿假和丧假依当地法律及公司福利方案执行。\n\n 每年提供2 个带薪志愿服务日，须用于公司认可的公益活动。\n\n 生日假为1 个工作日，应在生日当月使用，不可折现或结转。\n\n 假期                   申请时限",
+          "metadata": {
+            "page": 4,
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": 0.28564244508743286,
+          "bm25_score": 19.238991562998127,
+          "rerank_score": -3.9335415363311768
+        },
+        {
+          "rank": 6,
+          "document": "6. 绩效、申诉与离职\n\n\n6.1 绩效与发展\n\n公司每年设定目标并开展年中和年度评估。经理应提供具体事实和改进建议。员工可在收到正式结果后5 个工作日内\n\n提交书面复核申请。\n\n6.2 申诉渠道\n\n员工可向直属经理、上一级经理、人力资源或道德热线反映问题。公司禁止对善意举报或参与调查的人员进行报复。\n\n匿名举报可能限制调查人员获取补充信息，但仍会被评估。\n\n6.3 离职交接\n\n 员工应按劳动合",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "employee_handbook.pdf",
+            "page": 6
+          },
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 18.114262390979672,
+          "rerank_score": -5.170909404754639
+        },
+        {
+          "rank": 7,
+          "document": "2. 身份与访问控制\n\n\n2.1 账号管理\n\n所有用户必须使用实名账号，禁止共享口令。新员工账号由人力资源系统触发创建，默认有效期与劳动关系一致。离\n\n职账号应在离职生效后30 分钟内停用；高风险离职应在面谈开始前停用。\n\n2.2 多因素认证\n\n  互联网暴露系统、VPN、云管理控制台和特权账号必须启用MFA。\n\n 短信验证码仅作为过渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交",
+          "metadata": {
+            "page": 2,
+            "source": "security_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.3023303151130676,
+          "bm25_score": null,
+          "rerank_score": -5.899506092071533
+        },
+        {
+          "rank": 8,
+          "document": "当日10:00 前通知             不适用\n 生日假                   提前1 个工作日              不可结转\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档\n                                                          第 4 页",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "chunk_id": 3,
+            "page": 4
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 3,
+          "original_distance": 0.27265527844429016,
+          "bm25_score": 17.46160758910984,
+          "rerank_score": -6.025304317474365
+        },
+        {
+          "rank": 9,
+          "document": "6. 第三方、例外与问责\n\n\n6.1 第三方接入\n\n供应商接入应有明确业务负责人、限定系统范围和到期时间。远程维护必须使用公司批准的VPN 和MFA，默认最长授\n\n权90 天；每次高权限操作应留存会话审计。\n\n6.2 政策例外\n\n无法满足控制要求时，申请人须记录业务理由、风险、补偿措施和结束日期。例外最长有效期180 天，不自动续期。\n\n涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "security_policy.pdf",
+            "page": 6
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 17.396695036287642,
+          "rerank_score": -6.404507160186768
+        },
+        {
+          "rank": 10,
+          "document": "提交时间               最终审批人\n 国内常规                  出发前2 个工作日             部门负责人\n 国内高额                  出发前3 个工作日              财务BP\n 国际出差                   出发前10 个工作日            分管副总裁\n\n\n\n\n\n星云科技有限公司 - 内部制度示",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.30404990911483765,
+          "bm25_score": null,
+          "rerank_score": -7.373493671417236
+        }
+      ]
+    },
+    {
+      "id": "Q019",
+      "original_query": "生日假有几天，可以结转到下一年度吗？",
+      "rewritten_query": "公司员工生日假的假期天数是多少，以及生日假是否支持结转至下一年度使用？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 4,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "page": 4,
+            "chunk_id": 0,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": 0.2886520028114319,
+          "bm25_score": 40.16550536723688,
+          "rerank_score": -0.6762343049049377
+        },
+        {
+          "rank": 2,
+          "document": "申请时限                 结转\n 年假<5 天                  提前3 个工作日               最多5 天\n 年假≥5 天                   提前10 个工作日              最多5 天\n 病假                            当日10:00 前通知             不适用",
+          "metadata": {
+            "page": 4,
+            "chunk_id": 2,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.2236390858888626,
+          "bm25_score": 24.881107604550827,
+          "rerank_score": -2.3873353004455566
+        },
+        {
+          "rank": 3,
+          "document": "当日10:00 前通知             不适用\n 生日假                   提前1 个工作日              不可结转\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档\n                                                          第 4 页",
+          "metadata": {
+            "chunk_id": 3,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 3,
+          "original_distance": 0.2435969114303589,
+          "bm25_score": 30.291886279354863,
+          "rerank_score": -2.6537656784057617
+        },
+        {
+          "rank": 4,
+          "document": "医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10:00 前通知经理或人力资源部。\n\n4.3 其他假期\n\n 婚假、产假、陪产假、育儿假和丧假依当地法律及公司福利方案执行。\n\n 每年提供2 个带薪志愿服务日，须用于公司认可的公益活动。\n\n 生日假为1 个工作日，应在生日当月使用，不可折现或结转。\n\n 假期                   申请时限",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 4,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": 0.29359501600265503,
+          "bm25_score": 25.20858997117865,
+          "rerank_score": -3.510843276977539
+        },
+        {
+          "rank": 5,
+          "document": "适用法律为准，并由财务部发布\n\n补充指引。\n\n 版本                   日期                   主要变化\n V1.0                                    2025-01-01               首次发布\n V1.1                                    2026-07-01",
+          "metadata": {
+            "page": 6,
+            "chunk_id": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.3194177746772766,
+          "bm25_score": null,
+          "rerank_score": -5.630469799041748
+        },
+        {
+          "rank": 6,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.2953226566314697,
+          "bm25_score": 9.719968309091461,
+          "rerank_score": -6.4927191734313965
+        },
+        {
+          "rank": 7,
+          "document": "紧急事件应先电话报告，不应仅\n\n发送邮件。\n\n 版本                   日期                   主要变化\n V2.0                                    2025-09-01               统一数据分类\n V2.1                                    2026-07-01",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "security_policy.pdf",
+            "page": 6
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.3220086097717285,
+          "bm25_score": null,
+          "rerank_score": -6.554046154022217
+        },
+        {
+          "rank": 8,
+          "document": "6. 绩效、申诉与离职\n\n\n6.1 绩效与发展\n\n公司每年设定目标并开展年中和年度评估。经理应提供具体事实和改进建议。员工可在收到正式结果后5 个工作日内\n\n提交书面复核申请。\n\n6.2 申诉渠道\n\n员工可向直属经理、上一级经理、人力资源或道德热线反映问题。公司禁止对善意举报或参与调查的人员进行报复。\n\n匿名举报可能限制调查人员获取补充信息，但仍会被评估。\n\n6.3 离职交接\n\n 员工应按劳动合",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "employee_handbook.pdf",
+            "page": 6
+          },
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 12.116820247878552,
+          "rerank_score": -7.612974166870117
+        },
+        {
+          "rank": 9,
+          "document": "或邮件通知。本手册不构成固定期限或终身雇\n\n佣承诺。\n\n 咨询事项                           联系渠道\n 薪酬福利                                                  people@example.test\n 行为与申诉                                                  ethi",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "employee_handbook.pdf",
+            "page": 6
+          },
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.29970455169677734,
+          "bm25_score": null,
+          "rerank_score": -7.81041955947876
+        },
+        {
+          "rank": 10,
+          "document": "息，但仍会被评估。\n\n6.3 离职交接\n\n 员工应按劳动合同或法律要求提前通知。\n\n 最后工作日前归还电脑、门禁卡、文件和其他资产。\n\n 业务文件应移交到公司批准的位置，不得发送到个人邮箱。\n\n 离职薪资、未休假期及费用报销按法律和公司流程结算。\n\n6.4 手册更新\n\n公司可在符合法律程序的前提下更新本手册。重大变化将通过员工门户或邮件通知。本手册不构成固定期限或终身雇\n\n佣承诺。\n\n 咨",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf",
+            "page": 6
+          },
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 9.37868611303635,
+          "rerank_score": -8.060036659240723
+        }
+      ]
+    },
+    {
+      "id": "Q020",
+      "original_query": "普通礼品在什么金额以内可以接受？",
+      "rewritten_query": "普通礼品接受的金额上限是多少？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 5,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "5. 行为准则与利益冲突\n\n\n5.1 尊重与平等\n\n公司禁止歧视、骚扰、霸凌和报复。该要求适用于办公场所、客户现场、出差、线上沟通及公司组织的社交活动。旁\n\n观者可通过经理、人力资源或匿名渠道报告。\n\n5.2 礼品与招待\n\n员工不得索取礼品。单次价值不超过300 元且不影响商业判断的普通礼品可接受；现金、现金等价物及招投标敏感期\n\n礼品一律禁止。超过标准但无法当场退回时，应在2 个工作日内登记并交",
+          "metadata": {
+            "page": 5,
+            "source": "employee_handbook.pdf",
+            "chunk_id": 0
+          },
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": 0.2883014976978302,
+          "bm25_score": 33.42752789328437,
+          "rerank_score": -0.8920483589172363
+        },
+        {
+          "rank": 2,
+          "document": "时不发放餐补，但仍可领取30 元杂费补贴。\n\n 城市类别                 普通员工                 总监及以上\n A 类                                  650 元/晚                             900 元/晚\n B 类                                  500 元/晚",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 2,
+            "page": 4
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.3200647830963135,
+          "bm25_score": 15.303277121490297,
+          "rerank_score": -3.26712703704834
+        },
+        {
+          "rank": 3,
+          "document": "类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n  C 类城市：其他城市，普通员工上限380 元/晚。\n\n  总监及以上人员的对应上限分别为900 元、750 元和600 元。\n\n4.3 补贴\n\n国内出差餐饮及杂费补贴为150 元/自然日；出发日和返程日均按全天计算。公司或客户提供两餐及以上时，当日补贴\n\n减半；提供全部三餐时不发放餐补，但仍可领取30 元杂费补贴。\n\n 城市类别",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 1,
+            "page": 4
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 13.645752226454738,
+          "rerank_score": -3.3448259830474854
+        },
+        {
+          "rank": 4,
+          "document": "500 元/晚                             750 元/晚\n C 类                                  380 元/晚                             600 元/晚\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "chunk_id": 3,
+            "page": 4,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 3,
+          "original_distance": 0.32908719778060913,
+          "bm25_score": null,
+          "rerank_score": -3.418487071990967
+        },
+        {
+          "rank": 5,
+          "document": "3. 餐饮、招待与会议\n\n\n3.1 内部工作餐\n\n因跨部门会议连续超过4 小时且跨越正常用餐时间，可安排工作餐。标准为每人不超过80 元，不得报销酒精饮料。日\n\n常团队聚餐不属于工作餐。\n\n3.2 外部业务招待\n\n应说明客户单位、参与人员、业务目的和日期。普通商业客户标准为每人不超过300 元；涉及政府官员、国有机构敏\n\n感岗位或招投标期间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "expense_policy.pdf",
+            "page": 3
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.2990075349807739,
+          "bm25_score": null,
+          "rerank_score": -3.618680715560913
+        },
+        {
+          "rank": 6,
+          "document": "属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政策符合性。\n\n 合规部：审核高风险礼品、政府相关招待及例外事项。\n\n2.3 禁止拆分\n\n不得通过拆分订单、发票或报销单规避审批门槛。例如同一供应商、同一目的且7 天内发生的费用应合并判断审批级\n\n别。\n\n 金额（含税）                         最低审批要求\n ≤2,000 元",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 2,
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.28513357043266296,
+          "bm25_score": 16.476233613206908,
+          "rerank_score": -4.393982410430908
+        },
+        {
+          "rank": 7,
+          "document": "求\n ≤2,000 元                          直属经理\n 2,001-10,000 元                         经理+预算负责人\n 10,001-50,000 元                          部门总监+财务BP\n >50,000 元                           分管副总裁+采购负责人\n\n\n\n\n\n星云科",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 2,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.3135678172111511,
+          "bm25_score": null,
+          "rerank_score": -5.07388162612915
+        },
+        {
+          "rank": 8,
+          "document": "4. 住宿与出差补贴\n\n\n4.1 住宿上限\n\n住宿费按实际发生额在限额内报销。限额不等于固定补贴，未住宿或由客户免费提供住宿时不得申报住宿费。两名同\n\n性员工同住一间房不强制，但鼓励在安全与便利的前提下共享协议酒店。\n\n4.2 城市分类\n\n  A 类城市：北京、上海、广州、深圳及境外高成本城市，普通员工上限650 元/晚。\n\n  B 类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 4,
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 11.36201850287716,
+          "rerank_score": -5.417935848236084
+        },
+        {
+          "rank": 9,
+          "document": "行程>5 小时可选一等座\n 私家车                                      1.2 元/公里                须事前审批\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档\n                                                          第 3 页",
+          "metadata": {
+            "chunk_id": 3,
+            "page": 3,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 3,
+          "original_distance": 0.3259320855140686,
+          "bm25_score": null,
+          "rerank_score": -5.54852294921875
+        },
+        {
+          "rank": 10,
+          "document": "间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.3 会议费用\n\n 外部场地应优先通过采购渠道预订。\n\n 会议物料应注明使用数量和剩余物资去向。\n\n  单次会议总额超过10,000 元应附议程和签到记录。\n\n 未实际参会人员产生的餐费原则上不予报销。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 3,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": 0.32955682277679443,
+          "bm25_score": null,
+          "rerank_score": -5.599431037902832
+        }
+      ]
+    },
+    {
+      "id": "Q021",
+      "original_query": "员工对正式绩效结果有异议，应在多久内申请复核？",
+      "rewritten_query": "员工对正式绩效结果提出复核申请的有效期限是多少？",
+      "expected_source": "employee_handbook.pdf",
+      "expected_page": 6,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "6. 绩效、申诉与离职\n\n\n6.1 绩效与发展\n\n公司每年设定目标并开展年中和年度评估。经理应提供具体事实和改进建议。员工可在收到正式结果后5 个工作日内\n\n提交书面复核申请。\n\n6.2 申诉渠道\n\n员工可向直属经理、上一级经理、人力资源或道德热线反映问题。公司禁止对善意举报或参与调查的人员进行报复。\n\n匿名举报可能限制调查人员获取补充信息，但仍会被评估。\n\n6.3 离职交接\n\n 员工应按劳动合",
+          "metadata": {
+            "page": 6,
+            "source": "employee_handbook.pdf",
+            "chunk_id": 0
+          },
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.23237550258636475,
+          "bm25_score": 41.82929717444856,
+          "rerank_score": 4.006521701812744
+        },
+        {
+          "rank": 2,
+          "document": "人力资源部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n员工手册说明雇佣关系、工时休假、行为规范、绩效发",
+          "metadata": {
+            "page": 1,
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2707669734954834,
+          "bm25_score": 16.039701711964817,
+          "rerank_score": -1.5654644966125488
+        },
+        {
+          "rank": 3,
+          "document": "2. 入职与试用期\n\n\n2.1 入职资料\n\n员工应在入职后5 个工作日内提交身份、学历、工作许可及工资账户信息。故意提供虚假材料可能导致录用决定撤\n\n销。人力资源部仅为合法用工、薪酬和福利目的处理相关信息。\n\n2.2 试用期\n\n试用期以劳动合同约定为准，通常为3 个月。部门应在入职第30、60 和80 天开展反馈。试用期考核关注岗位能力、\n\n协作、诚信和目标完成情况，不得以怀孕、疾病或其他受保护特",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 2,
+            "chunk_id": 0
+          },
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.2837076783180237,
+          "bm25_score": null,
+          "rerank_score": -3.733677625656128
+        },
+        {
+          "rank": 4,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "page": 1,
+            "source": "travel_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.28191515803337097,
+          "bm25_score": null,
+          "rerank_score": -4.045138835906982
+        },
+        {
+          "rank": 5,
+          "document": "申请时限                 结转\n 年假<5 天                  提前3 个工作日               最多5 天\n 年假≥5 天                   提前10 个工作日              最多5 天\n 病假                            当日10:00 前通知             不适用",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 4,
+            "chunk_id": 2
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": null,
+          "bm25_score": 15.653267471740127,
+          "rerank_score": -4.096238136291504
+        },
+        {
+          "rank": 6,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "security_policy.pdf",
+            "page": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.282645583152771,
+          "bm25_score": null,
+          "rerank_score": -4.278665065765381
+        },
+        {
+          "rank": 7,
+          "document": "部门                           财务共享服务中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范非差旅类业务",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "chunk_id": 1,
+            "page": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2987384796142578,
+          "bm25_score": null,
+          "rerank_score": -4.423989295959473
+        },
+        {
+          "rank": 8,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 18.502190762605018,
+          "rerank_score": -4.83864164352417
+        },
+        {
+          "rank": 9,
+          "document": "渡方式，优先使用硬件密钥或认证器。\n\n 服务账号不得使用交互式登录，密钥至少每90 天轮换。\n\n 紧急账号应封存并在每次使用后24 小时内复核。\n\n2.3 权限复核\n\n系统负责人每季度复核普通权限，每月复核管理员权限。连续60 天未使用的高权限应自动暂停，确认仍有业务需要后\n\n方可恢复。\n\n 账号类型                 认证要求                 复核周期\n 普通员",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 20.43691659998698,
+          "rerank_score": -4.9846882820129395
+        },
+        {
+          "rank": 10,
+          "document": "协作、诚信和目标完成情况，不得以怀孕、疾病或其他受保护特征作为评价依据。\n\n2.3 导师与培训\n\n  新员工应在10 个工作日内完成合规、安全和隐私必修课。\n\n 未按时完成培训的员工将收到提醒；逾期30 天仍未完成可暂停部分系统权限。\n\n 岗位导师负责业务引导，但不代替直属经理的绩效责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 2,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.29470232129096985,
+          "bm25_score": null,
+          "rerank_score": -5.443449020385742
+        }
+      ]
+    },
+    {
+      "id": "Q022",
+      "original_query": "同一供应商、同一目的的费用，在多少天内发生时应合并判断审批级别？",
+      "rewritten_query": "同一供应商、同一目的的费用在多少天内发生时需要合并判断审批级别？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 2,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政策符合性。\n\n 合规部：审核高风险礼品、政府相关招待及例外事项。\n\n2.3 禁止拆分\n\n不得通过拆分订单、发票或报销单规避审批门槛。例如同一供应商、同一目的且7 天内发生的费用应合并判断审批级\n\n别。\n\n 金额（含税）                         最低审批要求\n ≤2,000 元",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 2,
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.21858932077884674,
+          "bm25_score": 101.30172085650882,
+          "rerank_score": 6.1065874099731445
+        },
+        {
+          "rank": 2,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "page": 5,
+            "chunk_id": 1,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.2760578989982605,
+          "bm25_score": 27.06416164943974,
+          "rerank_score": -3.90749192237854
+        },
+        {
+          "rank": 3,
+          "document": "负责人及财务BP 审批。\n\n  超过30,000 元或涉及国际出差：分管副总裁审批。\n\n 出差人员不得审批本人申请；同一项目多人出差应分别提交行程。\n\n2.3 必填信息\n\n申请应包含出差目的、城市、起止日期、客户或项目名称、预计费用、成本中心及同行人员。缺少成本中心的申请将\n\n退回。\n\n 场景                   最晚提交时间               最终审批人\n 国内常规",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.2778669595718384,
+          "bm25_score": 38.898845154195186,
+          "rerank_score": -4.797029495239258
+        },
+        {
+          "rank": 4,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 1
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2596070468425751,
+          "bm25_score": 23.953390145638856,
+          "rerank_score": -5.380873203277588
+        },
+        {
+          "rank": 5,
+          "document": "2. 基本原则与职责\n\n\n2.1 基本原则\n\n费用必须真实、合理、与公司业务直接相关，并已取得适当审批。预算可用不代表费用自动合规；审批通过也不免除\n\n申请人对真实性和票据合法性的责任。\n\n2.2 角色职责\n\n 申请人：提供业务目的、参与人员、金额、票据和成本中心。\n\n 直属经理：判断业务必要性与合理性。\n\n 预算负责人：确认预算归属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 2,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 26.635602509762265,
+          "rerank_score": -5.885238170623779
+        },
+        {
+          "rank": 6,
+          "document": "提交时间               最终审批人\n 国内常规                  出发前2 个工作日             部门负责人\n 国内高额                  出发前3 个工作日              财务BP\n 国际出差                   出发前10 个工作日            分管副总裁\n\n\n\n\n\n星云科技有限公司 - 内部制度示",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 2,
+            "chunk_id": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.264309823513031,
+          "bm25_score": null,
+          "rerank_score": -6.022327423095703
+        },
+        {
+          "rank": 7,
+          "document": "人力资源部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n员工手册说明雇佣关系、工时休假、行为规范、绩效发",
+          "metadata": {
+            "page": 1,
+            "chunk_id": 1,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2785780131816864,
+          "bm25_score": 22.615354748711297,
+          "rerank_score": -6.036285877227783
+        },
+        {
+          "rank": 8,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 1,
+            "page": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.2621416747570038,
+          "bm25_score": 22.364564535196003,
+          "rerank_score": -6.137629508972168
+        },
+        {
+          "rank": 9,
+          "document": "行程>5 小时可选一等座\n 私家车                                      1.2 元/公里                须事前审批\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档\n                                                          第 3 页",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 3,
+            "page": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 3,
+          "original_distance": 0.2619680166244507,
+          "bm25_score": null,
+          "rerank_score": -6.290245056152344
+        },
+        {
+          "rank": 10,
+          "document": "6. 报销、违规与附则\n\n\n6.1 报销期限\n\n返程后10 个工作日内提交报销。超过30 个自然日未提交且无合理说明的，财务可拒绝受理。电子发票应上传原始文\n\n件，不得仅上传截图。\n\n6.2 不予报销项目\n\n  迷你吧、付费电影、健身或SPA 等个人消费。\n\n 因个人疏忽产生的证件补办、行李超重和误机费用。\n\n 无业务必要的礼品、旅游景点门票及陪同人员费用。\n\n 已由客户、供应商或其他单位",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 0,
+            "page": 6
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 23.843018079326335,
+          "rerank_score": -6.692563533782959
+        }
+      ]
+    },
+    {
+      "id": "Q023",
+      "original_query": "含税金额为30,000元的费用最低需要哪些审批？",
+      "rewritten_query": "金额为30,000元（含税）的费用报销或支出申请所需的最低审批流程是什么？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 2,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政策符合性。\n\n 合规部：审核高风险礼品、政府相关招待及例外事项。\n\n2.3 禁止拆分\n\n不得通过拆分订单、发票或报销单规避审批门槛。例如同一供应商、同一目的且7 天内发生的费用应合并判断审批级\n\n别。\n\n 金额（含税）                         最低审批要求\n ≤2,000 元",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "expense_policy.pdf",
+            "page": 2
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.23819145560264587,
+          "bm25_score": 41.564714120771335,
+          "rerank_score": -1.1399091482162476
+        },
+        {
+          "rank": 2,
+          "document": "负责人及财务BP 审批。\n\n  超过30,000 元或涉及国际出差：分管副总裁审批。\n\n 出差人员不得审批本人申请；同一项目多人出差应分别提交行程。\n\n2.3 必填信息\n\n申请应包含出差目的、城市、起止日期、客户或项目名称、预计费用、成本中心及同行人员。缺少成本中心的申请将\n\n退回。\n\n 场景                   最晚提交时间               最终审批人\n 国内常规",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "travel_policy.pdf",
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.2575666010379791,
+          "bm25_score": 20.479499106872506,
+          "rerank_score": -1.34281587600708
+        },
+        {
+          "rank": 3,
+          "document": "2. 出差申请与审批\n\n\n2.1 申请时限\n\n国内出差原则上应至少提前2 个工作日提交；国际及港澳台出差至少提前10 个工作日提交。紧急出差可先取得直属总\n\n监的书面同意，并在返程后1 个工作日内补齐流程。\n\n2.2 审批路径\n\n  预算内且预计总费用不超过8,000 元：部门负责人审批。\n\n   8,001 至30,000 元：部门负责人及财务BP 审批。\n\n  超过30,000 元或涉及",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.27797073125839233,
+          "bm25_score": 18.974933273619918,
+          "rerank_score": -2.712646961212158
+        },
+        {
+          "rank": 4,
+          "document": "3 页",
+          "metadata": {
+            "page": 3,
+            "chunk_id": 4,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 4,
+          "original_distance": 0.298214852809906,
+          "bm25_score": null,
+          "rerank_score": -5.898939609527588
+        },
+        {
+          "rank": 5,
+          "document": "5. 票据、币种与提交\n\n\n5.1 合法票据\n\n境内费用原则上应取得合法增值税发票，抬头及税号必须正确。无法取得发票时，应填写无票说明并提供付款记录；\n\n单笔超过200 元的无票费用须由财务经理批准。\n\n5.2 外币换算\n\n外币费用按公司系统记录的交易日汇率换算；使用公司卡时以银行入账人民币金额为准。个人信用卡汇兑手续费可报\n\n销，但逾期费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用",
+          "metadata": {
+            "page": 5,
+            "source": "expense_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 23.601448652700316,
+          "rerank_score": -6.143840312957764
+        },
+        {
+          "rank": 6,
+          "document": "适用法律为准，并由财务部发布\n\n补充指引。\n\n 版本                   日期                   主要变化\n V1.0                                    2025-01-01               首次发布\n V1.1                                    2026-07-01",
+          "metadata": {
+            "chunk_id": 2,
+            "page": 6,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.3100150525569916,
+          "bm25_score": null,
+          "rerank_score": -6.468311786651611
+        },
+        {
+          "rank": 7,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "expense_policy.pdf",
+            "page": 5
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.31040433049201965,
+          "bm25_score": 16.06292722977896,
+          "rerank_score": -7.355179786682129
+        },
+        {
+          "rank": 8,
+          "document": "2. 基本原则与职责\n\n\n2.1 基本原则\n\n费用必须真实、合理、与公司业务直接相关，并已取得适当审批。预算可用不代表费用自动合规；审批通过也不免除\n\n申请人对真实性和票据合法性的责任。\n\n2.2 角色职责\n\n 申请人：提供业务目的、参与人员、金额、票据和成本中心。\n\n 直属经理：判断业务必要性与合理性。\n\n 预算负责人：确认预算归属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 2,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 18.240097829835904,
+          "rerank_score": -7.455658435821533
+        },
+        {
+          "rank": 9,
+          "document": "一等座，但需在申请中说明。\n\n  机场往返优先使用公共交通或公司协议用车；凌晨23:00 至次日06:00 可使用出租车。\n\n 网约车豪华车型、专车等候费和个人绕行费用不予报销。\n\n3.3 自驾\n\n因公使用私家车须事先审批，按1.2 元/公里补贴，补贴已包含燃油和车辆损耗；实际发生的高速公路费与停车费可凭\n\n票另行报销。交通违章及事故罚款由个人承担。\n\n 交通方式",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 3,
+            "chunk_id": 1
+          },
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 14.044907094976246,
+          "rerank_score": -7.476243495941162
+        },
+        {
+          "rank": 10,
+          "document": "版本                   日期                   主要变化\n V3.0                                    2025-04-01               整合费用及公司卡规则\n V3.1                                    2026-07-01               调整审批门槛和提",
+          "metadata": {
+            "page": 6,
+            "source": "expense_policy.pdf",
+            "chunk_id": 2
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.28988659381866455,
+          "bm25_score": null,
+          "rerank_score": -8.570064544677734
+        }
+      ]
+    },
+    {
+      "id": "Q024",
+      "original_query": "内部工作餐和普通商业客户招待的人均上限分别是多少？",
+      "rewritten_query": "内部工作餐和普通商业客户招待的人均费用报销上限分别是多少？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 3,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "3. 餐饮、招待与会议\n\n\n3.1 内部工作餐\n\n因跨部门会议连续超过4 小时且跨越正常用餐时间，可安排工作餐。标准为每人不超过80 元，不得报销酒精饮料。日\n\n常团队聚餐不属于工作餐。\n\n3.2 外部业务招待\n\n应说明客户单位、参与人员、业务目的和日期。普通商业客户标准为每人不超过300 元；涉及政府官员、国有机构敏\n\n感岗位或招投标期间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "expense_policy.pdf",
+            "page": 3
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.19603827595710754,
+          "bm25_score": 58.188692011115435,
+          "rerank_score": 5.234562397003174
+        },
+        {
+          "rank": 2,
+          "document": "类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n  C 类城市：其他城市，普通员工上限380 元/晚。\n\n  总监及以上人员的对应上限分别为900 元、750 元和600 元。\n\n4.3 补贴\n\n国内出差餐饮及杂费补贴为150 元/自然日；出发日和返程日均按全天计算。公司或客户提供两餐及以上时，当日补贴\n\n减半；提供全部三餐时不发放餐补，但仍可领取30 元杂费补贴。\n\n 城市类别",
+          "metadata": {
+            "page": 4,
+            "chunk_id": 1,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": 0.2774536609649658,
+          "bm25_score": 40.951662853554154,
+          "rerank_score": -0.9479694962501526
+        },
+        {
+          "rank": 3,
+          "document": "4. 住宿与出差补贴\n\n\n4.1 住宿上限\n\n住宿费按实际发生额在限额内报销。限额不等于固定补贴，未住宿或由客户免费提供住宿时不得申报住宿费。两名同\n\n性员工同住一间房不强制，但鼓励在安全与便利的前提下共享协议酒店。\n\n4.2 城市分类\n\n  A 类城市：北京、上海、广州、深圳及境外高成本城市，普通员工上限650 元/晚。\n\n  B 类城市：省会及计划单列市，普通员工上限500 元/晚。\n\n",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 0,
+            "page": 4
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": 0.3208579123020172,
+          "bm25_score": 22.196482913616702,
+          "rerank_score": -4.735447406768799
+        },
+        {
+          "rank": 4,
+          "document": "5. 行为准则与利益冲突\n\n\n5.1 尊重与平等\n\n公司禁止歧视、骚扰、霸凌和报复。该要求适用于办公场所、客户现场、出差、线上沟通及公司组织的社交活动。旁\n\n观者可通过经理、人力资源或匿名渠道报告。\n\n5.2 礼品与招待\n\n员工不得索取礼品。单次价值不超过300 元且不影响商业判断的普通礼品可接受；现金、现金等价物及招投标敏感期\n\n礼品一律禁止。超过标准但无法当场退回时，应在2 个工作日内登记并交",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 5,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": 0.29667526483535767,
+          "bm25_score": 27.537256123201765,
+          "rerank_score": -5.000651836395264
+        },
+        {
+          "rank": 5,
+          "document": "间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.3 会议费用\n\n 外部场地应优先通过采购渠道预订。\n\n 会议物料应注明使用数量和剩余物资去向。\n\n  单次会议总额超过10,000 元应附议程和签到记录。\n\n 未实际参会人员产生的餐费原则上不予报销。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 3,
+            "chunk_id": 1,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": 0.28373897075653076,
+          "bm25_score": 17.238768238781176,
+          "rerank_score": -5.250580310821533
+        },
+        {
+          "rank": 6,
+          "document": "时不发放餐补，但仍可领取30 元杂费补贴。\n\n 城市类别                 普通员工                 总监及以上\n A 类                                  650 元/晚                             900 元/晚\n B 类                                  500 元/晚",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 4,
+            "chunk_id": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "original_distance": 0.2834465801715851,
+          "bm25_score": 18.730017661101705,
+          "rerank_score": -5.410916328430176
+        },
+        {
+          "rank": 7,
+          "document": "500 元/晚                             750 元/晚\n C 类                                  380 元/晚                             600 元/晚\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 4,
+            "chunk_id": 3
+          },
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 3,
+          "original_distance": 0.3108436167240143,
+          "bm25_score": null,
+          "rerank_score": -5.876094341278076
+        },
+        {
+          "rank": 8,
+          "document": "属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政策符合性。\n\n 合规部：审核高风险礼品、政府相关招待及例外事项。\n\n2.3 禁止拆分\n\n不得通过拆分订单、发票或报销单规避审批门槛。例如同一供应商、同一目的且7 天内发生的费用应合并判断审批级\n\n别。\n\n 金额（含税）                         最低审批要求\n ≤2,000 元",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 1,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.3146228790283203,
+          "bm25_score": 16.182964280576364,
+          "rerank_score": -7.979743957519531
+        },
+        {
+          "rank": 9,
+          "document": "额外工作时间应及时向经理说明，不得隐瞒实际工时。\n\n3.3 混合办公\n\n 符合岗位条件的员工每周最多远程办公2 天。\n\n 周二为团队共同办公日，原则上不得安排常规远程办公。\n\n 涉及客户现场、实验室设备或纸质机密材料的工作必须在指定地点完成。\n\n 远程办公不改变员工对信息安全、响应时间和绩效结果的责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 3,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 15.906075275442987,
+          "rerank_score": -8.181559562683105
+        },
+        {
+          "rank": 10,
+          "document": "律禁止。超过标准但无法当场退回时，应在2 个工作日内登记并交由合规部处理。\n\n5.3 外部兼职\n\n 不得从事与公司竞争或影响本职工作的兼职。\n\n 担任供应商、客户或竞争对手的董事、顾问须提前申报。\n\n 个人投资公开交易基金无需申报；持有业务关联方5%以上权益必须申报。\n\n 使用公司资源开展个人商业活动属于违规。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 5,
+            "source": "employee_handbook.pdf",
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.3046773076057434,
+          "bm25_score": 20.19062526782802,
+          "rerank_score": -8.315449714660645
+        }
+      ]
+    },
+    {
+      "id": "Q025",
+      "original_query": "销售及现场支持岗位每月最多可报销多少业务通信费？",
+      "rewritten_query": "销售及现场支持岗位每月业务通信费报销限额是多少？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 4,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "4. 办公、通信与专业费用\n\n\n4.1 办公用品\n\n常规办公用品由行政集中采购。个人自行购买仅限紧急情况，单次上限500 元，并应说明未使用集中采购的原因。家\n\n具、显示器及耐用设备无论金额大小均须通过资产采购流程。\n\n4.2 通信费用\n\n销售及现场支持岗位可按月报销实际发生的业务通信费，上限300 元；经批准的国际漫游上限800 元/月。家庭宽带费\n\n仅对公司批准的长期远程岗位报销，上限150",
+          "metadata": {
+            "page": 4,
+            "chunk_id": 0,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": 0.2185974419116974,
+          "bm25_score": 73.63403515604439,
+          "rerank_score": 5.840531826019287
+        },
+        {
+          "rank": 2,
+          "document": "。家庭宽带费\n\n仅对公司批准的长期远程岗位报销，上限150 元/月。\n\n4.3 培训与会员\n\n 外部培训须在报名付款前取得经理和学习发展负责人批准。\n\n 考试通过后可报销认证考试费；首次未通过的补考费由个人承担，岗位强制认证除外。\n\n 专业协会会员费可在与岗位直接相关且公司未重复购买时报销。\n\n 健身、兴趣社群及个人订阅不属于专业会员费。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "chunk_id": 1,
+            "page": 4
+          },
+          "source": "expense_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "original_distance": 0.2511427402496338,
+          "bm25_score": 27.788502164156995,
+          "rerank_score": -3.4080827236175537
+        },
+        {
+          "rank": 3,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "page": 5,
+            "source": "expense_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.2675662934780121,
+          "bm25_score": null,
+          "rerank_score": -4.253814220428467
+        },
+        {
+          "rank": 4,
+          "document": "3. 餐饮、招待与会议\n\n\n3.1 内部工作餐\n\n因跨部门会议连续超过4 小时且跨越正常用餐时间，可安排工作餐。标准为每人不超过80 元，不得报销酒精饮料。日\n\n常团队聚餐不属于工作餐。\n\n3.2 外部业务招待\n\n应说明客户单位、参与人员、业务目的和日期。普通商业客户标准为每人不超过300 元；涉及政府官员、国有机构敏\n\n感岗位或招投标期间的招待，必须提前获得合规批准，且不得提供娱乐活动。\n\n3.",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "expense_policy.pdf",
+            "page": 3
+          },
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "original_distance": 0.28891220688819885,
+          "bm25_score": 18.549281042008197,
+          "rerank_score": -5.520318508148193
+        },
+        {
+          "rank": 5,
+          "document": "求\n ≤2,000 元                          直属经理\n 2,001-10,000 元                         经理+预算负责人\n 10,001-50,000 元                          部门总监+财务BP\n >50,000 元                           分管副总裁+采购负责人\n\n\n\n\n\n星云科",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 2,
+            "chunk_id": 2
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.2909548580646515,
+          "bm25_score": null,
+          "rerank_score": -6.108407497406006
+        },
+        {
+          "rank": 6,
+          "document": "属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政策符合性。\n\n 合规部：审核高风险礼品、政府相关招待及例外事项。\n\n2.3 禁止拆分\n\n不得通过拆分订单、发票或报销单规避审批门槛。例如同一供应商、同一目的且7 天内发生的费用应合并判断审批级\n\n别。\n\n 金额（含税）                         最低审批要求\n ≤2,000 元",
+          "metadata": {
+            "page": 2,
+            "source": "expense_policy.pdf",
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.29000476002693176,
+          "bm25_score": null,
+          "rerank_score": -6.626337051391602
+        },
+        {
+          "rank": 7,
+          "document": "6. 报销、违规与附则\n\n\n6.1 报销期限\n\n返程后10 个工作日内提交报销。超过30 个自然日未提交且无合理说明的，财务可拒绝受理。电子发票应上传原始文\n\n件，不得仅上传截图。\n\n6.2 不予报销项目\n\n  迷你吧、付费电影、健身或SPA 等个人消费。\n\n 因个人疏忽产生的证件补办、行李超重和误机费用。\n\n 无业务必要的礼品、旅游景点门票及陪同人员费用。\n\n 已由客户、供应商或其他单位",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 0,
+            "page": 6
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 16.958749833363512,
+          "rerank_score": -7.367636203765869
+        },
+        {
+          "rank": 8,
+          "document": "额外工作时间应及时向经理说明，不得隐瞒实际工时。\n\n3.3 混合办公\n\n 符合岗位条件的员工每周最多远程办公2 天。\n\n 周二为团队共同办公日，原则上不得安排常规远程办公。\n\n 涉及客户现场、实验室设备或纸质机密材料的工作必须在指定地点完成。\n\n 远程办公不改变员工对信息安全、响应时间和绩效结果的责任。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 3,
+            "chunk_id": 1
+          },
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "original_distance": null,
+          "bm25_score": 23.079151400972627,
+          "rerank_score": -7.406153202056885
+        },
+        {
+          "rank": 9,
+          "document": "金额报\n\n销；若更高，差额由个人承担。个人停留期间不发放补贴。\n\n5.3 高风险地区\n\n 出发前完成安全培训并登记紧急联系人。\n\n 不得前往公司安全团队发布的禁止区域。\n\n 发生自然灾害、骚乱或公共卫生事件时，应优先保证人身安全并联系24 小时热线。\n\n 护照、公司设备或客户资料遗失须在2 小时内报告。\n\n\n\n\n\n星云科技有限公司 - 内部制度示例文档",
+          "metadata": {
+            "page": 5,
+            "chunk_id": 1,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.28438422083854675,
+          "bm25_score": null,
+          "rerank_score": -7.630256175994873
+        },
+        {
+          "rank": 10,
+          "document": "类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误用公司卡时，应主动报告并在5 个工作日内退款。主动、及时纠正的非故意错误通常按流\n\n程更正；故意隐瞒、伪造或重复申报将按严重违规处理。\n\n6.4 抽查\n\n财务和内审可对已支付费用开展抽查，并要求补充业务证明。申请人及审批人应保存相关记录至少5 年，或按照更长\n\n的法定期限保存。\n\n 版本                   日期",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 6,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.28696584701538086,
+          "bm25_score": 19.042508326797186,
+          "rerank_score": -7.928491115570068
+        }
+      ]
+    },
+    {
+      "id": "Q026",
+      "original_query": "费用应在发生后多久提交？超过多少金额的无票费用需要财务经理批准？",
+      "rewritten_query": "费用报销的提交时效要求是什么？超过多少金额的无票费用需要财务经理审批？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 5,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "5. 票据、币种与提交\n\n\n5.1 合法票据\n\n境内费用原则上应取得合法增值税发票，抬头及税号必须正确。无法取得发票时，应填写无票说明并提供付款记录；\n\n单笔超过200 元的无票费用须由财务经理批准。\n\n5.2 外币换算\n\n外币费用按公司系统记录的交易日汇率换算；使用公司卡时以银行入账人民币金额为准。个人信用卡汇兑手续费可报\n\n销，但逾期费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "expense_policy.pdf",
+            "page": 5
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "original_distance": 0.2339736670255661,
+          "bm25_score": 62.75803234635193,
+          "rerank_score": 1.7596285343170166
+        },
+        {
+          "rank": 2,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.21826884150505066,
+          "bm25_score": 54.675433910513036,
+          "rerank_score": 1.6616181135177612
+        },
+        {
+          "rank": 3,
+          "document": "2. 出差申请与审批\n\n\n2.1 申请时限\n\n国内出差原则上应至少提前2 个工作日提交；国际及港澳台出差至少提前10 个工作日提交。紧急出差可先取得直属总\n\n监的书面同意，并在返程后1 个工作日内补齐流程。\n\n2.2 审批路径\n\n  预算内且预计总费用不超过8,000 元：部门负责人审批。\n\n   8,001 至30,000 元：部门负责人及财务BP 审批。\n\n  超过30,000 元或涉及",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.27064087986946106,
+          "bm25_score": 31.581947762324027,
+          "rerank_score": -2.8133089542388916
+        },
+        {
+          "rank": 4,
+          "document": "属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政策符合性。\n\n 合规部：审核高风险礼品、政府相关招待及例外事项。\n\n2.3 禁止拆分\n\n不得通过拆分订单、发票或报销单规避审批门槛。例如同一供应商、同一目的且7 天内发生的费用应合并判断审批级\n\n别。\n\n 金额（含税）                         最低审批要求\n ≤2,000 元",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "chunk_id": 1,
+            "page": 2
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.2485664188861847,
+          "bm25_score": 32.357611723846695,
+          "rerank_score": -3.2963783740997314
+        },
+        {
+          "rank": 5,
+          "document": "6. 报销、违规与附则\n\n\n6.1 报销期限\n\n返程后10 个工作日内提交报销。超过30 个自然日未提交且无合理说明的，财务可拒绝受理。电子发票应上传原始文\n\n件，不得仅上传截图。\n\n6.2 不予报销项目\n\n  迷你吧、付费电影、健身或SPA 等个人消费。\n\n 因个人疏忽产生的证件补办、行李超重和误机费用。\n\n 无业务必要的礼品、旅游景点门票及陪同人员费用。\n\n 已由客户、供应商或其他单位",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 0,
+            "page": 6
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.2702830135822296,
+          "bm25_score": 37.17439217217589,
+          "rerank_score": -3.899444103240967
+        },
+        {
+          "rank": 6,
+          "document": "负责人及财务BP 审批。\n\n  超过30,000 元或涉及国际出差：分管副总裁审批。\n\n 出差人员不得审批本人申请；同一项目多人出差应分别提交行程。\n\n2.3 必填信息\n\n申请应包含出差目的、城市、起止日期、客户或项目名称、预计费用、成本中心及同行人员。缺少成本中心的申请将\n\n退回。\n\n 场景                   最晚提交时间               最终审批人\n 国内常规",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "chunk_id": 1,
+            "page": 2
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.25395262241363525,
+          "bm25_score": 30.902295750203088,
+          "rerank_score": -4.34845495223999
+        },
+        {
+          "rank": 7,
+          "document": "类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误用公司卡时，应主动报告并在5 个工作日内退款。主动、及时纠正的非故意错误通常按流\n\n程更正；故意隐瞒、伪造或重复申报将按严重违规处理。\n\n6.4 抽查\n\n财务和内审可对已支付费用开展抽查，并要求补充业务证明。申请人及审批人应保存相关记录至少5 年，或按照更长\n\n的法定期限保存。\n\n 版本                   日期",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "chunk_id": 1,
+            "page": 6
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.25247007608413696,
+          "bm25_score": null,
+          "rerank_score": -5.086940288543701
+        },
+        {
+          "rank": 8,
+          "document": "2. 基本原则与职责\n\n\n2.1 基本原则\n\n费用必须真实、合理、与公司业务直接相关，并已取得适当审批。预算可用不代表费用自动合规；审批通过也不免除\n\n申请人对真实性和票据合法性的责任。\n\n2.2 角色职责\n\n 申请人：提供业务目的、参与人员、金额、票据和成本中心。\n\n 直属经理：判断业务必要性与合理性。\n\n 预算负责人：确认预算归属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 0,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.26433202624320984,
+          "bm25_score": 30.488739725373993,
+          "rerank_score": -6.151896953582764
+        },
+        {
+          "rank": 9,
+          "document": "6. 公司卡、预付款与异常处理\n\n\n6.1 公司卡\n\n公司卡仅限业务用途，不得用于个人消费或提现。持卡人应在账单生成后5 个工作日内完成认领。卡片遗失或可疑交\n\n易须立即通知银行和财务。\n\n6.2 预付款\n\n活动、培训或紧急采购可申请预付款。申请人应在事项结束后10 个工作日内清算，多退少补。前一笔预付款未清算\n\n时，原则上不得申请新的同类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 6,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 28.602408385879762,
+          "rerank_score": -6.519889831542969
+        },
+        {
+          "rank": 10,
+          "document": "适用法律为准，并由财务部发布\n\n补充指引。\n\n 版本                   日期                   主要变化\n V1.0                                    2025-01-01               首次发布\n V1.1                                    2026-07-01",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "travel_policy.pdf",
+            "page": 6
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.27366742491722107,
+          "bm25_score": null,
+          "rerank_score": -7.055769443511963
+        }
+      ]
+    },
+    {
+      "id": "Q027",
+      "original_query": "预付款应在事项结束后多久完成清算？",
+      "rewritten_query": "预付款在事项结束后进行清算的规定时限是多少？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 6,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "6. 公司卡、预付款与异常处理\n\n\n6.1 公司卡\n\n公司卡仅限业务用途，不得用于个人消费或提现。持卡人应在账单生成后5 个工作日内完成认领。卡片遗失或可疑交\n\n易须立即通知银行和财务。\n\n6.2 预付款\n\n活动、培训或紧急采购可申请预付款。申请人应在事项结束后10 个工作日内清算，多退少补。前一笔预付款未清算\n\n时，原则上不得申请新的同类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "chunk_id": 0,
+            "page": 6
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.2914663553237915,
+          "bm25_score": 67.44419666929122,
+          "rerank_score": 4.818638324737549
+        },
+        {
+          "rank": 2,
+          "document": "类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误用公司卡时，应主动报告并在5 个工作日内退款。主动、及时纠正的非故意错误通常按流\n\n程更正；故意隐瞒、伪造或重复申报将按严重违规处理。\n\n6.4 抽查\n\n财务和内审可对已支付费用开展抽查，并要求补充业务证明。申请人及审批人应保存相关记录至少5 年，或按照更长\n\n的法定期限保存。\n\n 版本                   日期",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "expense_policy.pdf",
+            "page": 6
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.2853253483772278,
+          "bm25_score": 13.363558023446611,
+          "rerank_score": -2.5817840099334717
+        },
+        {
+          "rank": 3,
+          "document": "6. 报销、违规与附则\n\n\n6.1 报销期限\n\n返程后10 个工作日内提交报销。超过30 个自然日未提交且无合理说明的，财务可拒绝受理。电子发票应上传原始文\n\n件，不得仅上传截图。\n\n6.2 不予报销项目\n\n  迷你吧、付费电影、健身或SPA 等个人消费。\n\n 因个人疏忽产生的证件补办、行李超重和误机费用。\n\n 无业务必要的礼品、旅游景点门票及陪同人员费用。\n\n 已由客户、供应商或其他单位",
+          "metadata": {
+            "source": "travel_policy.pdf",
+            "page": 6,
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": 0.3294883966445923,
+          "bm25_score": null,
+          "rerank_score": -4.173661231994629
+        },
+        {
+          "rank": 4,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 5,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.30162325501441956,
+          "bm25_score": null,
+          "rerank_score": -4.2997660636901855
+        },
+        {
+          "rank": 5,
+          "document": "2. 入职与试用期\n\n\n2.1 入职资料\n\n员工应在入职后5 个工作日内提交身份、学历、工作许可及工资账户信息。故意提供虚假材料可能导致录用决定撤\n\n销。人力资源部仅为合法用工、薪酬和福利目的处理相关信息。\n\n2.2 试用期\n\n试用期以劳动合同约定为准，通常为3 个月。部门应在入职第30、60 和80 天开展反馈。试用期考核关注岗位能力、\n\n协作、诚信和目标完成情况，不得以怀孕、疾病或其他受保护特",
+          "metadata": {
+            "source": "employee_handbook.pdf",
+            "page": 2,
+            "chunk_id": 0
+          },
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 10.49015420921078,
+          "rerank_score": -5.16994047164917
+        },
+        {
+          "rank": 6,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "page": 1,
+            "chunk_id": 1,
+            "source": "security_policy.pdf"
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.3319145739078522,
+          "bm25_score": null,
+          "rerank_score": -5.192625522613525
+        },
+        {
+          "rank": 7,
+          "document": "属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政策符合性。\n\n 合规部：审核高风险礼品、政府相关招待及例外事项。\n\n2.3 禁止拆分\n\n不得通过拆分订单、发票或报销单规避审批门槛。例如同一供应商、同一目的且7 天内发生的费用应合并判断审批级\n\n别。\n\n 金额（含税）                         最低审批要求\n ≤2,000 元",
+          "metadata": {
+            "chunk_id": 1,
+            "source": "expense_policy.pdf",
+            "page": 2
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.30517545342445374,
+          "bm25_score": null,
+          "rerank_score": -5.409424304962158
+        },
+        {
+          "rank": 8,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 11.057928712800802,
+          "rerank_score": -5.6558074951171875
+        },
+        {
+          "rank": 9,
+          "document": "适用法律为准，并由财务部发布\n\n补充指引。\n\n 版本                   日期                   主要变化\n V1.0                                    2025-01-01               首次发布\n V1.1                                    2026-07-01",
+          "metadata": {
+            "chunk_id": 2,
+            "source": "travel_policy.pdf",
+            "page": 6
+          },
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "original_distance": 0.33271971344947815,
+          "bm25_score": null,
+          "rerank_score": -5.695929050445557
+        },
+        {
+          "rank": 10,
+          "document": "提交时间               最终审批人\n 国内常规                  出发前2 个工作日             部门负责人\n 国内高额                  出发前3 个工作日              财务BP\n 国际出差                   出发前10 个工作日            分管副总裁\n\n\n\n\n\n星云科技有限公司 - 内部制度示",
+          "metadata": {
+            "page": 2,
+            "chunk_id": 2,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "original_distance": 0.3308763802051544,
+          "bm25_score": null,
+          "rerank_score": -5.744909763336182
+        }
+      ]
+    },
+    {
+      "id": "Q028",
+      "original_query": "费用申请人和审批人至少需要保存相关记录多少年？",
+      "rewritten_query": "费用申请人和审批人保存相关记录的最低年限要求是多少？",
+      "expected_source": "expense_policy.pdf",
+      "expected_page": 6,
+      "hit_rank_without_rewrite": 1,
+      "hit_rank_with_rewrite": 1,
+      "comparison": "unchanged",
+      "rewrite_cache_hit": false,
+      "retrieved": [
+        {
+          "rank": 1,
+          "document": "类预付款。\n\n6.3 重复与误报\n\n发现重复报销或个人费用误用公司卡时，应主动报告并在5 个工作日内退款。主动、及时纠正的非故意错误通常按流\n\n程更正；故意隐瞒、伪造或重复申报将按严重违规处理。\n\n6.4 抽查\n\n财务和内审可对已支付费用开展抽查，并要求补充业务证明。申请人及审批人应保存相关记录至少5 年，或按照更长\n\n的法定期限保存。\n\n 版本                   日期",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 6,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "original_distance": 0.2628590166568756,
+          "bm25_score": 56.855865335950114,
+          "rerank_score": 3.5998213291168213
+        },
+        {
+          "rank": 2,
+          "document": "6. 第三方、例外与问责\n\n\n6.1 第三方接入\n\n供应商接入应有明确业务负责人、限定系统范围和到期时间。远程维护必须使用公司批准的VPN 和MFA，默认最长授\n\n权90 天；每次高权限操作应留存会话审计。\n\n6.2 政策例外\n\n无法满足控制要求时，申请人须记录业务理由、风险、补偿措施和结束日期。例外最长有效期180 天，不自动续期。\n\n涉及严格机密数据的例外须由CISO 批准。\n\n6.3 违规处",
+          "metadata": {
+            "chunk_id": 0,
+            "source": "security_policy.pdf",
+            "page": 6
+          },
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 19.94713626779291,
+          "rerank_score": -4.076539993286133
+        },
+        {
+          "rank": 3,
+          "document": "2. 基本原则与职责\n\n\n2.1 基本原则\n\n费用必须真实、合理、与公司业务直接相关，并已取得适当审批。预算可用不代表费用自动合规；审批通过也不免除\n\n申请人对真实性和票据合法性的责任。\n\n2.2 角色职责\n\n 申请人：提供业务目的、参与人员、金额、票据和成本中心。\n\n 直属经理：判断业务必要性与合理性。\n\n 预算负责人：确认预算归属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 2,
+            "chunk_id": 0
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": 0.3016098439693451,
+          "bm25_score": 27.926373280803414,
+          "rerank_score": -4.336523532867432
+        },
+        {
+          "rank": 4,
+          "document": "费和个人分期利息不予报销。\n\n5.3 提交期限\n\n  费用发生后15 个自然日内提交。\n\n  每年12 月发生的费用应在次年1 月10 日前提交。\n\n  超过60 天的费用须由部门总监说明原因。\n\n  超过180 天的费用原则上不再受理，法律另有要求除外。\n\n 材料                             要求\n 电子发票",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "chunk_id": 1,
+            "page": 5
+          },
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "original_distance": 0.24795301258563995,
+          "bm25_score": null,
+          "rerank_score": -4.528450965881348
+        },
+        {
+          "rank": 5,
+          "document": "归口部门                           信息安全与风险管理部\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规定账号",
+          "metadata": {
+            "source": "security_policy.pdf",
+            "chunk_id": 1,
+            "page": 1
+          },
+          "source": "security_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.29582148790359497,
+          "bm25_score": null,
+          "rerank_score": -5.174808025360107
+        },
+        {
+          "rank": 6,
+          "document": "口部门                           行政与采购中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范因公出差的申",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 1,
+            "source": "travel_policy.pdf"
+          },
+          "source": "travel_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.29693663120269775,
+          "bm25_score": null,
+          "rerank_score": -5.178852558135986
+        },
+        {
+          "rank": 7,
+          "document": "属与可用余额。\n\n 财务：检查税务、会计科目、重复报销及政策符合性。\n\n 合规部：审核高风险礼品、政府相关招待及例外事项。\n\n2.3 禁止拆分\n\n不得通过拆分订单、发票或报销单规避审批门槛。例如同一供应商、同一目的且7 天内发生的费用应合并判断审批级\n\n别。\n\n 金额（含税）                         最低审批要求\n ≤2,000 元",
+          "metadata": {
+            "chunk_id": 1,
+            "page": 2,
+            "source": "expense_policy.pdf"
+          },
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "original_distance": 0.291610449552536,
+          "bm25_score": null,
+          "rerank_score": -5.522741794586182
+        },
+        {
+          "rank": 8,
+          "document": "部门                           财务共享服务中心\n 审批人                            首席运营官\n 保密级别                           内部公开\n 复审周期                                   每12 个月一次，或在法规及业务发生重大变化时提前复审\n\n文档说明\n\n\n本制度规范非差旅类业务",
+          "metadata": {
+            "source": "expense_policy.pdf",
+            "page": 1,
+            "chunk_id": 1
+          },
+          "source": "expense_policy.pdf",
+          "page": 1,
+          "chunk_id": 1,
+          "original_distance": 0.29018092155456543,
+          "bm25_score": null,
+          "rerank_score": -5.705597400665283
+        },
+        {
+          "rank": 9,
+          "document": "2. 出差申请与审批\n\n\n2.1 申请时限\n\n国内出差原则上应至少提前2 个工作日提交；国际及港澳台出差至少提前10 个工作日提交。紧急出差可先取得直属总\n\n监的书面同意，并在返程后1 个工作日内补齐流程。\n\n2.2 审批路径\n\n  预算内且预计总费用不超过8,000 元：部门负责人审批。\n\n   8,001 至30,000 元：部门负责人及财务BP 审批。\n\n  超过30,000 元或涉及",
+          "metadata": {
+            "page": 2,
+            "source": "travel_policy.pdf",
+            "chunk_id": 0
+          },
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 31.166013063696532,
+          "rerank_score": -6.031632900238037
+        },
+        {
+          "rank": 10,
+          "document": "4. 休假与福利\n\n\n4.1 年假\n\n入职满一年后，法定及公司年假合计不少于10 个工作日；工龄达到10 年后不少于15 个工作日。年假应提前3 个工作\n\n日申请，连续5 天以上应提前10 个工作日申请。最多5 天可结转至下一年度，并应在次年3 月31 日前使用。\n\n4.2 病假\n\n连续病假1 天可提交自我声明；连续2 天及以上应提供合法医疗机构证明。员工如因紧急情况无法提前请假，应在当日\n\n10",
+          "metadata": {
+            "chunk_id": 0,
+            "page": 4,
+            "source": "employee_handbook.pdf"
+          },
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "original_distance": null,
+          "bm25_score": 21.366504347138036,
+          "rerank_score": -6.111064434051514
+        }
+      ]
+    }
+  ]
+}

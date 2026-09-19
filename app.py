@@ -37,6 +37,8 @@ class sourceItem(BaseModel):
 
 class QuestionResponse(BaseModel):
     question: str
+    original_query: str
+    retrieval_query: str
     answer: str
     source: list[sourceItem]
 
@@ -75,6 +77,8 @@ def chat(question: QuestionRequest):
 
         return {
             "question": question.question,
+            "original_query": result["original_query"],
+            "retrieval_query": result["retrieval_query"],
             "answer": result["answer"],
             "source": source
         }
