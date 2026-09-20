@@ -1,3 +1,5 @@
+import time
+
 import chromadb
 
 from answer_guard import assess_answerability
@@ -23,6 +25,8 @@ def ask_rag(
     use_hybrid: bool = True,
     use_reranker: bool = True,
 ):
+    request_started_at = time.perf_counter()
+    retrieval_started_at = time.perf_counter()
     original_query = question
     retrieval_query = (
         rewrite_query(original_query)
@@ -47,6 +51,9 @@ def ask_rag(
             else None
         ),
     )
+    retrieval_latency_ms = (
+        time.perf_counter() - retrieval_started_at
+    ) * 1000
 
     documents = [candidate["document"] for candidate in candidates]
     metadatas = [candidate["metadata"] for candidate in candidates]
@@ -60,6 +67,9 @@ def ask_rag(
         ANSWERABILITY_GUARD_ENABLED
         and not answerability["should_answer"]
     ):
+        total_latency_ms = (
+            time.perf_counter() - request_started_at
+        ) * 1000
         return {
             "question": original_query,
             "original_query": original_query,
@@ -88,6 +98,9 @@ def ask_rag(
                 candidate.get("matched_queries", [])
                 for candidate in candidates
             ],
+            "retrieval_latency_ms": retrieval_latency_ms,
+            "generation_latency_ms": 0.0,
+            "total_latency_ms": total_latency_ms,
         }
 
     context_parts = []
@@ -130,7 +143,14 @@ def ask_rag(
 {original_query}
 """
 
+    generation_started_at = time.perf_counter()
     answer = generate_answer(prompt)
+    generation_latency_ms = (
+        time.perf_counter() - generation_started_at
+    ) * 1000
+    total_latency_ms = (
+        time.perf_counter() - request_started_at
+    ) * 1000
     return {
         "question": original_query,
         "original_query": original_query,
@@ -159,4 +179,7 @@ def ask_rag(
             candidate.get("matched_queries", [])
             for candidate in candidates
         ],
+        "retrieval_latency_ms": retrieval_latency_ms,
+        "generation_latency_ms": generation_latency_ms,
+        "total_latency_ms": total_latency_ms,
     }

@@ -3,6 +3,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from google import genai
+from google.genai import types
 from pydantic import BaseModel, Field
 
 
@@ -10,9 +12,17 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from config import LLM_MODEL
-from llm import client
-from google.genai import types
+from config import GEMINI_API_KEY, LLM_MODEL
+
+
+JUDGE_REQUEST_TIMEOUT_MS = 60_000
+judge_client = genai.Client(
+    api_key=GEMINI_API_KEY,
+    http_options=types.HttpOptions(
+        timeout=JUDGE_REQUEST_TIMEOUT_MS,
+        retry_options=types.HttpRetryOptions(attempts=1),
+    ),
+)
 
 
 class JudgeResult(BaseModel):
@@ -111,7 +121,7 @@ def judge_answer(
     raw_judge_result = None
 
     try:
-        response = client.models.generate_content(
+        response = judge_client.models.generate_content(
             model=LLM_MODEL,
             contents=JUDGE_PROMPT.format(
                 evaluation_input=json.dumps(
