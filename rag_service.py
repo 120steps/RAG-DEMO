@@ -1,8 +1,11 @@
 import chromadb
 
+from answer_guard import assess_answerability
 from config import (
+    ANSWERABILITY_GUARD_ENABLED,
     QUERY_EXPANSION_ENABLED,
     QUERY_REWRITE_ENABLED,
+    REFUSAL_MESSAGE,
     TOP_K,
 )
 from llm import generate_answer
@@ -51,6 +54,41 @@ def ask_rag(
         candidate["original_distance"]
         for candidate in candidates
     ]
+    answerability = assess_answerability(candidates)
+
+    if (
+        ANSWERABILITY_GUARD_ENABLED
+        and not answerability["should_answer"]
+    ):
+        return {
+            "question": original_query,
+            "original_query": original_query,
+            "rewritten_query": retrieval_query,
+            "retrieval_query": retrieval_query,
+            "expanded_queries": expanded_queries,
+            "answer": REFUSAL_MESSAGE,
+            "refused": True,
+            "answerability": answerability,
+            "documents": documents,
+            "metadatas": metadatas,
+            "distances": distances,
+            "bm25_scores": [
+                candidate["bm25_score"]
+                for candidate in candidates
+            ],
+            "rerank_scores": [
+                candidate["rerank_score"]
+                for candidate in candidates
+            ],
+            "fusion_scores": [
+                candidate.get("fusion_score")
+                for candidate in candidates
+            ],
+            "matched_queries": [
+                candidate.get("matched_queries", [])
+                for candidate in candidates
+            ],
+        }
 
     context_parts = []
 
@@ -100,6 +138,8 @@ def ask_rag(
         "retrieval_query": retrieval_query,
         "expanded_queries": expanded_queries,
         "answer": answer,
+        "refused": False,
+        "answerability": answerability,
         "documents": documents,
         "metadatas": metadatas,
         "distances": distances,

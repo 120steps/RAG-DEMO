@@ -40,6 +40,7 @@ class QuestionResponse(BaseModel):
     original_query: str
     retrieval_query: str
     answer: str
+    refused: bool = False
     source: list[sourceItem]
 
 class DocumentUploadResponse(BaseModel):
@@ -64,22 +65,24 @@ def chat(question: QuestionRequest):
     
         source = []
 
-        for metadata, distance, doc in zip(result["metadatas"], result["distances"], result["documents"]):
-            source.append(
-                {
-                    "source": metadata["source"],
-                    "chunk_id": metadata["chunk_id"],
-                    "page": metadata["page"] if "page" in metadata else "N/A",
-                    "distance": distance,
-                    "document": doc
-                }
-            )
+        if not result["refused"]:
+            for metadata, distance, doc in zip(result["metadatas"], result["distances"], result["documents"]):
+                source.append(
+                    {
+                        "source": metadata["source"],
+                        "chunk_id": metadata["chunk_id"],
+                        "page": metadata["page"] if "page" in metadata else "N/A",
+                        "distance": distance,
+                        "document": doc
+                    }
+                )
 
         return {
             "question": question.question,
             "original_query": result["original_query"],
             "retrieval_query": result["retrieval_query"],
             "answer": result["answer"],
+            "refused": result["refused"],
             "source": source
         }
     
