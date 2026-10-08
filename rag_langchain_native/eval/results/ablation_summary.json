@@ -1,0 +1,78 @@
+{
+  "modes": {
+    "vector_only": {
+      "total_cases": 28,
+      "mrr": 0.9464285714285714,
+      "average_retrieval_latency_ms": 62.67471431887576,
+      "p95_retrieval_latency_ms": 97.9659000877291,
+      "miss_cases": [],
+      "hit_at_1": {
+        "hit_count": 25,
+        "hit_rate": 0.8928571428571429
+      },
+      "hit_at_3": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      },
+      "hit_at_5": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      },
+      "hit_at_10": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      }
+    },
+    "hybrid": {
+      "total_cases": 28,
+      "mrr": 0.9642857142857143,
+      "average_retrieval_latency_ms": 54.76507858838886,
+      "p95_retrieval_latency_ms": 63.309899996966124,
+      "miss_cases": [],
+      "hit_at_1": {
+        "hit_count": 26,
+        "hit_rate": 0.9285714285714286
+      },
+      "hit_at_3": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      },
+      "hit_at_5": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      },
+      "hit_at_10": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      }
+    },
+    "hybrid_reranker": {
+      "total_cases": 28,
+      "mrr": 0.9821428571428571,
+      "average_retrieval_latency_ms": 968.9207214645909,
+      "p95_retrieval_latency_ms": 902.7319001033902,
+      "miss_cases": [],
+      "hit_at_1": {
+        "hit_count": 27,
+        "hit_rate": 0.9642857142857143
+      },
+      "hit_at_3": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      },
+      "hit_at_5": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      },
+      "hit_at_10": {
+        "hit_count": 28,
+        "hit_rate": 1.0
+      }
+    }
+  },
+  "skipped_modes": [
+    "rewrite_hybrid_reranker",
+    "rewrite_expansion_hybrid_reranker"
+  ],
+  "skip_reason": "Gemini network execution was not authorized"
+}
