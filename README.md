@@ -1,644 +1,209 @@
-# 本地 RAG Demo
+# 企业知识库 RAG Demo
 
-这是一个用于学习和实践 RAG（Retrieval-Augmented Generation，检索增强生成）的本地 Demo 项目。
+这是一个用于学习和验证企业知识库 RAG 的 Python 项目。项目同时保留两套实现：
 
-项目目标是从零开始搭建一个可以运行的企业知识库问答系统，逐步理解并实现：
+- 手写 RAG：当前 FastAPI 业务入口，包含 Hybrid Search、RRF、Reranker、Query Rewrite、Query Expansion、拒答和 Citation。
+- LangChain RAG：与手写实现并行，用 LangChain Runnable 编排现有高级 Retrieval，并使用 `ChatGoogleGenerativeAI` 生成答案。
 
-* Python 开发环境
-* 大模型 API 调用
-* 本地 Embedding
-* 文档切分 Chunk
-* 向量检索
-* ChromaDB 本地向量数据库
-* RAG 问答流程
-* Git / GitHub 代码管理
-* 后续扩展 FastAPI、Docker 和云端部署
+LangChain 版本没有重写已经验证过的 BM25、RRF、Reranker、Rewrite 和 Expansion，而是通过适配器和 Runnable 复用它们。
 
----
+详细代码讲解见 [Phase 8 LangChain 代码指南](docs/PHASE8_LANGCHAIN_CODE_GUIDE.md)。
 
-## 1. 项目目标
-
-本项目主要用于学习 RAG 的完整工作流程。
-
-整体流程如下：
+## 当前架构
 
 ```text
-本地知识文档
-    ↓
-Chunk 切分
-    ↓
-本地 Embedding
-    ↓
-ChromaDB 向量数据库
-    ↓
-用户问题
-    ↓
-问题 Embedding
-    ↓
-向量相似度检索
-    ↓
-Top-K 相关知识
-    ↓
-Context + Question
-    ↓
-调用大模型
-    ↓
-生成最终答案
+PDF
+  -> PyMuPDF 解析
+  -> 手写 Chunk
+  -> multilingual-e5-base Embedding
+  -> ChromaDB
+
+Question
+  -> Query Rewrite（可选）
+  -> Query Expansion（可选）
+  -> Vector + BM25 Hybrid Retrieval
+  -> RRF（多 Query 时）
+  -> CrossEncoder Reranker
+  -> Answerability Guard
+  -> Context + Prompt
+  -> Gemini
+  -> Answer + Metadata Citation
 ```
 
-RAG 的核心思想不是让大模型直接回答问题，而是：
+当前 FastAPI `/chat` 调用 `rag_service.ask_rag()`。LangChain 完整实现的函数入口是 `langchain_rag.lc_full_rag.ask_langchain_full_rag()`；它尚未替换 FastAPI 的业务入口。
 
-1. 先从自己的知识库中检索相关内容；
-2. 再把检索到的内容作为 Context 提供给大模型；
-3. 最后由大模型基于知识库内容生成答案。
-
----
-
-## 2. 当前技术栈
-
-目前项目主要使用以下技术： 
-
-### 开发环境
-
-* Windows
-* VS Code
-* Python 3.11
-* Python Virtual Environment `.venv`
-
-### AI / RAG
-
-* OpenAI API：用于最终大模型问答
-* Sentence Transformers：用于本地生成 Embedding
-* ChromaDB：本地向量数据库
-* NumPy：基础向量计算
-
-### 工程管理
-
-* Git
-* GitHub
-* `.env`：保存 API Key
-* `.gitignore`：避免敏感文件和本地运行数据上传 GitHub
-
----
-
-## 3. 项目目录
-
-当前项目结构大致如下：
+## 主要目录
 
 ```text
 rag-demo/
-│
-├── data/
-│   └── company_policy.txt
-│
-├── chroma_db/
-│
-├── ingest.py
-├── rag.py
-├── simple_rag.py
-├── first_ai.py
-│
-├── .env
-├── .gitignore
-├── requirements.txt
-└── README.md
+├── app.py                         # FastAPI，当前调用手写 RAG
+├── rag_service.py                 # 手写完整 RAG
+├── retrieval.py                   # Vector/Hybrid/多 Query Retrieval 编排
+├── bm25_search.py                 # BM25 与候选合并
+├── result_fusion.py               # RRF
+├── reranker.py                    # 本地 CrossEncoder Reranker
+├── query_rewriter.py              # Query Rewrite 与本地 Cache
+├── query_expander.py              # Query Expansion 与本地 Cache
+├── answer_guard.py                # 结构化拒答判断
+├── embedding.py                   # 原 Embedding 实现
+├── document_loader.py             # PDF 解析和手写 Chunk
+├── ingest.py                      # 原 Chroma 入库脚本
+├── langchain_rag/
+│   ├── lc_embedding.py            # LangChain Embeddings Adapter
+│   ├── lc_vectorstore.py          # 独立 LangChain Chroma VectorStore
+│   ├── lc_retriever.py            # 纯向量 Retriever
+│   ├── lc_llm.py                  # ChatGoogleGenerativeAI
+│   ├── lc_rag.py                  # 最小纯向量 LangChain RAG
+│   └── lc_full_rag.py             # 完整高级 LangChain RAG
+├── eval/
+│   ├── test_case.json             # 唯一真实评估集
+│   ├── retrieve_eval.py           # Retrieval Evaluation
+│   ├── answer_eval.py             # Deterministic Answer Evaluation
+│   ├── answer_judge.py            # LLM-as-a-Judge
+│   ├── end_to_end_eval.py         # 手写 RAG 端到端评估
+│   ├── experiment_langchain.py    # 纯 Vector 回归对比
+│   └── experiment_langchain_full.py # 完整 RAG 对比
+├── data/pdf/                      # 原始 PDF
+├── chroma_db/                     # 原业务向量库（Git 忽略）
+├── chroma_db_langchain/           # LangChain 实验向量库（Git 忽略）
+├── requirements.txt               # 原项目依赖
+└── phase8-requirements.txt        # Phase 8 独立依赖
 ```
 
-各文件作用如下。
+## 环境
 
-### `data/`
+原项目环境：
 
-保存本地知识库文件。
-
-目前使用：
-
-```text
-company_policy.txt
-```
-
-作为测试企业制度知识库。
-
----
-
-### `first_ai.py`
-
-第一个大模型 API 测试程序。
-
-主要用于验证：
-
-```text
-Python
-↓
-OpenAI API
-↓
-大模型
-↓
-返回回答
-```
-
-这一步不包含 RAG。
-
----
-
-### `simple_rag.py`
-
-最初的手工 RAG Demo。
-
-主要用于理解：
-
-* Chunk
-* Embedding
-* 相似度计算
-* Retrieval
-* Context
-* LLM
-
-这一版本没有真正的向量数据库，Embedding 主要保存在 Python 内存中。
-
----
-
-### `ingest.py`
-
-知识库入库程序。
-
-负责：
-
-```text
-读取文档
-↓
-Chunk 切分
-↓
-本地 Embedding
-↓
-写入 ChromaDB
-```
-
-这个流程也可以称为：
-
-```text
-Indexing Pipeline
-```
-
-通常只有知识库发生变化时才需要重新执行。
-
----
-
-### `rag.py`
-
-RAG 查询程序。
-
-负责：
-
-```text
-用户输入问题
-↓
-问题 Embedding
-↓
-ChromaDB 检索
-↓
-获取 Top-K Chunk
-↓
-组成 Context
-↓
-调用大模型
-↓
-返回答案
-```
-
-这是当前主要的 RAG 查询入口。
-
----
-
-### `chroma_db/`
-
-ChromaDB 本地向量数据库目录。
-
-用于保存：
-
-* Chunk
-* Embedding
-* 文档内容
-* 后续 Metadata
-
-该目录属于运行时产生的数据，因此不会上传 GitHub。
-
----
-
-### `.env`
-
-保存本地环境变量，例如：
-
-```env
-OPENAI_API_KEY=your_api_key
-```
-
-`.env` 不会上传 GitHub。
-
----
-
-### `.gitignore`
-
-用于忽略不应该提交到 GitHub 的文件。
-
-建议内容：
-
-```gitignore
-.venv/
-.env
-__pycache__/
-*.pyc
-chroma_db/
-```
-
----
-
-## 4. 环境准备
-
-### 4.1 创建虚拟环境
-
-```bash
+```powershell
 python -m venv .venv
-```
-
-Windows 激活虚拟环境：
-
-```bash
-.venv\Scripts\activate
-```
-
-激活成功后终端前面通常会显示：
-
-```text
-(.venv)
-```
-
----
-
-## 5. 安装依赖
-
-目前主要依赖包括：
-
-```bash
-python -m pip install openai
-python -m pip install python-dotenv
-python -m pip install sentence-transformers
-python -m pip install chromadb
-python -m pip install numpy
-```
-
-后续可以通过：
-
-```bash
-pip freeze > requirements.txt
-```
-
-生成依赖文件。
-
-其他人拿到代码后可以执行：
-
-```bash
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
-恢复运行环境。
+Phase 8 LangChain 环境：
 
----
+```powershell
+python -m venv .venv-phase8
+.\.venv-phase8\Scripts\Activate.ps1
+pip install -r phase8-requirements.txt
+pip check
+```
 
-## 6. API Key 配置
-
-项目通过 `.env` 保存 API Key。
-
-`.env` 示例：
+在项目根目录的 `.env` 中配置：
 
 ```env
-OPENAI_API_KEY=your_api_key
+GEMINI_API_KEY=your_api_key
 ```
 
-Python 中通过：
+API Key 由 `config.py` 加载，不要写入源码或提交到 Git。
 
-```python
-from dotenv import load_dotenv
+## 配置
 
-load_dotenv()
-```
+主要配置位于 `config.py`：
 
-读取环境变量。
+- `LLM_MODEL`
+- `CHUNK_SIZE` / `CHUNK_OVERLAP`
+- `TOP_K`
+- `QUERY_REWRITE_ENABLED`
+- `QUERY_EXPANSION_ENABLED`
+- Answerability Guard 阈值
 
-不要把真实 API Key：
+Embedding 模型由 `embedding.py` 定义。目前使用 `intfloat/multilingual-e5-base`，原实现直接编码原始文本，没有添加 `query:` 或 `passage:` 前缀。
 
-* 写死在 Python 代码中；
-* 提交到 GitHub；
-* 发到聊天记录或截图中。
+## 构建知识库
 
----
-
-## 7. 知识库入库
-
-首先准备：
-
-```text
-data/company_policy.txt
-```
-
-然后运行：
-
-```bash
+```powershell
 python ingest.py
 ```
 
-程序会完成：
+注意：`ingest.py` 会删除并重建原 `company_knowledge` collection。只有在明确需要重新切 Chunk 和生成 Embedding 时才运行。
 
-```text
-TXT
-↓
-Chunk
-↓
-Embedding
-↓
-ChromaDB
-```
+LangChain 独立 VectorStore 位于 `chroma_db_langchain/`，不会删除或覆盖原 `chroma_db/`。
 
-首次运行后，会在本地生成：
+## 运行入口
 
-```text
-chroma_db/
-```
+### 手写命令行 RAG
 
----
-
-## 8. 运行 RAG
-
-知识库完成入库后：
-
-```bash
+```powershell
 python rag.py
 ```
 
-然后输入问题，例如：
+### FastAPI
 
-```text
-出差住宿一天最多多少钱？
+```powershell
+uvicorn app:app --reload
 ```
 
-系统会：
+主要接口：
 
-1. 对问题生成本地 Embedding；
-2. 从 ChromaDB 搜索相关 Chunk；
-3. 获取 Top-K 知识；
-4. 把知识作为 Context；
-5. 调用大模型；
-6. 返回最终答案。
+- `GET /health`
+- `POST /chat`
+- `POST /documents`
+- `GET /documents`
+- `DELETE /documents/{filename}`
 
----
+### LangChain 完整 RAG
 
-## 9. 当前已经完成
+Python 调用：
 
-目前项目已经完成：
+```python
+from langchain_rag.lc_full_rag import ask_langchain_full_rag
 
-* Python 本地开发环境
-* VS Code 开发环境
-* Python 虚拟环境
-* OpenAI API 调用
-* `.env` API Key 管理
-* 本地知识库 TXT
-* Chunk 切分
-* 本地 Embedding
-* 基础相似度检索
-* RAG 基础流程
-* ChromaDB 本地向量库接入
-* Git / GitHub 代码管理基础
-
----
-
-## 10. 后续计划
-
-后续计划逐步增加以下能力。
-
-### 第一阶段：完善基础 RAG
-
-* ChromaDB 稳定运行
-* Top-K 检索
-* Metadata
-* Source
-* Citation
-* Retrieval Threshold
-
-目标：
-
-让回答可以明确告诉用户：
-
-```text
-答案：员工需要在出差结束后 30 天内提交报销。
-
-来源：
-company_policy.txt
-Chunk 3
+result = ask_langchain_full_rag("国际出差需要提前多久申请？")
+print(result["answer"])
+print(result["sources"])
 ```
 
----
+该调用会使用 Gemini，可能产生费用。最终答案回答原始问题；Rewrite/Expansion Query 只用于 Retrieval。
 
-### 第二阶段：支持真实文档
+## Evaluation
 
-支持：
+以下命令在项目根目录运行。
 
-* PDF
-* Word
-* Markdown
-* 多文件知识库
+纯 Retrieval，不调用最终 Answer Generation：
 
-并增加：
-
-* 文件名
-* 页码
-* 文档类型
-* Chunk ID
-
-等 Metadata。
-
----
-
-### 第三阶段：优化 RAG 效果
-
-逐步学习：
-
-* Chunk Size
-* Chunk Overlap
-* Top-K
-* Metadata Filter
-* Query Rewrite
-* Hybrid Search
-* Reranker
-* RAG Evaluation
-
----
-
-### 第四阶段：服务化
-
-使用 FastAPI 把 RAG 做成 API。
-
-例如：
-
-```text
-POST /chat
-POST /documents
-GET /health
+```powershell
+python eval/retrieve_eval.py
 ```
 
-使其他 Web 页面或应用可以调用 RAG。
+Deterministic Answer Evaluation（调用 Gemini）：
 
----
-
-### 第五阶段：Docker
-
-使用 Docker 将：
-
-```text
-Python
-RAG
-FastAPI
-依赖
+```powershell
+python eval/answer_eval.py
 ```
 
-打包成统一的 Container。
+手写 RAG End-to-End Evaluation（调用 Gemini 和 Judge）：
 
-实现：
-
-```text
-本地运行
-↓
-Docker
-↓
-云服务器部署
+```powershell
+python eval/end_to_end_eval.py
 ```
 
----
+Manual Vector 与 LangChain Vector 回归：
 
-### 第六阶段：云端部署
-
-最终目标架构：
-
-```text
-GitHub
-   ↓
-Cloud Server
-   ↓
-Docker
-   ↓
-FastAPI
-   ↓
-RAG
-   ↓
-Vector Database
-   ↓
-LLM
+```powershell
+.\.venv-phase8\Scripts\python.exe eval\experiment_langchain.py
 ```
 
-未来可以部署到：
+Manual Full RAG 与 LangChain Full RAG Benchmark：
 
-* 华为云
-* AWS
-* Azure
-* 阿里云
-* 腾讯云
-* 其他 Linux 云服务器
-
----
-
-## 11. 当前项目定位
-
-这个项目当前不是生产级 RAG 系统。
-
-它主要用于：
-
-* 学习 RAG 原理；
-* 理解 AI 应用工程结构；
-* 学习 Python AI 开发；
-* 学习向量数据库；
-* 学习大模型 API；
-* 学习 Git / GitHub；
-* 为后续 FDE / AI 应用开发能力打基础。
-
-项目会按照：
-
-```text
-能运行
-↓
-理解原理
-↓
-工程化
-↓
-优化效果
-↓
-服务化
-↓
-部署
+```powershell
+.\.venv-phase8\Scripts\python.exe eval\experiment_langchain_full.py
 ```
 
-的方式逐步演进，而不是一开始就加入大量复杂框架。
+完整 RAG Benchmark 会产生较多 Gemini 请求；已有结果位于 `eval/results/langchain_full_benchmark.json`。除非配置或实现发生变化，否则无需频繁重跑。
 
----
+## 已验证的 Phase 8 结论
 
-## 12. RAG 核心概念
+- Embedding Adapter 与原 Embedding 数值完全一致。
+- 原 Chroma 与 LangChain 独立 Chroma 的 93 个 Chunk、Metadata 和稳定 ID 一致。
+- 纯 Vector Regression 的 Top-10 顺序与 L2 Distance 完全一致。
+- 完整 Retrieval Benchmark 中，Manual 与 LangChain 的 Hit@1/3/5/10 都是 100%。
+- LangChain 提供统一接口和编排能力，但不会自动提升 Retrieval Accuracy 或消除 Hallucination。
 
-目前这个项目涉及的核心概念包括：
+## 安全边界
 
-```text
-Document
-↓
-Chunk
-↓
-Embedding
-↓
-Vector Database
-↓
-Similarity Search
-↓
-Top-K
-↓
-Context
-↓
-Prompt
-↓
-LLM
-↓
-Answer
-```
-
-理解这条链路，是后续学习：
-
-* LangChain
-* LlamaIndex
-* Reranker
-* Hybrid Search
-* GraphRAG
-* Agentic RAG
-
-的基础。
-
----
-
-## 13. 项目最终目标
-
-最终希望将该 Demo 逐步发展为一个简单的：
-
-**Enterprise Knowledge Assistant**
-
-即企业知识库助手。
-
-支持：
-
-```text
-上传企业文档
-↓
-自动解析和入库
-↓
-用户自然语言提问
-↓
-知识库检索
-↓
-大模型回答
-↓
-返回引用来源
-```
-
-并最终通过 FastAPI + Docker 部署成为一个可以被其他应用调用的 RAG 服务。
+- `eval/test_case.json` 是 Ground Truth，不应为提高指标而修改。
+- `chroma_db/` 是原业务库；LangChain 实验使用独立数据库。
+- Citation 必须来自 Retrieved Metadata，不应信任模型自行生成的来源。
+- Query Rewrite/Expansion 失败时应回退到原 Query，不能让整个 RAG 请求失败。
+- `.env`、虚拟环境和本地 Chroma 数据库均被 Git 忽略。
