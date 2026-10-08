@@ -1,7 +1,9 @@
 .venv/
+.venv-phase8/
 .env
 _pycache__/
 *.pyc
 chroma_db/
+chroma_db_langchain/
 data/upload/
 .cache/

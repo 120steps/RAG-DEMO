@@ -1,0 +1,14 @@
+# Phase 8 LangChain dependencies
+langchain==1.4.3
+langchain-core==1.6.7
+langchain-chroma==1.1.0
+langchain-huggingface==1.2.3
+langchain-google-genai==4.4.0
+langchain-text-splitters==1.1.3
+
+# Existing RAG dependencies intentionally preserved for compatibility
+sentence-transformers==6.0.0
+chromadb==1.5.9
+google-genai==2.22.0
+pymupdf==1.28.2
+python-dotenv==1.2.3
