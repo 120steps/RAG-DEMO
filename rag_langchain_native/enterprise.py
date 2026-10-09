@@ -18,6 +18,8 @@ from .chain import NativeRAGService, get_chat_model
 from .config import DEFAULT_SETTINGS, Settings
 from .conversation import ConversationService
 from .lifecycle import enterprise_settings
+from .observability import get_observability
+from .observability.core import observed_request
 from .router import KNOWLEDGE_RAG, QueryRouter
 from .security import (
     AuthorizationError,
@@ -149,6 +151,7 @@ class EnterpriseRAGService:
             principal, conversation_id, question
         )
 
+    @observed_request("enterprise.retrieve")
     def retrieve_only(
         self,
         *,
@@ -162,16 +165,20 @@ class EnterpriseRAGService:
         classification: str | None = None,
     ) -> dict[str, Any]:
         """执行带版本/ACL/租户边界的 Retrieval-only，不生成 Answer。"""
+        observability = get_observability()
+        observability.bind_tenant(principal.tenant_id)
         contextual, failed = self._contextual_query(
             principal, conversation_id, question
         )
-        scope = self._scope(
-            principal,
-            knowledge_base_id,
-            document_id=document_id,
-            version_id=version_id,
-            classification=classification,
-        )
+        with observability.stage("authorization.scope") as trace_data:
+            scope = self._scope(
+                principal,
+                knowledge_base_id,
+                document_id=document_id,
+                version_id=version_id,
+                classification=classification,
+            )
+            trace_data["authorized_version_count"] = len(scope.version_ids)
         if scope.empty:
             result = self._empty_authorized_result(
                 question, contextual, "no_authorized_documents"
@@ -193,6 +200,7 @@ class EnterpriseRAGService:
         )
         return result
 
+    @observed_request("enterprise.chat")
     def chat(
         self,
         *,
@@ -205,6 +213,8 @@ class EnterpriseRAGService:
         classification: str | None = None,
     ) -> dict[str, Any]:
         """执行企业问答并把本轮 user/assistant 消息写入授权会话。"""
+        observability = get_observability()
+        observability.bind_tenant(principal.tenant_id)
         if conversation_id:
             conversation = self.catalog.get_conversation(
                 conversation_id, principal.tenant_id, principal.user_id
@@ -214,7 +224,11 @@ class EnterpriseRAGService:
         contextual, contextual_failed = self._contextual_query(
             principal, conversation_id, question
         )
-        route = self.router.runnable.invoke(question)
+        with observability.stage("query.route") as trace_data:
+            route = self.router.runnable.invoke(
+                question, config=observability.langchain_config()
+            )
+            trace_data["rag_mode"] = route
         started = time.perf_counter()
         if route != KNOWLEDGE_RAG:
             result = {
@@ -232,13 +246,15 @@ class EnterpriseRAGService:
             }
             scope = None
         else:
-            scope = self._scope(
-                principal,
-                knowledge_base_id,
-                document_id=document_id,
-                version_id=version_id,
-                classification=classification,
-            )
+            with observability.stage("authorization.scope") as trace_data:
+                scope = self._scope(
+                    principal,
+                    knowledge_base_id,
+                    document_id=document_id,
+                    version_id=version_id,
+                    classification=classification,
+                )
+                trace_data["authorized_version_count"] = len(scope.version_ids)
             if scope.empty:
                 result = self._empty_authorized_result(
                     question, contextual, "no_authorized_documents"

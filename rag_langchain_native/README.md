@@ -105,3 +105,23 @@ Phase 9 验证：
 [PHASE9_ENTERPRISE_RAG.md](docs/PHASE9_ENTERPRISE_RAG.md) 与
 [PHASE9_BEGINNER_GUIDE.md](docs/PHASE9_BEGINNER_GUIDE.md)。
 
+## Phase 10 Observability
+
+V3 默认启用本地 OpenTelemetry Trace、JSON Structured Logging、低基数 Metrics、真实 Token Usage 提取、可配置成本估算和失败分类。默认不记录问题、Prompt、Context、Answer、文档正文或凭证，也不会上传外部 SaaS。
+
+```powershell
+# 最近请求、单条 Trace 树、窗口聚合
+.\rag_langchain_native\.venv\Scripts\python.exe -m rag_langchain_native.observability.report recent --limit 10
+.\rag_langchain_native\.venv\Scripts\python.exe -m rag_langchain_native.observability.report trace --request-id <request_id>
+.\rag_langchain_native\.venv\Scripts\python.exe -m rag_langchain_native.observability.report summary --minutes 60
+
+# 离线 ON/OFF 开销实验
+.\rag_langchain_native\.venv\Scripts\python.exe -m rag_langchain_native.eval.observability_overhead
+```
+
+API 响应包含 `X-Request-ID` 和 `X-Trace-ID`。同租户 admin 可访问 `/observability/requests`、`/observability/traces/{trace_id}`、`/observability/summary`；Trace ID 本身不是访问凭证。运行文件位于 `runtime/observability/`，已由 `.gitignore` 的 `runtime/` 规则排除。
+
+主要环境变量：`V3_OBSERVABILITY_ENABLED`、`V3_OBSERVABILITY_EXPORTER`（默认 `local`）、`V3_OBSERVABILITY_SAMPLE_RATE`、`V3_OBSERVABILITY_LOG_LEVEL`、`V3_OBSERVABILITY_OTLP_ENDPOINT`、`V3_OBSERVABILITY_RETENTION_DAYS`。
+
+完整说明见 [PHASE10_RAG_OBSERVABILITY.md](docs/PHASE10_RAG_OBSERVABILITY.md) 和 [PHASE10_BEGINNER_GUIDE.md](docs/PHASE10_BEGINNER_GUIDE.md)。
+
