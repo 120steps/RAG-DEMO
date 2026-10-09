@@ -11,6 +11,7 @@ tenant 字段。管理操作要求 admin，下载和检索使用同一 ACL/RBAC 
 from __future__ import annotations
 
 from pathlib import Path
+import uuid
 import asyncio
 
 from fastapi import (
@@ -33,6 +34,10 @@ from pydantic import BaseModel, Field
 from .catalog import CatalogError, DocumentCatalog, NotFoundError
 from .config import DEFAULT_SETTINGS, Settings
 from .enterprise import EnterpriseRAGService
+from .lifecycle import DocumentLifecycleService
+from .observability import get_observability
+from .observability.core import tenant_fingerprint
+from .observability.report import LocalReportStore
 from .lifecycle import DocumentLifecycleService, validate_pdf_content
 from .rate_limit import LocalRateLimiter
 from .security import (
@@ -170,6 +175,29 @@ def create_app(
         if len(question) > settings.max_query_chars:
             raise HTTPException(status_code=422, detail="Question exceeds configured limit")
 
+    @application.middleware("http")
+    async def observability_middleware(request: Request, call_next):
+        """为 HTTP 请求建立可关联的 request/trace；健康和调试查询不产生递归噪声。"""
+        if request.url.path == "/health" or request.url.path.startswith("/observability"):
+            return await call_next(request)
+        incoming = request.headers.get("x-request-id", "")
+        request_id = incoming if incoming.isalnum() and len(incoming) <= 64 else uuid.uuid4().hex
+        category = request.url.path.strip("/").split("/", 1)[0] or "root"
+        observability = get_observability()
+        with observability.request_scope(
+            f"api.{category}", request_id=request_id,
+            attributes={"http.method": request.method, "http.route_group": category},
+        ) as state:
+            response = await call_next(request)
+            response.headers["X-Request-ID"] = state.request_id
+            if state.trace_id:
+                response.headers["X-Trace-ID"] = state.trace_id
+            observability.metric(
+                "http.status.count",
+                attributes={"status_class": f"{response.status_code // 100}xx", "route_group": category},
+            )
+            return response
+
     def lifecycle() -> DocumentLifecycleService:
         nonlocal lifecycle_instance
         if lifecycle_instance is None:
@@ -195,16 +223,23 @@ def create_app(
         credentials: HTTPAuthorizationCredentials | None = Security(bearer),
     ) -> Principal:
         """FastAPI Security Dependency：验证 Bearer Token，失败默认拒绝。"""
+        observability = get_observability()
         if credentials is None:
+            observability.metric("authentication.failure.count", attributes={"reason": "missing"})
             raise HTTPException(status_code=401, detail="Authentication required")
         try:
-            return auth.verify_token(credentials.credentials)
+            with observability.stage("authentication"):
+                principal = auth.verify_token(credentials.credentials)
+            observability.bind_tenant(principal.tenant_id)
+            return principal
         except AuthenticationError as error:
+            observability.metric("authentication.failure.count", attributes={"reason": "invalid"})
             raise HTTPException(status_code=401, detail=str(error)) from error
 
     def checked_admin(principal: Principal = Depends(current_principal)) -> Principal:
         try:
-            require_admin(principal)
+            with get_observability().stage("authorization.admin"):
+                require_admin(principal)
             return principal
         except AuthorizationError as error:
             raise HTTPException(status_code=403, detail=str(error)) from error
@@ -228,6 +263,35 @@ def create_app(
             "collection": settings.enterprise_collection_name,
             "auth_configured": bool(settings.auth_secret),
         }
+
+    @application.get("/observability/requests")
+    def observability_requests(
+        limit: int = Query(default=20, ge=1, le=200),
+        principal: Principal = Depends(checked_admin),
+    ) -> list[dict]:
+        """管理员只能读取自己租户的请求摘要；Trace ID 本身不是访问凭证。"""
+        return LocalReportStore().recent(limit, tenant_fingerprint(principal.tenant_id))
+
+    @application.get("/observability/traces/{trace_id}")
+    def observability_trace(
+        trace_id: str,
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        detail = LocalReportStore().trace_detail(
+            trace_id=trace_id, tenant_scope=tenant_fingerprint(principal.tenant_id)
+        )
+        if detail is None:
+            raise HTTPException(status_code=404, detail="Trace not found")
+        return detail
+
+    @application.get("/observability/summary")
+    def observability_summary(
+        minutes: int = Query(default=60, ge=1, le=43200),
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        return LocalReportStore().summary(
+            minutes=minutes, tenant_scope=tenant_fingerprint(principal.tenant_id)
+        )
 
     @application.get("/ready")
     def readiness() -> dict:
@@ -483,6 +547,13 @@ def create_app(
     application.state.auth_service = auth
     application.state.get_lifecycle = lifecycle
     application.state.get_enterprise = enterprise
+    if get_observability().settings.enabled:
+        from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+
+        FastAPIInstrumentor.instrument_app(
+            application,
+            excluded_urls="health,observability",
+        )
     return application
 
 

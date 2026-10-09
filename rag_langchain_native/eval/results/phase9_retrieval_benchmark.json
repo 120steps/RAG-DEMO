@@ -46,6 +46,7 @@
       "latency_ms": 6050.683000124991,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -683,6 +684,7 @@
       "hit_rank": 1,
       "latency_ms": 914.6843999624252,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -1327,6 +1329,7 @@
       "latency_ms": 975.5394998937845,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -1620,6 +1623,7 @@
             "knowledge_base_id": "phase9-ground-truth",
             "tenant_id": "evaluation-tenant",
             "title": "",
+            "moddate": "",
             "total_pages": 6,
             "author": "",
             "page": 5,
@@ -1937,6 +1941,7 @@
             "page": 6,
             "modDate": "",
             "moddate": "",
+            "tenant_id": "evaluation-tenant",
             "format": "PDF 1.7",
             "classification": "general",
             "chunk_uid": "5075f8d11e6fb2e6d61f7b83ca5ee37be7c8dd20ea3c5e5b2fd482ec84868ace",
@@ -1969,6 +1974,7 @@
       "hit_rank": 1,
       "latency_ms": 951.3610997237265,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -2601,6 +2607,7 @@
       "hit_rank": 1,
       "latency_ms": 851.7810003831983,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -3241,6 +3248,7 @@
       "hit_rank": 1,
       "latency_ms": 895.397299900651,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -3887,6 +3895,7 @@
       "latency_ms": 823.751900345087,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -4435,6 +4444,8 @@
             "title": "",
             "chunk_id": 0,
             "moddate": "",
+            "knowledge_base_id": "phase9-ground-truth",
+            "modDate": "",
             "keywords": "",
             "document_id": "257e325634e84ea4b2f9d36d3ace7061",
             "tenant_id": "evaluation-tenant",
@@ -4528,6 +4539,7 @@
       "latency_ms": 892.8261999972165,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -4617,6 +4629,9 @@
             "哪些访问场景必须启用多因素认证(MFA)？"
           ],
           "metadata": {
+            "knowledge_base_id": "phase9-ground-truth",
+            "title": "",
+            "keywords": "",
             "author": "",
             "file_path": "D:\\workspace\\AI\\rag-demo\\rag_langchain_native\\runtime\\uploads\\tenants\\evaluation-tenant\\knowledge_bases\\phase9-ground-truth\\documents\\de46be381cfa4318a8c2df6ae19a1d5e\\versions\\8c41821a94204ef5ba0a44ae98b47aac\\security_policy.pdf",
             "subject": "",
@@ -4948,6 +4963,10 @@
             "chunk_uid": "e800678e7c9dc49c71d29da98ee490d48aa2f9fb05dfd81552befbb838e8eb3c",
             "page": 3,
             "tenant_id": "evaluation-tenant",
+            "classification": "general",
+            "document_type": "pdf",
+            "keywords": "",
+            "creationDate": "",
             "creationdate": "",
             "source": "security_policy.pdf",
             "document_type": "pdf",
@@ -5171,6 +5190,7 @@
       "latency_ms": 962.4292002990842,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -5214,6 +5234,9 @@
             "document_type": "pdf",
             "format": "PDF 1.7",
             "knowledge_base_id": "phase9-ground-truth",
+            "classification": "general",
+            "creationDate": "",
+            "moddate": "",
             "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
             "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
             "chunk_id": 1,
@@ -5807,6 +5830,7 @@
       "hit_rank": 1,
       "latency_ms": 939.74390020594,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -6444,6 +6468,7 @@
       "hit_rank": 1,
       "latency_ms": 866.56490014866,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -7088,6 +7113,7 @@
       "latency_ms": 941.5258001536131,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -7724,6 +7750,7 @@
       "hit_rank": 1,
       "latency_ms": 921.2215002626181,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -8362,6 +8389,7 @@
       "latency_ms": 827.9876001179218,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -8905,6 +8933,8 @@
             "page": 6,
             "document_type": "pdf",
             "creationdate": "",
+            "moddate": "",
+            "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
             "format": "PDF 1.7",
             "source": "security_policy.pdf",
             "chunk_id": 2,
@@ -9004,6 +9034,7 @@
       "hit_rank": 1,
       "latency_ms": 846.3767999783158,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -9356,7 +9387,7 @@
             "tenant_id": "evaluation-tenant",
             "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
             "source": "security_policy.pdf",
-            "subject": "",
+            "format": "PDF 1.7",
             "document_name": "security_policy.pdf",
             "file_path": "D:\\workspace\\AI\\rag-demo\\rag_langchain_native\\runtime\\uploads\\tenants\\evaluation-tenant\\knowledge_bases\\phase9-ground-truth\\documents\\de46be381cfa4318a8c2df6ae19a1d5e\\versions\\8c41821a94204ef5ba0a44ae98b47aac\\security_policy.pdf",
             "creationDate": "",
@@ -9645,6 +9676,7 @@
       "hit_rank": 1,
       "latency_ms": 990.8682000823319,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -10287,6 +10319,7 @@
       "latency_ms": 784.0885003097355,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -10571,6 +10604,8 @@
             "document_id": "d28e29bce6ca4dbfa755d90842287e41",
             "chunk_uid": "747e7c255a0e0612b2e93fd34f1813a4027fce40e03a6f15bd7df6cfe17c0950",
             "trapped": "",
+            "file_path": "D:\\workspace\\AI\\rag-demo\\rag_langchain_native\\runtime\\uploads\\tenants\\evaluation-tenant\\knowledge_bases\\phase9-ground-truth\\documents\\d28e29bce6ca4dbfa755d90842287e41\\versions\\875ab23d8c024875ade2d585ed19addc\\employee_handbook.pdf",
+            "creationdate": "",
             "knowledge_base_id": "phase9-ground-truth",
             "title": "",
             "creator": "",
@@ -10925,6 +10960,7 @@
       "hit_rank": 1,
       "latency_ms": 760.1683996617794,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -11560,6 +11596,7 @@
       "hit_rank": 1,
       "latency_ms": 783.5149001330137,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -12200,6 +12237,7 @@
       "latency_ms": 721.4257000014186,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -12481,6 +12519,7 @@
             "format": "PDF 1.7",
             "file_path": "D:\\workspace\\AI\\rag-demo\\rag_langchain_native\\runtime\\uploads\\tenants\\evaluation-tenant\\knowledge_bases\\phase9-ground-truth\\documents\\5ca49c9c326c427fb6fdfa684a29ba4e\\versions\\81f8ea5c749b4f49b1aae694b6355e81\\expense_policy.pdf",
             "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+            "creator": "",
             "source": "expense_policy.pdf",
             "document_name": "expense_policy.pdf",
             "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
@@ -12842,6 +12881,7 @@
       "latency_ms": 750.8657001890242,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -13123,6 +13163,8 @@
             "员工对正式绩效结果有异议，应在多久内申请复核？"
           ],
           "metadata": {
+            "version_id": "875ab23d8c024875ade2d585ed19addc",
+            "author": "",
             "document_name": "employee_handbook.pdf",
             "source": "employee_handbook.pdf",
             "trapped": "",
@@ -13479,6 +13521,7 @@
       "hit_rank": 1,
       "latency_ms": 769.5566997863352,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -14075,6 +14118,7 @@
             "title": "",
             "author": "",
             "document_type": "pdf",
+            "document_name": "security_policy.pdf",
             "chunk_id": 2,
             "document_name": "security_policy.pdf",
             "creationDate": "",
@@ -14116,6 +14160,7 @@
       "hit_rank": 1,
       "latency_ms": 752.4753999896348,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -14607,6 +14652,11 @@
             "file_path": "D:\\workspace\\AI\\rag-demo\\rag_langchain_native\\runtime\\uploads\\tenants\\evaluation-tenant\\knowledge_bases\\phase9-ground-truth\\documents\\257e325634e84ea4b2f9d36d3ace7061\\versions\\9c1808cf840f42769b95ea70d6d67213\\travel_policy.pdf",
             "document_name": "travel_policy.pdf",
             "creator": "",
+            "source": "travel_policy.pdf",
+            "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+            "moddate": "",
+            "page": 3,
+            "format": "PDF 1.7",
             "vector_distance": 0.1557520627975464,
             "vector_rank": 9,
             "fusion_score": 0.007246376811594203,
@@ -14756,6 +14806,7 @@
       "hit_rank": 1,
       "latency_ms": 679.1085000149906,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -15405,6 +15456,7 @@
       "latency_ms": 743.4379998594522,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -16044,6 +16096,7 @@
       "hit_rank": 1,
       "latency_ms": 796.5887999162078,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {
@@ -16695,6 +16748,7 @@
       "latency_ms": 951.066100038588,
       "tenant_id": "evaluation-tenant",
       "authorization_epoch": 12,
+      "authorization_epoch": 12,
       "documents": [
         {
           "rank": 1,
@@ -17329,6 +17383,7 @@
       "hit_rank": 1,
       "latency_ms": 981.5274002030492,
       "tenant_id": "evaluation-tenant",
+      "authorization_epoch": 12,
       "authorization_epoch": 12,
       "documents": [
         {

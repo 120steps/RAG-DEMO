@@ -24,6 +24,7 @@ import fitz
 from .catalog import ConflictError, DocumentCatalog
 from .config import DEFAULT_SETTINGS, Settings
 from .ingestion import load_pdf_pages, split_pages
+from .observability import get_observability
 from .vectorstore import add_documents, create_vectorstore
 from .runtime_lock import serialized_runtime_write
 
@@ -111,15 +112,19 @@ class DocumentLifecycleService:
         value = classification.lower()
         if value not in ALLOWED_CLASSIFICATIONS:
             raise ValueError("Unsupported document classification")
-        document, created = self.catalog.register_document(
-            tenant_id=tenant_id,
-            knowledge_base_id=knowledge_base_id,
-            document_name=document_name,
-            source=Path(source).name,
-            document_type=document_type,
-            classification=value,
-            owner=owner,
-        )
+        observability = get_observability()
+        observability.bind_tenant(tenant_id)
+        with observability.stage("document.register") as trace_data:
+            document, created = self.catalog.register_document(
+                tenant_id=tenant_id,
+                knowledge_base_id=knowledge_base_id,
+                document_name=document_name,
+                source=Path(source).name,
+                document_type=document_type,
+                classification=value,
+                owner=owner,
+            )
+            trace_data["created"] = created
         return {**document, "created": created}
 
     def _version_path(
@@ -195,14 +200,18 @@ class DocumentLifecycleService:
         )
         destination.parent.mkdir(parents=True, exist_ok=True)
         temporary = destination.with_suffix(".uploading")
-        temporary.write_bytes(content)
-        temporary.replace(destination)
-        version, created = self.catalog.create_version(
-            document_id=document_id,
-            content_hash=content_hash,
-            storage_path=str(destination),
-            version_id=version_id,
-        )
+        observability = get_observability()
+        observability.bind_tenant(tenant_id)
+        with observability.stage("document.version_upload") as trace_data:
+            temporary.write_bytes(content)
+            temporary.replace(destination)
+            version, created = self.catalog.create_version(
+                document_id=document_id,
+                content_hash=content_hash,
+                storage_path=str(destination),
+                version_id=version_id,
+            )
+            trace_data["created"] = created
         return {**version, "created": created}
 
     @serialized_runtime_write
@@ -220,8 +229,14 @@ class DocumentLifecycleService:
             return {**version, "indexed": False, "idempotent": True}
         self.catalog.set_version_status(version_id, "indexing")
         try:
-            pages = load_pdf_pages(version["storage_path"])
-            chunks = split_pages(pages, self.settings)
+            observability = get_observability()
+            observability.bind_tenant(document["tenant_id"])
+            with observability.stage("document.pdf_parse") as trace_data:
+                pages = load_pdf_pages(version["storage_path"])
+                trace_data["page_count"] = len(pages)
+            with observability.stage("document.chunking") as trace_data:
+                chunks = split_pages(pages, self.settings)
+                trace_data["chunk_count"] = len(chunks)
             if not chunks:
                 raise ValueError("PDF produced no chunks")
             enterprise_chunks: list[Document] = []
@@ -257,8 +272,11 @@ class DocumentLifecycleService:
                 )
             # 重试同一 version 时先清理该 version，范围由不可伪造的 Catalog ID 决定。
             self.vectorstore.delete(where={"version_id": version_id})
-            ids = add_documents(self.vectorstore, enterprise_chunks)
+            with observability.stage("document.chroma_index") as trace_data:
+                ids = add_documents(self.vectorstore, enterprise_chunks)
+                trace_data["chunk_count"] = len(ids)
             self.catalog.set_version_status(version_id, "indexed")
+            observability.metric("document.ingestion.count")
             return {
                 **self.catalog.get_version(version_id),
                 "indexed": True,
@@ -267,6 +285,7 @@ class DocumentLifecycleService:
                 "chunk_ids": ids,
             }
         except Exception as error:
+            get_observability().metric("document.ingestion.failure.count")
             try:
                 self.vectorstore.delete(where={"version_id": version_id})
             finally:
@@ -276,22 +295,30 @@ class DocumentLifecycleService:
     @serialized_runtime_write
     def publish_version(self, document_id: str, version_id: str) -> dict[str, Any]:
         """发布已成功索引的版本，使普通检索只看到它。"""
-        return self.catalog.publish_version(document_id, version_id)
+        with get_observability().stage("document.publish"):
+            result = self.catalog.publish_version(document_id, version_id)
+        get_observability().metric("document.published.count")
+        return result
 
     @serialized_runtime_write
     def rollback_version(self, document_id: str, version_id: str) -> dict[str, Any]:
         """把历史 indexed/retired 版本重新设为 active，Citation 会随之切回该 version。"""
-        return self.catalog.publish_version(document_id, version_id)
+        with get_observability().stage("document.rollback"):
+            result = self.catalog.publish_version(document_id, version_id)
+        get_observability().metric("document.rollback.count")
+        return result
 
     @serialized_runtime_write
     def soft_delete(self, document_id: str) -> None:
         """只软删除目标文档；向量保留以便恢复，但授权 Scope 会立即排除。"""
-        self.catalog.soft_delete_document(document_id)
+        with get_observability().stage("document.delete"):
+            self.catalog.soft_delete_document(document_id)
 
     @serialized_runtime_write
     def restore(self, document_id: str) -> None:
         """恢复逻辑文档；其原 active version 重新进入授权 Scope。"""
-        self.catalog.restore_document(document_id)
+        with get_observability().stage("document.restore"):
+            self.catalog.restore_document(document_id)
 
     def list_documents(
         self, tenant_id: str, knowledge_base_id: str, *, include_deleted: bool = False
