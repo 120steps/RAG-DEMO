@@ -13,6 +13,7 @@ from langchain_core.runnables import Runnable
 
 from .catalog import DocumentCatalog
 from .config import DEFAULT_SETTINGS, Settings
+from .observability import get_observability
 from .security import Principal
 
 
@@ -86,12 +87,15 @@ class ConversationService:
         original = question.strip()
         if not conversation_id:
             return original, False
-        self.catalog.get_conversation(
-            conversation_id, principal.tenant_id, principal.user_id
-        )
-        messages = self.catalog.list_messages(
-            conversation_id, self.settings.conversation_history_limit
-        )
+        observability = get_observability()
+        with observability.stage("conversation.load") as trace_data:
+            self.catalog.get_conversation(
+                conversation_id, principal.tenant_id, principal.user_id
+            )
+            messages = self.catalog.list_messages(
+                conversation_id, self.settings.conversation_history_limit
+            )
+            trace_data["message_count"] = len(messages)
         if not messages:
             return original, False
         if self.model is None:
@@ -102,10 +106,13 @@ class ConversationService:
         try:
             # LCEL：dict -> ChatPromptValue -> AIMessage -> str。
             chain = CONTEXTUAL_REWRITE_PROMPT | self.model | StrOutputParser()
-            rewritten = chain.invoke(
-                {"history": history, "question": original}
-            ).strip()
+            with observability.stage("conversation.contextual_rewrite"):
+                rewritten = chain.invoke(
+                    {"history": history, "question": original},
+                    config=observability.langchain_config(),
+                ).strip()
             return (rewritten, False) if rewritten else (original, True)
-        except Exception:
+        except Exception as error:
+            observability.fallback("conversation.contextual_rewrite", error)
             return original, True
 

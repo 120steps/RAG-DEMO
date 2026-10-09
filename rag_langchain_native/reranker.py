@@ -35,6 +35,7 @@ from langchain_core.callbacks import Callbacks
 from langchain_core.documents import Document
 
 from .config import DEFAULT_SETTINGS, Settings
+from .observability import get_observability
 from .retrieval import clone_document
 
 
@@ -164,8 +165,19 @@ def rerank_documents(
         ``compressor or get_reranker(settings)`` 表示优先使用调用方注入对象，否则创建
         默认对象。这种依赖注入让离线测试不必真的加载大型模型。
     """
+    observability = get_observability()
     if not settings.reranker_enabled:
-        return documents[: settings.final_k]
-    active = compressor or get_reranker(settings)
-    return list(active.compress_documents(documents, query))
+        output = documents[: settings.final_k]
+        observability.metric("reranker.skipped.count")
+        return output
+    with observability.stage(
+        "reranker",
+        attributes={"input_count": len(documents), "top_k": settings.final_k},
+    ) as trace_data:
+        active = compressor or get_reranker(settings)
+        output = list(active.compress_documents(documents, query))
+        trace_data["input_count"] = len(documents)
+        trace_data["result_count"] = len(output)
+        observability.metric("reranker.candidate.count", len(documents))
+        return output
 

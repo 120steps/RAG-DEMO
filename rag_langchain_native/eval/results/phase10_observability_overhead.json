@@ -1,0 +1,26 @@
+{
+  "workload": "local mock: request + retrieval span + reranker span",
+  "note": "微型工作负载会放大相对开销，不能代表真实 Gemini 端到端性能。",
+  "disabled": {
+    "enabled": false,
+    "samples": 200,
+    "average_latency_ms": 0.01621750183403492,
+    "p95_latency_ms": 0.022700056433677673,
+    "error_count": 0,
+    "span_count": 0,
+    "expected_span_count": 0,
+    "trace_complete": true
+  },
+  "enabled": {
+    "enabled": true,
+    "samples": 200,
+    "average_latency_ms": 4.5174205070361495,
+    "p95_latency_ms": 5.1018004305660725,
+    "error_count": 0,
+    "span_count": 600,
+    "expected_span_count": 600,
+    "trace_complete": true
+  },
+  "average_absolute_overhead_ms": 4.501203005202115,
+  "average_relative_overhead_percent": 27755.218104897318
+}

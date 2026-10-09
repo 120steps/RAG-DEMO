@@ -236,20 +236,34 @@ class QueryProcessor:
         """
         if not self.settings.rewrite_enabled:
             return question, False
+        from .observability import get_observability
+
+        observability = get_observability()
         cache_key = self._cache_key(question)
         cached = self.rewrite_cache.read().get(cache_key)
         if isinstance(cached, str) and cached.strip():
+            observability.metric(
+                "cache.hit.count", attributes={"cache": "query_rewrite"}
+            )
             return cached.strip(), False
         try:
-            self.throttle.wait()
-            # 这里的 ``|`` 是 LCEL 管道；与 ``Runnable | None`` 类型注解中的 ``|`` 含义不同。
-            chain = REWRITE_PROMPT | self._require_model() | StrOutputParser()
-            rewritten = chain.invoke({"question": question}).strip()
-            if not rewritten:
-                raise ValueError("Gemini returned an empty rewrite")
-            self.rewrite_cache.set(cache_key, rewritten)
-            return rewritten, False
-        except Exception:
+            with observability.stage(
+                "query.rewrite", attributes={"cache_hit": False}
+            ) as observed:
+                self.throttle.wait()
+                # 这里的 ``|`` 是 LCEL 管道；与类型注解中的 ``|`` 含义不同。
+                chain = REWRITE_PROMPT | self._require_model() | StrOutputParser()
+                rewritten = chain.invoke(
+                    {"question": question},
+                    config=observability.langchain_config(),
+                ).strip()
+                if not rewritten:
+                    raise ValueError("Gemini returned an empty rewrite")
+                self.rewrite_cache.set(cache_key, rewritten)
+                observed["cache_hit"] = False
+                return rewritten, False
+        except Exception as error:
+            observability.fallback("query.rewrite", error)
             return question, True
 
     def expand(self, query: str) -> tuple[list[str], bool]:
@@ -276,29 +290,40 @@ class QueryProcessor:
         """
         if not self.settings.expansion_enabled:
             return [query], False
+        from .observability import get_observability
+
+        observability = get_observability()
         cache_key = self._cache_key(query)
         cached = self.expansion_cache.read().get(cache_key)
         if isinstance(cached, list):
             cached_queries = [str(item).strip() for item in cached if str(item).strip()]
             if cached_queries:
+                observability.metric(
+                    "cache.hit.count", attributes={"cache": "query_expansion"}
+                )
                 return list(dict.fromkeys([query, *cached_queries])), False
         try:
-            self.throttle.wait()
-            # Structured Output 比让模型返回自由格式 JSON 字符串更容易验证字段类型。
-            structured_model = self._require_model().with_structured_output(
-                ExpansionOutput
-            )
-            chain = EXPANSION_PROMPT | structured_model
-            output = chain.invoke(
-                {"query": query, "count": self.settings.expansion_count}
-            )
-            alternatives = [item.strip() for item in output.queries if item.strip()]
-            queries = list(dict.fromkeys([query, *alternatives]))[
-                : self.settings.expansion_count + 1
-            ]
-            self.expansion_cache.set(cache_key, queries)
-            return queries, False
-        except Exception:
+            with observability.stage(
+                "query.expand", attributes={"cache_hit": False}
+            ) as observed:
+                self.throttle.wait()
+                structured_model = self._require_model().with_structured_output(
+                    ExpansionOutput
+                )
+                chain = EXPANSION_PROMPT | structured_model
+                output = chain.invoke(
+                    {"query": query, "count": self.settings.expansion_count},
+                    config=observability.langchain_config(),
+                )
+                alternatives = [item.strip() for item in output.queries if item.strip()]
+                queries = list(dict.fromkeys([query, *alternatives]))[
+                    : self.settings.expansion_count + 1
+                ]
+                self.expansion_cache.set(cache_key, queries)
+                observed["query_count"] = len(queries)
+                return queries, False
+        except Exception as error:
+            observability.fallback("query.expand", error)
             return [query], True
 
     def process(self, question: str) -> dict:

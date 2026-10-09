@@ -49,6 +49,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel, Field
 
 from .config import DEFAULT_SETTINGS, Settings
+from .observability import get_observability
 from .query_processing import QueryProcessor
 from .reranker import ScoredCrossEncoderReranker, get_reranker, rerank_documents
 from .retrieval import NativeRetrievalEngine, serialize_document
@@ -392,15 +393,20 @@ class NativeRAGService:
         输出新增 ``context: str``、``refused: bool``、``refusal_reason: str``。后续
         ``RunnableBranch`` 根据 refused 选择固定拒答或 Gemini Answer Generation。
         """
-        allowed, reason = assess_answerability(
-            state["retrieved_documents"], self.settings
-        )
-        return {
-            **state,
-            "context": format_context(state["retrieved_documents"]),
-            "refused": not allowed,
-            "refusal_reason": reason,
-        }
+        observability = get_observability()
+        with observability.stage("context.build") as trace_data:
+            allowed, reason = assess_answerability(
+                state["retrieved_documents"], self.settings
+            )
+            context = format_context(state["retrieved_documents"])
+            trace_data["document_count"] = len(state["retrieved_documents"])
+            trace_data["refused"] = not allowed
+            return {
+                **state,
+                "context": context,
+                "refused": not allowed,
+                "refusal_reason": reason,
+            }
 
     def _finalize(self, state: dict) -> dict:
         """把内部 Chain State 转换为稳定的 API/Evaluation 结果。
@@ -412,6 +418,10 @@ class NativeRAGService:
         保证 Answer Context、Debug 文档和 Citation 的来源一致。
         """
         documents = state["retrieved_documents"]
+        observability = get_observability()
+        with observability.stage("citation.build") as trace_data:
+            sources = build_citations(documents)
+            trace_data["citation_count"] = len(sources)
         return {
             "question": state["original_question"],
             "original_query": state["original_question"],
@@ -422,7 +432,7 @@ class NativeRAGService:
             "answer": state["answer"],
             "refused": state["refused"],
             "refusal_reason": state["refusal_reason"],
-            "sources": build_citations(documents),
+            "sources": sources,
             "documents": [
                 serialize_document(document, rank)
                 for rank, document in enumerate(documents, start=1)
@@ -573,7 +583,15 @@ class NativeRAGService:
                 "original_question": question,
                 "retrieval_question": retrieval_question,
             }
-        return self.chain.invoke(value)
+        observability = get_observability()
+        with observability.request_scope("rag.chat"):
+            result = self.chain.invoke(
+                value, config=observability.langchain_config()
+            )
+            observability.metric(
+                "rag.refusal.count" if result.get("refused") else "rag.answer.count"
+            )
+            return result
 
     async def aask_rag(self, question: str) -> dict:
         """异步执行完整 RAG Chain，并返回完整结果。
@@ -581,7 +599,11 @@ class NativeRAGService:
         ``async def`` 定义协程；调用者必须 ``await``。``await self.chain.ainvoke`` 在等待
         I/O 时允许事件循环处理其他任务，但它仍不是逐 token streaming。
         """
-        return await self.chain.ainvoke(question)
+        observability = get_observability()
+        with observability.request_scope("rag.chat.async"):
+            return await self.chain.ainvoke(
+                question, config=observability.langchain_config()
+            )
 
     def batch_ask(self, questions: list[str]) -> list[dict]:
         """通过同一条 Chain 批量处理多个问题。
@@ -616,35 +638,37 @@ class NativeRAGService:
             这里直接调用组件而不是完整 Answer LCEL，因为评估需要在生成前停止。若请求的
             top_k 与缓存 compressor 的 top_n 不同，会复用同一模型创建轻量 compressor。
         """
-        processor = self._prepare_query_processor()
-        query_state = processor.process((retrieval_question or question).strip())
-        started = time.perf_counter()
-        documents = self.retrieval_engine.retrieve_queries(
-            query_state["expanded_queries"]
-        )
-        if self.settings.reranker_enabled:
-            compressor = self._reranker or get_reranker(self.settings)
-            if compressor.top_n != top_k:
-                compressor = ScoredCrossEncoderReranker(
-                    model=compressor.model,
-                    top_n=top_k,
-                )
-            documents = rerank_documents(
-                query_state["retrieval_query"],
-                documents,
-                settings=self.settings,
-                compressor=compressor,
+        observability = get_observability()
+        with observability.request_scope("rag.retrieve"):
+            processor = self._prepare_query_processor()
+            query_state = processor.process((retrieval_question or question).strip())
+            started = time.perf_counter()
+            documents = self.retrieval_engine.retrieve_queries(
+                query_state["expanded_queries"]
             )
-        latency = (time.perf_counter() - started) * 1000
-        return {
-            "original_query": question,
-            **query_state,
-            "documents": [
-                serialize_document(document, rank)
-                for rank, document in enumerate(documents[:top_k], start=1)
-            ],
-            "latency_ms": latency,
-        }
+            if self.settings.reranker_enabled:
+                compressor = self._reranker or get_reranker(self.settings)
+                if compressor.top_n != top_k:
+                    compressor = ScoredCrossEncoderReranker(
+                        model=compressor.model,
+                        top_n=top_k,
+                    )
+                documents = rerank_documents(
+                    query_state["retrieval_query"],
+                    documents,
+                    settings=self.settings,
+                    compressor=compressor,
+                )
+            latency = (time.perf_counter() - started) * 1000
+            return {
+                "original_query": question,
+                **query_state,
+                "documents": [
+                    serialize_document(document, rank)
+                    for rank, document in enumerate(documents[:top_k], start=1)
+                ],
+                "latency_ms": latency,
+            }
 
 
 @lru_cache(maxsize=1)

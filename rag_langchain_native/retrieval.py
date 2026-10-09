@@ -40,6 +40,7 @@ from langchain_core.retrievers import BaseRetriever
 from pydantic import ConfigDict, Field
 
 from .config import DEFAULT_SETTINGS, Settings
+from .observability import get_observability
 from .vectorstore import get_all_documents
 
 
@@ -148,20 +149,38 @@ class ScoredChromaRetriever(BaseRetriever):
             方法名以下划线开头是 LangChain BaseRetriever 要求实现的内部扩展点；用户
             通常调用公开的 ``invoke()``，而不是直接调用本方法。
         """
-        results = self.vectorstore.similarity_search_with_score(
-            query,
-            k=self.k,
-            filter=self.metadata_filter,
-        )
-        documents = []
-        for rank, (document, distance) in enumerate(results, start=1):
-            copied = clone_document(document)
-            copied.metadata.update(
-                vector_distance=float(distance),
-                vector_rank=rank,
+        observability = get_observability()
+        with observability.stage(
+            "vector.search", attributes={"top_k": self.k}
+        ) as trace_data:
+            results = self.vectorstore.similarity_search_with_score(
+                query,
+                k=self.k,
+                filter=self.metadata_filter,
             )
-            documents.append(copied)
-        return documents
+            documents = []
+            for rank, (document, distance) in enumerate(results, start=1):
+                copied = clone_document(document)
+                copied.metadata.update(
+                    vector_distance=float(distance),
+                    vector_rank=rank,
+                )
+                documents.append(copied)
+            trace_data["result_count"] = len(documents)
+            observability.metric("retrieval.candidate.count", len(documents), attributes={"route": "vector"})
+            return documents
+
+
+class ObservedBM25Retriever(BM25Retriever):
+    """为 LangChain BM25Retriever 增加安全 Span，不改变其排序算法。"""
+
+    def _get_relevant_documents(self, query: str, *, run_manager) -> list[Document]:
+        observability = get_observability()
+        with observability.stage("bm25.search", attributes={"top_k": self.k}) as trace_data:
+            documents = list(super()._get_relevant_documents(query, run_manager=run_manager))
+            trace_data["result_count"] = len(documents)
+            observability.metric("retrieval.candidate.count", len(documents), attributes={"route": "bm25"})
+            return documents
 
 
 class TracedEnsembleRetriever(EnsembleRetriever):
@@ -203,6 +222,19 @@ class TracedEnsembleRetriever(EnsembleRetriever):
             ``defaultdict`` 在键首次访问时自动创建默认值；``set`` 用于快速判重；
             ``zip(..., strict=True)`` 在长度不等时立即报错，避免静默丢数据。
     """
+        observability = get_observability()
+        with observability.stage(
+            "fusion.rrf",
+            attributes={"route_count": len(doc_lists)},
+        ) as trace_data:
+            output = self._weighted_reciprocal_rank_impl(doc_lists)
+            trace_data["result_count"] = len(output)
+            return output
+
+    def _weighted_reciprocal_rank_impl(
+        self, doc_lists: list[list[Document]]
+    ) -> list[Document]:
+        """保留原 RRF 实现；外层方法只负责 Observability。"""
         if len(doc_lists) != len(self.weights):
             raise ValueError("Retriever lists and weights must have equal lengths")
 
@@ -381,11 +413,15 @@ class NativeRetrievalEngine:
         """
         if not self.documents:
             return None
-        return BM25Retriever.from_documents(
-            self.documents,
-            preprocess_func=chinese_tokenize,
-            k=self.settings.bm25_k,
-        )
+        observability = get_observability()
+        with observability.stage("bm25.index") as trace_data:
+            retriever = ObservedBM25Retriever.from_documents(
+                self.documents,
+                preprocess_func=chinese_tokenize,
+                k=self.settings.bm25_k,
+            )
+            trace_data["document_count"] = len(self.documents)
+            return retriever
 
     def _build_base_retriever(self):
         """按配置组合本次实际使用的 Retriever。
@@ -427,8 +463,16 @@ class NativeRetrievalEngine:
         """
         if self.deny_all:
             return []
-        documents = self.base_retriever.invoke(query)
-        return list(documents[: self.settings.candidate_k])
+        observability = get_observability()
+        with observability.stage(
+            "retrieval", attributes={"query_count": 1, "top_k": self.settings.candidate_k}
+        ) as trace_data:
+            documents = self.base_retriever.invoke(
+                query, config=observability.langchain_config()
+            )
+            output = list(documents[: self.settings.candidate_k])
+            trace_data["result_count"] = len(output)
+            return output
 
     def retrieve_queries(self, queries: list[str]) -> list[Document]:
         """对多条 Query 批量检索，并在需要时进行 Query-level RRF。
@@ -453,7 +497,23 @@ class NativeRetrievalEngine:
         unique_queries = list(dict.fromkeys(query.strip() for query in queries if query.strip()))
         if not unique_queries or self.deny_all:
             return []
-        result_sets = self.base_retriever.batch(unique_queries)
+        observability = get_observability()
+        with observability.stage(
+            "retrieval",
+            attributes={"query_count": len(unique_queries), "top_k": self.settings.candidate_k},
+        ) as trace_data:
+            result_sets = self.base_retriever.batch(
+                unique_queries,
+                config=observability.langchain_config(),
+            )
+            output = self._merge_query_results(unique_queries, result_sets)
+            trace_data["result_count"] = len(output)
+            return output
+
+    def _merge_query_results(
+        self, unique_queries: list[str], result_sets: list[list[Document]]
+    ) -> list[Document]:
+        """合并批量 Query 结果；从 retrieve_queries 拆出只为保持 Span 边界清晰。"""
         if len(unique_queries) == 1:
             documents = list(result_sets[0])
             for document in documents:
