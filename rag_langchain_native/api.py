@@ -1,147 +1,402 @@
-"""LangChain V3 的独立 FastAPI 入口（约定端口 8011）。
+"""Phase 9 企业 FastAPI：认证、会话、授权问答和文档生命周期的统一 HTTP 入口。
 
-文件职责：
-    把 V3 的健康检查、Retrieval-only、完整问答和 PDF Upload 暴露为 HTTP API。
+除 ``/health`` 与 ``/auth/login`` 外，所有路由都依赖 HTTP Bearer Token。Token 只用于定位
+用户，tenant/roles/groups 每次从服务端 Catalog 重新加载；请求体没有可被信任的 role 或
+tenant 字段。管理操作要求 admin，下载和检索使用同一 ACL/RBAC 判断。
 
-在 RAG Pipeline 中的位置：
-    API 是最上游适配层。它负责把 HTTP JSON/文件转换成 Python 参数，然后调用
-    ``NativeRAGService`` 或 Ingestion；它不重新实现 Retrieval、Prompt 或 Citation。
-
-输入与输出：
-    ``/retrieve`` 和 ``/chat`` 接收 Pydantic ``QueryRequest``；``/upload`` 接收 PDF。
-    下游返回的普通 dict 会由 FastAPI 自动序列化为 JSON。
-
-隔离原则：
-    本文件不修改根 ``app.py``，不调用 V1/V2 服务。上传文件、Chroma 和 Cache 全部写入
-    V3 runtime。当前 ``/chat`` 是同步完整响应，不是 SSE token streaming。
-
-LangChain 关系：
-    FastAPI 本身不是 LangChain。它通过 ``get_service().ask_rag()`` 进入 LCEL Chain。
+应用仍运行在 V3 独立端口 8011，不修改根目录 FastAPI。重型 Embedding/Chroma 对象按需
+创建，因此 ``/health`` 不会下载模型或调用 Gemini。
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import (
+    Depends,
+    FastAPI,
+    File,
+    Form,
+    HTTPException,
+    Query,
+    Security,
+    UploadFile,
+)
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from langchain_core.runnables import Runnable
 from pydantic import BaseModel, Field
 
-from .chain import get_service
+from .catalog import CatalogError, DocumentCatalog, NotFoundError
 from .config import DEFAULT_SETTINGS, Settings
-from .ingestion import ingest_pdf
+from .enterprise import EnterpriseRAGService
+from .lifecycle import DocumentLifecycleService
+from .security import (
+    AuthService,
+    AuthenticationError,
+    AuthorizationError,
+    Principal,
+    can_read_document,
+    require_admin,
+    require_document_access,
+)
+
+
+class LoginRequest(BaseModel):
+    tenant_id: str = Field(min_length=1)
+    username: str = Field(min_length=1)
+    password: str = Field(min_length=8)
 
 
 class QueryRequest(BaseModel):
-    """Retrieval/Chat 的 HTTP 请求模型。
-
-    ``question`` 至少一个字符；``top_k`` 只用于 Retrieval-only 路由，并限制在 1 到 50，
-    防止客户端请求无意义或过大的候选数量。
-    """
+    """客户端只选择知识库与会话，不能声明 tenant 或 role。"""
 
     question: str = Field(min_length=1)
+    knowledge_base_id: str = Field(default="default", min_length=1)
+    conversation_id: str | None = None
+    document_id: str | None = None
+    version_id: str | None = None
+    classification: str | None = None
     top_k: int = Field(default=10, ge=1, le=50)
 
 
-def create_app(settings: Settings = DEFAULT_SETTINGS) -> FastAPI:
-    """创建并配置独立 V3 FastAPI 应用。
+class ConversationRequest(BaseModel):
+    knowledge_base_id: str = Field(default="default", min_length=1)
 
-    参数：
-        settings (Settings): V3 配置；测试可注入临时 runtime 配置。
 
-    返回：
-        FastAPI: 已注册 health、retrieve、chat、upload 路由的应用对象。
+class RegisterDocumentRequest(BaseModel):
+    knowledge_base_id: str = Field(default="default", min_length=1)
+    document_name: str = Field(min_length=1)
+    source: str = Field(min_length=1)
+    document_type: str = "pdf"
+    classification: str = "general"
 
-    调用关系：
-        模块末尾 ``app = create_app()`` 供 Uvicorn 导入；各路由再调用共享 Service。
 
-    初学者知识点：
-        路由装饰器把内部函数注册到 HTTP 路径。闭包使这些函数可以读取外层 ``settings``，
-        不需要把配置暴露为全局可变变量。
-    """
+class VersionActionRequest(BaseModel):
+    version_id: str = Field(min_length=1)
+
+
+def create_app(
+    settings: Settings = DEFAULT_SETTINGS,
+    *,
+    catalog: DocumentCatalog | None = None,
+    vectorstore=None,
+    llm: Runnable | None = None,
+    query_model: Runnable | None = None,
+    reranker=None,
+) -> FastAPI:
+    """创建 Phase 9 API；测试可注入临时 Catalog、Chroma 和 Fake LLM。"""
     application = FastAPI(
-        title="LangChain Native RAG V3",
-        version="0.1.0",
+        title="LangChain Native Enterprise RAG V3",
+        version="0.2.0",
     )
+    document_catalog = catalog or DocumentCatalog(settings.catalog_path)
+    auth = AuthService(
+        document_catalog,
+        settings.auth_secret,
+        settings.auth_token_ttl_seconds,
+    )
+    bearer = HTTPBearer(auto_error=False)
+    lifecycle_instance: DocumentLifecycleService | None = None
+    enterprise_instance: EnterpriseRAGService | None = None
+
+    def lifecycle() -> DocumentLifecycleService:
+        nonlocal lifecycle_instance
+        if lifecycle_instance is None:
+            lifecycle_instance = DocumentLifecycleService(
+                document_catalog, settings, vectorstore=vectorstore
+            )
+        return lifecycle_instance
+
+    def enterprise() -> EnterpriseRAGService:
+        nonlocal enterprise_instance
+        if enterprise_instance is None:
+            enterprise_instance = EnterpriseRAGService(
+                document_catalog,
+                settings,
+                vectorstore=vectorstore,
+                llm=llm,
+                query_model=query_model,
+                reranker=reranker,
+            )
+        return enterprise_instance
+
+    def current_principal(
+        credentials: HTTPAuthorizationCredentials | None = Security(bearer),
+    ) -> Principal:
+        """FastAPI Security Dependency：验证 Bearer Token，失败默认拒绝。"""
+        if credentials is None:
+            raise HTTPException(status_code=401, detail="Authentication required")
+        try:
+            return auth.verify_token(credentials.credentials)
+        except AuthenticationError as error:
+            raise HTTPException(status_code=401, detail=str(error)) from error
+
+    def checked_admin(principal: Principal = Depends(current_principal)) -> Principal:
+        try:
+            require_admin(principal)
+            return principal
+        except AuthorizationError as error:
+            raise HTTPException(status_code=403, detail=str(error)) from error
+
+    def ensure_owned_document(principal: Principal, document_id: str) -> dict:
+        document = document_catalog.get_document(document_id)
+        if document["tenant_id"] != principal.tenant_id:
+            raise HTTPException(status_code=404, detail="Document not found")
+        return document
+
+    @application.exception_handler(CatalogError)
+    async def catalog_error_handler(_, error: CatalogError):
+        status = 404 if isinstance(error, NotFoundError) else 409
+        return JSONResponse(status_code=status, content={"detail": str(error)})
 
     @application.get("/health")
     def health() -> dict:
-        """返回进程状态和 V3 数据隔离信息，不加载/调用 Gemini。"""
         return {
             "status": "ok",
-            "version": "v3",
-            "collection": settings.collection_name,
+            "version": "v3-phase9",
+            "collection": settings.enterprise_collection_name,
             "runtime": str(settings.runtime_dir),
+            "auth_configured": bool(settings.auth_secret),
         }
 
-    @application.post("/retrieve")
-    def retrieve(request: QueryRequest) -> dict:
-        """执行 Retrieval-only 调试，不调用最终 Answer Generation。
-
-        输入 Pydantic 对象，输出 Query、Documents、分数和延迟字典。异常被转换为 HTTP
-        500，并保留原异常作为 ``from error`` 的 cause，方便服务日志排查。
-        """
+    @application.post("/auth/login")
+    def login(request: LoginRequest) -> dict:
         try:
-            return get_service().retrieve_only(
-                request.question, top_k=request.top_k
+            token = auth.login(
+                request.tenant_id, request.username, request.password
             )
-        except Exception as error:
-            raise HTTPException(status_code=500, detail=str(error)) from error
+            return {"access_token": token, "token_type": "bearer"}
+        except AuthenticationError as error:
+            raise HTTPException(status_code=401, detail=str(error)) from error
+
+    @application.post("/conversations")
+    def create_conversation(
+        request: ConversationRequest,
+        principal: Principal = Depends(current_principal),
+    ) -> dict:
+        return enterprise().conversations.create(
+            principal, request.knowledge_base_id
+        )
+
+    @application.get("/conversations/{conversation_id}")
+    def get_conversation(
+        conversation_id: str,
+        principal: Principal = Depends(current_principal),
+    ) -> dict:
+        return enterprise().conversations.get(principal, conversation_id)
+
+    @application.delete("/conversations/{conversation_id}")
+    def delete_conversation(
+        conversation_id: str,
+        principal: Principal = Depends(current_principal),
+    ) -> dict:
+        enterprise().conversations.delete(principal, conversation_id)
+        return {"deleted": True, "conversation_id": conversation_id}
+
+    @application.post("/retrieve")
+    def retrieve(
+        request: QueryRequest,
+        principal: Principal = Depends(current_principal),
+    ) -> dict:
+        try:
+            return enterprise().retrieve_only(
+                principal=principal,
+                knowledge_base_id=request.knowledge_base_id,
+                question=request.question,
+                top_k=request.top_k,
+                conversation_id=request.conversation_id,
+                document_id=request.document_id,
+                version_id=request.version_id,
+                classification=request.classification,
+            )
+        except AuthorizationError as error:
+            raise HTTPException(status_code=403, detail=str(error)) from error
 
     @application.post("/chat")
-    def chat(request: QueryRequest) -> dict:
-        """同步执行 V3 完整 RAG Chain，并返回 Answer、Citation 与 Debug 字段。
-
-        当前函数是普通 ``def``，调用 ``ask_rag()->invoke()``，会等待完整回答。虽然
-        Service 提供 ``aask_rag``，这里尚未使用 ``async def/await``，也没有 SSE。
-        """
+    def chat(
+        request: QueryRequest,
+        principal: Principal = Depends(current_principal),
+    ) -> dict:
         try:
-            return get_service().ask_rag(request.question)
-        except Exception as error:
-            raise HTTPException(status_code=500, detail=str(error)) from error
+            return enterprise().chat(
+                principal=principal,
+                knowledge_base_id=request.knowledge_base_id,
+                question=request.question,
+                conversation_id=request.conversation_id,
+                document_id=request.document_id,
+                version_id=request.version_id,
+                classification=request.classification,
+            )
+        except AuthorizationError as error:
+            raise HTTPException(status_code=403, detail=str(error)) from error
+
+    @application.post("/documents/register")
+    def register_document(
+        request: RegisterDocumentRequest,
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        return lifecycle().register_document(
+            tenant_id=principal.tenant_id,
+            knowledge_base_id=request.knowledge_base_id,
+            document_name=request.document_name,
+            source=request.source,
+            document_type=request.document_type,
+            classification=request.classification,
+            owner=principal.user_id,
+        )
+
+    @application.post("/documents/{document_id}/versions")
+    async def upload_version(
+        document_id: str,
+        file: UploadFile = File(...),
+        index: bool = Form(default=True),
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        document = ensure_owned_document(principal, document_id)
+        result = lifecycle().upload_version(
+            tenant_id=principal.tenant_id,
+            knowledge_base_id=document["knowledge_base_id"],
+            document_id=document_id,
+            filename=Path(file.filename or document["source"]).name,
+            content=await file.read(),
+        )
+        if index and result["status"] in {"registered", "failed"}:
+            result = lifecycle().index_version(document_id, result["version_id"])
+        return result
 
     @application.post("/upload")
-    async def upload(file: UploadFile = File(...)) -> dict:
-        """接收一个 PDF，保存到 V3 runtime 并写入同一知识库。
-
-        参数：
-            file (UploadFile): FastAPI 对 multipart 上传文件的封装。
-
-        返回：
-            dict: Ingestion 的 source、页数、Chunk 数和 IDs。
-
-        执行过程：
-            1. ``Path(...).name`` 去掉客户端可能携带的目录，只保留安全文件名。
-            2. 检查扩展名，创建 V3 runtime 目录。
-            3. ``await file.read()`` 异步读取上传内容，再写入 V3 uploads。
-            4. 复用 Service 的 VectorStore 调 ``ingest_pdf``。
-            5. ``refresh_retriever`` 重建内存 BM25，并让下次请求重建 Chain。
-
-        初学者知识点：
-            ``async def`` 定义异步路由；``await`` 暂停当前协程等待文件读取。后续 PDF
-            解析和 Embedding 仍是同步计算，并不会因为路由是 async 自动变成非阻塞。
-        """
+    async def upload_document(
+        file: UploadFile = File(...),
+        knowledge_base_id: str = Form(default="default"),
+        classification: str = Form(default="general"),
+        document_name: str | None = Form(default=None),
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        """便捷入口：注册+上传+索引；发布仍需显式调用，避免未验证版本自动上线。"""
         filename = Path(file.filename or "").name
         if not filename.lower().endswith(".pdf"):
             raise HTTPException(status_code=400, detail="Only PDF files are supported")
-        settings.ensure_runtime_dirs()
-        destination = settings.upload_dir / filename
-        # ``await`` 只能出现在 async def 中；读取完成后 content 的类型是 bytes。
-        content = await file.read()
-        destination.write_bytes(content)
-        try:
-            result = ingest_pdf(
-                destination,
-                settings=settings,
-                vectorstore=get_service().vectorstore,
+        document = lifecycle().register_document(
+            tenant_id=principal.tenant_id,
+            knowledge_base_id=knowledge_base_id,
+            document_name=document_name or filename,
+            source=filename,
+            classification=classification,
+            owner=principal.user_id,
+        )
+        version = lifecycle().upload_version(
+            tenant_id=principal.tenant_id,
+            knowledge_base_id=knowledge_base_id,
+            document_id=document["document_id"],
+            filename=filename,
+            content=await file.read(),
+        )
+        if version["status"] in {"registered", "failed"}:
+            version = lifecycle().index_version(
+                document["document_id"], version["version_id"]
             )
-            get_service().refresh_retriever()
-            return result
-        except Exception as error:
-            raise HTTPException(status_code=500, detail=str(error)) from error
+        return {"document": document, "version": version}
 
+    @application.get("/documents")
+    def list_documents(
+        knowledge_base_id: str = Query(default="default"),
+        include_deleted: bool = Query(default=False),
+        principal: Principal = Depends(current_principal),
+    ) -> list[dict]:
+        if include_deleted and not principal.is_admin:
+            raise HTTPException(status_code=403, detail="Administrator role required")
+        documents = lifecycle().list_documents(
+            principal.tenant_id,
+            knowledge_base_id,
+            include_deleted=include_deleted,
+        )
+        return [
+            document
+            for document in documents
+            if can_read_document(document_catalog, principal, document)
+        ]
+
+    @application.get("/documents/{document_id}/versions")
+    def list_versions(
+        document_id: str,
+        principal: Principal = Depends(current_principal),
+    ) -> list[dict]:
+        try:
+            require_document_access(document_catalog, principal, document_id)
+        except AuthorizationError as error:
+            raise HTTPException(status_code=403, detail=str(error)) from error
+        return lifecycle().list_versions(document_id)
+
+    @application.post("/documents/{document_id}/publish")
+    def publish_version(
+        document_id: str,
+        request: VersionActionRequest,
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        ensure_owned_document(principal, document_id)
+        result = lifecycle().publish_version(document_id, request.version_id)
+        if enterprise_instance:
+            enterprise_instance.invalidate_services()
+        return result
+
+    @application.post("/documents/{document_id}/rollback")
+    def rollback_version(
+        document_id: str,
+        request: VersionActionRequest,
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        ensure_owned_document(principal, document_id)
+        result = lifecycle().rollback_version(document_id, request.version_id)
+        if enterprise_instance:
+            enterprise_instance.invalidate_services()
+        return result
+
+    @application.delete("/documents/{document_id}")
+    def delete_document(
+        document_id: str,
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        ensure_owned_document(principal, document_id)
+        lifecycle().soft_delete(document_id)
+        if enterprise_instance:
+            enterprise_instance.invalidate_services()
+        return {"deleted": True, "document_id": document_id}
+
+    @application.post("/documents/{document_id}/restore")
+    def restore_document(
+        document_id: str,
+        principal: Principal = Depends(checked_admin),
+    ) -> dict:
+        ensure_owned_document(principal, document_id)
+        lifecycle().restore(document_id)
+        if enterprise_instance:
+            enterprise_instance.invalidate_services()
+        return {"restored": True, "document_id": document_id}
+
+    @application.get("/documents/{document_id}/download")
+    def download_document(
+        document_id: str,
+        version_id: str | None = Query(default=None),
+        principal: Principal = Depends(current_principal),
+    ):
+        try:
+            document = require_document_access(
+                document_catalog, principal, document_id
+            )
+        except AuthorizationError as error:
+            raise HTTPException(status_code=403, detail=str(error)) from error
+        path = lifecycle().download_path(document_id, version_id)
+        return FileResponse(
+            path, filename=document["source"], media_type="application/pdf"
+        )
+
+    application.state.catalog = document_catalog
+    application.state.auth_service = auth
+    application.state.get_lifecycle = lifecycle
+    application.state.get_enterprise = enterprise
     return application
 
 
-# Uvicorn 使用 ``rag_langchain_native.api:app`` 导入这个模块级应用对象。
 app = create_app()
 

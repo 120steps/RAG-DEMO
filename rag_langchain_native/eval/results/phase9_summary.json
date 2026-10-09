@@ -1,0 +1,81 @@
+{
+  "phase8_retrieval_baseline": {
+    "total_cases": 28,
+    "mrr": 0.9821428571428571,
+    "average_retrieval_latency_ms": 930.4340428456532,
+    "p95_retrieval_latency_ms": 882.0668000262231,
+    "miss_cases": [],
+    "hit_at_1": {
+      "hit_count": 27,
+      "hit_rate": 0.9642857142857143
+    },
+    "hit_at_3": {
+      "hit_count": 28,
+      "hit_rate": 1.0
+    },
+    "hit_at_5": {
+      "hit_count": 28,
+      "hit_rate": 1.0
+    },
+    "hit_at_10": {
+      "hit_count": 28,
+      "hit_rate": 1.0
+    }
+  },
+  "phase9_retrieval": {
+    "total_cases": 28,
+    "mrr": 0.9821428571428571,
+    "average_retrieval_latency_ms": 1024.488803548073,
+    "p95_retrieval_latency_ms": 1113.7403002940118,
+    "miss_cases": [],
+    "hit_at_1": {
+      "hit_count": 27,
+      "hit_rate": 0.9642857142857143
+    },
+    "hit_at_3": {
+      "hit_count": 28,
+      "hit_rate": 1.0
+    },
+    "hit_at_5": {
+      "hit_count": 28,
+      "hit_rate": 1.0
+    },
+    "hit_at_10": {
+      "hit_count": 28,
+      "hit_rate": 1.0
+    }
+  },
+  "phase9_answer": {
+    "total_cases": 32,
+    "answer_accuracy": 0.9642857142857143,
+    "citation_accuracy": 1.0,
+    "refusal_accuracy": 1.0,
+    "faithfulness_average": null,
+    "hallucination_rate": null,
+    "average_latency_ms": 7094.395549996989,
+    "failed_case_ids": [
+      "Q023"
+    ],
+    "judge_evaluated_cases": 0
+  },
+  "phase9_judge": {
+    "total_cases": 32,
+    "judged_cases": 32,
+    "judge_failed_cases": [],
+    "correctness_average": 2.0,
+    "faithfulness_average": 2.0,
+    "completeness_average": 2.0,
+    "hallucination_rate": 0.0,
+    "hallucination_case_ids": []
+  },
+  "phase9_security": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "comparability": {
+    "retrieval_accuracy": "Comparable model/chunk/retrieval configuration and same ground truth.",
+    "latency": "Observed runs were not controlled for cold start or machine load; do not treat as a strict performance claim.",
+    "security": "Hit@K is not a security metric; use the separate security evaluation and pytest suite."
+  }
+}

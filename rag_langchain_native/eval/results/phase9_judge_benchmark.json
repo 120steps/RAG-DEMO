@@ -1,0 +1,366 @@
+{
+  "summary": {
+    "total_cases": 32,
+    "judged_cases": 32,
+    "judge_failed_cases": [],
+    "correctness_average": 2.0,
+    "faithfulness_average": 2.0,
+    "completeness_average": 2.0,
+    "hallucination_rate": 0.0,
+    "hallucination_case_ids": []
+  },
+  "details": [
+    {
+      "id": "Q001",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全符合Retrieved Context中的规定。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q002",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了国际出差的申请时限（提前10个工作日）和最终审批人（分管副总裁），且完全符合检索到的文档内容。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q003",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确涵盖了总监及以上人员的职级要求以及其他员工因医疗原因升舱的条件和审批流程，与提供的上下文完全一致。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q004",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确地从提供的上下文中提取了关于机场往返出租车使用的时间段，完全符合预期答案。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q005",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全基于提供的上下文信息，没有幻觉。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q006",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "The generated answer accurately reflects the information provided in the retrieved context regarding the daily subsidy amount and the specific rules for when meals are provided by the company or client."
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q007",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "The generated answer accurately reflects the information provided in the travel policy document regarding the 10-working-day submission deadline for travel expenses."
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q008",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确涵盖了文档中提到的所有必须启用MFA的场景，包括明确列出的四项以及第三方远程维护和远程访问场景，且均有对应的上下文支持。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q009",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全符合检索到的上下文信息。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q010",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全基于提供的上下文信息，没有引入外部知识或虚假信息。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q011",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确地从提供的上下文中提取了关键安全补丁（7天）和一般高危补丁（14天）的完成期限，完全符合要求。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q012",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全符合检索到的上下文（security_policy.pdf 第3页第1段明确指出USB存储设备授权最长30天）。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q013",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，列出了四个分类级别，且内容完全基于提供的上下文，没有产生幻觉。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q014",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全基于提供的上下文信息，没有包含任何幻觉内容。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q015",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全基于提供的上下文信息，没有引入外部知识。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q016",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全基于提供的上下文信息，没有引入外部知识或虚假信息。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q017",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全基于提供的上下文信息，没有包含任何幻觉内容。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q018",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了员工入职满一年后的年假天数以及结转规则，且完全基于提供的上下文内容，没有产生幻觉。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q019",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了生日假的天数以及不可结转的规定，与提供的上下文完全一致。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q020",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确引用了employee_handbook.pdf中的规定，完整回答了问题，且未包含任何幻觉信息。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q021",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全符合Retrieved Context中关于绩效复核时限的规定。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q022",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "The generated answer accurately reflects the policy stated in the retrieved context, which specifies that expenses with the same supplier and purpose occurring within 7 days should be combined for approval level determination."
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q023",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "The generated answer correctly identifies that the provided context specifies the approval requirement for the 8,001-30,000 range as 'department head and finance BP', which covers the 30,000 amount. It accurately reflects the information available in the retrieved context."
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q024",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全基于提供的上下文信息，没有包含任何幻觉内容。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q025",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全基于提供的上下文信息，没有产生幻觉。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q026",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "The generated answer accurately reflects the information provided in the retrieved context regarding the submission deadline and the approval requirement for non-receipt expenses."
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q027",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确回答了问题，且完全符合检索到的上下文内容。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q028",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确引用了Retrieved Context中的内容，完整回答了问题，且没有包含任何幻觉信息。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q029",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "The model correctly identified that the provided context does not contain information about the CEO and provided a proper refusal, which aligns with the should_answer=false requirement."
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q030",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "生成的答案准确地指出文档中没有关于普通员工密码每90天修改的规定，并正确区分了服务账号的轮换要求与普通员工的复核周期，完全符合上下文内容。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q031",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "该问题属于无法回答的问题，生成答案正确识别了这一点并进行了拒答，符合预期。"
+      },
+      "judge_error": null
+    },
+    {
+      "id": "Q032",
+      "judge_result": {
+        "correctness_score": 2,
+        "faithfulness_score": 2,
+        "completeness_score": 2,
+        "hallucination": false,
+        "reason": "The generated answer correctly identifies that the document does not specify the exact number of days for maternity leave and accurately reflects the information provided in the context, which states that it is determined by local laws and company welfare schemes."
+      },
+      "judge_error": null
+    }
+  ]
+}

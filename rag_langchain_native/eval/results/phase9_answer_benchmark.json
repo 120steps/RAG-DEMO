@@ -1,0 +1,1425 @@
+{
+  "summary": {
+    "total_cases": 32,
+    "answer_accuracy": 0.9642857142857143,
+    "citation_accuracy": 1.0,
+    "refusal_accuracy": 1.0,
+    "faithfulness_average": null,
+    "hallucination_rate": null,
+    "average_latency_ms": 7094.395549996989,
+    "failed_case_ids": [
+      "Q023"
+    ],
+    "judge_evaluated_cases": 0
+  },
+  "details": [
+    {
+      "id": "Q001",
+      "question": "国内常规出差最迟需要提前多久提交申请？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "国内常规出差原则上应至少提前2个工作日提交申请。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 17021.447400096804,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q002",
+      "question": "国际出差需要提前多久申请，并由谁最终批准？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "国际出差需要至少提前10个工作日提交申请，最终由分管副总裁审批。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 11743.42430010438,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q003",
+      "question": "连续飞行超过6小时，哪些员工可以选择公务舱？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "连续飞行超过6小时，职级为总监及以上的人员可以选择公务舱；其他员工如因医疗原因需要升舱，需提交医院证明并经人力资源负责人批准。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 20110.494500026107,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q004",
+      "question": "员工在什么时间段往返机场可以使用出租车？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "员工在凌晨23:00至次日06:00期间往返机场可以使用出租车。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 3,
+          "chunk_id": 2,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 14963.18560000509,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q005",
+      "question": "A类城市普通员工的住宿上限是多少？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "A类城市普通员工的住宿上限为650元/晚。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 10853.448700159788,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q006",
+      "question": "国内出差补贴标准是多少？如果公司或客户提供两餐及以上，应如何处理？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "国内出差餐饮及杂费补贴标准为150元/自然日（出发日和返程日均按全天计算）。若公司或客户提供两餐及以上，当日补贴减半；若提供全部三餐，则不发放餐补，但仍可领取30元杂费补贴。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1919.9824999086559,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q007",
+      "question": "出差返程后应在多久内提交报销？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "根据公司内部制度，出差返程后应在10个工作日内提交报销。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1399.3576997891068,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q008",
+      "question": "哪些访问场景必须启用多因素认证(MFA)？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "根据公司制度，以下场景必须启用多因素认证（MFA）：互联网暴露系统、VPN、云管理控制台、特权账号、第三方远程维护，以及远程访问场景。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 20625.472799874842,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q009",
+      "question": "服务账号的密钥多久至少轮换一次？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "服务账号的密钥至少每90天轮换一次。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 2,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1678.3631001599133,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q010",
+      "question": "连续多久未使用的高权限会被自动暂停？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "连续60天未使用的高权限会被自动暂停。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 14053.543999791145,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q011",
+      "question": "关键安全补丁和一般高危补丁分别应在多久内完成？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "关键安全补丁应在7天内完成，一般高危补丁应在14天内完成。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 10385.173900052905,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q012",
+      "question": "经批准使用USB存储设备时，授权最长可以持续多久？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "经批准使用USB存储设备时，授权最长可以持续30天。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 5580.592500045896,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q013",
+      "question": "公司的数据分为哪四个分类级别？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "公司的数据分为公开、内部、机密和严格机密四个分类级别。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 2,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 6150.566900148988,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q014",
+      "question": "发现账号被盗或数据误发后，应在多长时间内报告？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "发现账号被盗或数据误发后，应在15分钟内通过安全热线或事件门户报告。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 7754.024399910122,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q015",
+      "question": "信息安全政策例外最长有效多久？涉及严格机密数据时由谁批准？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "信息安全政策例外最长有效期为180天。涉及严格机密数据的例外须由CISO批准。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 7291.171200107783,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q016",
+      "question": "新员工应在多久内完成合规、安全和隐私必修课？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "新员工应在10个工作日内完成合规、安全和隐私必修课。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 5286.641399841756,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q017",
+      "question": "符合条件的员工每周最多远程办公几天？哪一天是团队共同办公日？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "符合条件的员工每周最多远程办公2天；周二为团队共同办公日。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 5759.039099793881,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q018",
+      "question": "员工入职满一年后最少有多少天年假？最多可以结转多少天？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "员工入职满一年后，法定及公司年假合计不少于10个工作日；年假最多可结转5天至下一年度，并应在次年3月31日前使用。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1768.134200014174,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q019",
+      "question": "生日假有几天，可以结转到下一年度吗？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "生日假为1个工作日，不可结转到下一年度。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1523.7130001187325,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q020",
+      "question": "普通礼品在什么金额以内可以接受？",
+      "should_answer": true,
+      "retrieval_rank": 2,
+      "answer": "单次价值不超过300元且不影响商业判断的普通礼品可以接受。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1449.0827000699937,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q021",
+      "question": "员工对正式绩效结果有异议，应在多久内申请复核？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "员工在收到正式绩效结果后，应在5个工作日内提交书面复核申请。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "employee_handbook.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1988.1235002540052,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q022",
+      "question": "同一供应商、同一目的的费用，在多少天内发生时应合并判断审批级别？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "同一供应商、同一目的的费用，在7天内发生时应合并判断审批级别。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1932.2955999523401,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q023",
+      "question": "含税金额为30,000元的费用最低需要哪些审批？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "根据提供的文档，对于含税金额为30,000元的费用，文档中未明确列出该具体金额区间的最低审批要求。文档仅说明了8,001至30,000元需部门负责人及财务BP审批，以及超过30,000元需分管副总裁审批。",
+      "refused": true,
+      "answer_correct": false,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 2191.834700293839,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q024",
+      "question": "内部工作餐和普通商业客户招待的人均上限分别是多少？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "内部工作餐的人均上限为80元，普通商业客户招待的人均上限为300元。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "expense_policy.pdf",
+          "page": 3,
+          "chunk_id": 0,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 7611.8080001324415,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q025",
+      "question": "销售及现场支持岗位每月最多可报销多少业务通信费？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "销售及现场支持岗位每月最多可报销300元的业务通信费。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "expense_policy.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 3785.1716997101903,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q026",
+      "question": "费用应在发生后多久提交？超过多少金额的无票费用需要财务经理批准？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "费用应在发生后15个自然日内提交（每年12月发生的费用应在次年1月10日前提交）。单笔超过200元的无票费用须由财务经理批准。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 0,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1505.1667001098394,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q027",
+      "question": "预付款应在事项结束后多久完成清算？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "预付款申请人应在事项结束后10个工作日内完成清算。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 0,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 2270.5035996623337,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q028",
+      "question": "费用申请人和审批人至少需要保存相关记录多少年？",
+      "should_answer": true,
+      "retrieval_rank": 1,
+      "answer": "费用申请人和审批人应保存相关记录至少5年，或按照更长的法定期限保存。",
+      "refused": false,
+      "answer_correct": true,
+      "citation_correct": true,
+      "refusal_correct": null,
+      "sources": [
+        {
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 6,
+          "chunk_id": 2,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 5,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 4228.964000009,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q029",
+      "question": "公司的CEO是谁？",
+      "should_answer": false,
+      "retrieval_rank": null,
+      "answer": "无法根据知识库回答，提供的文档中未包含公司CEO的相关信息。",
+      "refused": true,
+      "answer_correct": null,
+      "citation_correct": null,
+      "refusal_correct": true,
+      "sources": [
+        {
+          "source": "travel_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 11079.704799689353,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q030",
+      "question": "普通员工的登录密码必须每90天修改一次吗？",
+      "should_answer": false,
+      "retrieval_rank": null,
+      "answer": "文档中未说明普通员工的登录密码必须每90天修改一次。文档仅规定了服务账号的密钥需每90天轮换，普通员工的认证要求为口令加条件访问，复核周期为每季度。",
+      "refused": true,
+      "answer_correct": null,
+      "citation_correct": null,
+      "refusal_correct": true,
+      "sources": [
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 1,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "security_policy.pdf",
+          "page": 2,
+          "chunk_id": 0,
+          "document_id": "de46be381cfa4318a8c2df6ae19a1d5e",
+          "version_id": "8c41821a94204ef5ba0a44ae98b47aac",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 1644.117200281471,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q031",
+      "question": "公司2026年的营业收入是多少？",
+      "should_answer": false,
+      "retrieval_rank": null,
+      "answer": "提供的知识库中未包含公司2026年营业收入的相关信息。",
+      "refused": true,
+      "answer_correct": null,
+      "citation_correct": null,
+      "refusal_correct": true,
+      "sources": [
+        {
+          "source": "expense_policy.pdf",
+          "page": 2,
+          "chunk_id": 2,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "travel_policy.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "document_id": "257e325634e84ea4b2f9d36d3ace7061",
+          "version_id": "9c1808cf840f42769b95ea70d6d67213",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "expense_policy.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "5ca49c9c326c427fb6fdfa684a29ba4e",
+          "version_id": "81f8ea5c749b4f49b1aae694b6355e81",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 13822.581899818033,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    },
+    {
+      "id": "Q032",
+      "question": "员工产假具体有多少天？",
+      "should_answer": false,
+      "retrieval_rank": null,
+      "answer": "根据公司内部制度，产假具体天数依当地法律及公司福利方案执行，文档中未说明具体天数。",
+      "refused": true,
+      "answer_correct": null,
+      "citation_correct": null,
+      "refusal_correct": true,
+      "sources": [
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 1,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 0,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        },
+        {
+          "source": "employee_handbook.pdf",
+          "page": 4,
+          "chunk_id": 2,
+          "document_id": "d28e29bce6ca4dbfa755d90842287e41",
+          "version_id": "875ab23d8c024875ade2d585ed19addc",
+          "tenant_id": "evaluation-tenant",
+          "knowledge_base_id": "phase9-ground-truth"
+        }
+      ],
+      "latency_ms": 7643.525999970734,
+      "judge_result": null,
+      "judge_error": null,
+      "error": null
+    }
+  ]
+}

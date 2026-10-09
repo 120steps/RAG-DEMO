@@ -1,0 +1,38 @@
+{
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "general_can_read_general",
+      "passed": true
+    },
+    {
+      "name": "general_cannot_read_hr",
+      "passed": true
+    },
+    {
+      "name": "hr_can_read_hr",
+      "passed": true
+    },
+    {
+      "name": "tenant_a_cannot_read_tenant_b",
+      "passed": true
+    },
+    {
+      "name": "tenant_b_only_reads_tenant_b",
+      "passed": true
+    },
+    {
+      "name": "tampered_token_rejected",
+      "passed": true
+    },
+    {
+      "name": "conversation_ownership_enforced",
+      "passed": true
+    }
+  ],
+  "note": "This deterministic evaluation complements, but does not replace, penetration testing."
+}

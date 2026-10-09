@@ -6,8 +6,8 @@ from langchain_core.messages import AIMessage
 from langchain_core.runnables import RunnableLambda
 
 from rag_langchain_native import api
-from rag_langchain_native.chain import NativeRAGService
 from rag_langchain_native.cli import build_parser
+from rag_langchain_native.security import AuthService
 
 
 def test_cli_parser_supports_required_commands():
@@ -18,29 +18,48 @@ def test_cli_parser_supports_required_commands():
     assert parser.parse_args(["ingest", "--rebuild"]).rebuild is True
 
 
-def test_fastapi_upload_and_retrieve_share_store(
-    monkeypatch, fake_store, v3_settings
-):
+def test_fastapi_upload_and_retrieve_share_store(fake_store, v3_settings):
     model = RunnableLambda(lambda _: AIMessage(content="测试答案"))
-    service = NativeRAGService(
-        settings=v3_settings,
+    app = api.create_app(
+        v3_settings,
         vectorstore=fake_store,
         llm=model,
     )
-    monkeypatch.setattr(api, "get_service", lambda: service)
-    client = TestClient(api.create_app(v3_settings))
+    auth: AuthService = app.state.auth_service
+    auth.register_user(
+        tenant_id="tenant-a",
+        username="admin",
+        password="password123",
+        roles=["admin"],
+    )
+    token = auth.login("tenant-a", "admin", "password123")
+    headers = {"Authorization": f"Bearer {token}"}
+    client = TestClient(app)
     assert client.get("/health").json()["status"] == "ok"
 
     pdf = v3_settings.project_root / "data" / "pdf" / "travel_policy.pdf"
     with pdf.open("rb") as file:
         response = client.post(
-            "/upload", files={"file": (pdf.name, file, "application/pdf")}
+            "/upload",
+            files={"file": (pdf.name, file, "application/pdf")},
+            data={"knowledge_base_id": "default", "classification": "general"},
+            headers=headers,
         )
     assert response.status_code == 200
     assert fake_store._collection.count() > 0
+    document = response.json()["document"]
+    version = response.json()["version"]
+    response = client.post(
+        f"/documents/{document['document_id']}/publish",
+        json={"version_id": version["version_id"]},
+        headers=headers,
+    )
+    assert response.status_code == 200
 
     response = client.post(
-        "/retrieve", json={"question": "国际出差", "top_k": 3}
+        "/retrieve",
+        json={"question": "国际出差", "top_k": 3},
+        headers=headers,
     )
     assert response.status_code == 200
     assert response.json()["documents"]

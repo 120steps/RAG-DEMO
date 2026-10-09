@@ -106,13 +106,15 @@ def get_all_documents(vectorstore: Chroma) -> list[Document]:
     documents = result.get("documents") or []
     metadatas = result.get("metadatas") or []
     ids = result.get("ids") or []
-    return [
-        Document(
-            page_content=text,
-            metadata={**(metadata or {}), "document_id": doc_id},
-        )
-        for doc_id, text, metadata in zip(ids, documents, metadatas)
-    ]
+    restored = []
+    for doc_id, text, metadata in zip(ids, documents, metadatas):
+        values = dict(metadata or {})
+        # Phase 8 的 Chroma ID 就是 document_id；Phase 9 的 document_id 表示逻辑文档，
+        # 因此新增 chunk_uid 保存真正唯一的向量记录 ID，不能覆盖逻辑 document_id。
+        values.setdefault("chunk_uid", doc_id)
+        values.setdefault("document_id", doc_id)
+        restored.append(Document(page_content=text, metadata=values, id=doc_id))
+    return restored
 
 
 def add_documents(
@@ -137,7 +139,10 @@ def add_documents(
         ``Iterable`` 表示参数可以是列表、元组或生成器；转成 list 后才能安全重复遍历。
     """
     docs = list(documents)
-    ids = [str(doc.metadata["document_id"]) for doc in docs]
+    ids = [
+        str(doc.metadata.get("chunk_uid") or doc.metadata["document_id"])
+        for doc in docs
+    ]
     if docs:
         vectorstore.add_documents(docs, ids=ids)
     return ids

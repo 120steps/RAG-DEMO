@@ -1,7 +1,8 @@
 """LangChain V3 的命令行入口。
 
 文件职责：
-    提供 PowerShell 友好的 ``ingest``、``retrieve``、``ask``、``health`` 子命令。
+    保留 Phase 8 的 ``ingest/retrieve/ask/health``，并提供 Phase 9 的本地用户创建、
+    企业上传、授权检索和授权问答子命令。
 
 在 RAG Pipeline 中的位置：
     CLI 与 FastAPI 都是最上游入口。它只解析命令行参数并调用正式业务函数，不重新实现
@@ -14,7 +15,8 @@
     ``ingest`` -> ``ingest_pdf/rebuild_knowledge_base``；
     ``retrieve`` -> ``NativeRAGService.retrieve_only``；
     ``ask`` -> ``NativeRAGService.ask_rag``；
-    ``health`` 只返回配置，不加载 Gemini。
+    ``health`` 只返回配置，不加载 Gemini；Enterprise 命令通过 Catalog 验证用户后调用
+    ``DocumentLifecycleService`` 或 ``EnterpriseRAGService``。
 
 LangChain 关系：
     argparse/CLI 不是 LangChain；``ask`` 最终进入 LCEL 的 ``chain.invoke``。
@@ -25,10 +27,15 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
 
 from .chain import get_service
+from .catalog import DocumentCatalog
 from .config import DEFAULT_SETTINGS
+from .enterprise import EnterpriseRAGService
 from .ingestion import ingest_pdf, rebuild_knowledge_base
+from .lifecycle import DocumentLifecycleService
+from .security import AuthService
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -57,6 +64,37 @@ def build_parser() -> argparse.ArgumentParser:
     ask.add_argument("question")
 
     commands.add_parser("health", help="Show V3 runtime configuration")
+
+    create_user = commands.add_parser(
+        "create-user", help="Create a Phase 9 local development user"
+    )
+    create_user.add_argument("--tenant", required=True)
+    create_user.add_argument("--username", required=True)
+    create_user.add_argument("--password", required=True)
+    create_user.add_argument(
+        "--roles", default="general", help="Comma-separated roles"
+    )
+
+    enterprise_upload = commands.add_parser(
+        "enterprise-upload", help="Upload, index and optionally publish a PDF"
+    )
+    enterprise_upload.add_argument("path")
+    enterprise_upload.add_argument("--tenant", required=True)
+    enterprise_upload.add_argument("--username", required=True)
+    enterprise_upload.add_argument("--password", required=True)
+    enterprise_upload.add_argument("--knowledge-base", default="default")
+    enterprise_upload.add_argument("--classification", default="general")
+    enterprise_upload.add_argument("--publish", action="store_true")
+
+    for name in ("enterprise-retrieve", "enterprise-ask"):
+        command = commands.add_parser(name, help=f"Run Phase 9 {name}")
+        command.add_argument("question")
+        command.add_argument("--tenant", required=True)
+        command.add_argument("--username", required=True)
+        command.add_argument("--password", required=True)
+        command.add_argument("--knowledge-base", default="default")
+        if name == "enterprise-retrieve":
+            command.add_argument("--top-k", type=int, default=10)
     return parser
 
 
@@ -74,7 +112,8 @@ def main(argv: list[str] | None = None) -> int:
         2. 解析子命令。
         3. Ingest 后清除 ``get_service`` 缓存，避免继续使用旧 BM25/Chain。
         4. Retrieve 不调用 Gemini；Ask 执行完整 RAG；Health 只读配置。
-        5. ``json.dumps(..., ensure_ascii=False)`` 以可读中文打印结果。
+        5. Enterprise 命令先使用密码取得并验证本地签名 Token 对应的 Principal。
+        6. ``json.dumps(..., ensure_ascii=False)`` 以可读中文打印结果。
 
     初学者知识点：
         ``if/elif/else`` 保证一次只运行一个子命令。函数末尾返回整数；模块入口使用
@@ -93,6 +132,75 @@ def main(argv: list[str] | None = None) -> int:
         result = get_service().retrieve_only(args.question, top_k=args.top_k)
     elif args.command == "ask":
         result = get_service().ask_rag(args.question)
+    elif args.command == "create-user":
+        catalog = DocumentCatalog(DEFAULT_SETTINGS.catalog_path)
+        auth = AuthService(
+            catalog,
+            DEFAULT_SETTINGS.auth_secret,
+            DEFAULT_SETTINGS.auth_token_ttl_seconds,
+        )
+        result = auth.register_user(
+            tenant_id=args.tenant,
+            username=args.username,
+            password=args.password,
+            roles=[role.strip() for role in args.roles.split(",") if role.strip()],
+        )
+        result.pop("password_hash", None)
+    elif args.command in {
+        "enterprise-upload",
+        "enterprise-retrieve",
+        "enterprise-ask",
+    }:
+        catalog = DocumentCatalog(DEFAULT_SETTINGS.catalog_path)
+        auth = AuthService(
+            catalog,
+            DEFAULT_SETTINGS.auth_secret,
+            DEFAULT_SETTINGS.auth_token_ttl_seconds,
+        )
+        principal = auth.verify_token(
+            auth.login(args.tenant, args.username, args.password)
+        )
+        if args.command == "enterprise-upload":
+            if not principal.is_admin:
+                raise PermissionError("Administrator role required")
+            lifecycle = DocumentLifecycleService(catalog, DEFAULT_SETTINGS)
+            path = Path(args.path)
+            document = lifecycle.register_document(
+                tenant_id=principal.tenant_id,
+                knowledge_base_id=args.knowledge_base,
+                document_name=path.name,
+                source=path.name,
+                classification=args.classification,
+                owner=principal.user_id,
+            )
+            version = lifecycle.upload_version(
+                tenant_id=principal.tenant_id,
+                knowledge_base_id=args.knowledge_base,
+                document_id=document["document_id"],
+                filename=path.name,
+                content=path.read_bytes(),
+            )
+            if version["status"] in {"registered", "failed"}:
+                version = lifecycle.index_version(
+                    document["document_id"], version["version_id"]
+                )
+            if args.publish:
+                lifecycle.publish_version(
+                    document["document_id"], version["version_id"]
+                )
+            result = {"document": document, "version": version}
+        else:
+            service = EnterpriseRAGService(catalog, DEFAULT_SETTINGS)
+            values = {
+                "principal": principal,
+                "knowledge_base_id": args.knowledge_base,
+                "question": args.question,
+            }
+            result = (
+                service.retrieve_only(**values, top_k=args.top_k)
+                if args.command == "enterprise-retrieve"
+                else service.chat(**values)
+            )
     else:
         result = {
             "status": "ok",

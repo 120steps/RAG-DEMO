@@ -175,15 +175,19 @@ class QueryProcessor:
         self,
         model: Runnable | None,
         settings: Settings = DEFAULT_SETTINGS,
+        cache_namespace: str = "default",
     ) -> None:
         """创建 QueryProcessor 及其 V3 独立 Cache。
 
         参数：
             model (Runnable | None): 可调用的 ChatModel；两项功能都关闭时可以为 None。
             settings (Settings): 开关、Expansion 数量、Cache 路径和限流间隔。
+            cache_namespace (str): Phase 9 的租户、知识库、权限版本作用域。默认值保留
+                Phase 8 原缓存格式；企业主链始终传入隔离 Namespace。
         """
         self.model = model
         self.settings = settings
+        self.cache_namespace = cache_namespace
         settings.ensure_runtime_dirs()
         self.rewrite_cache = JsonCache(
             settings.cache_dir / "query_rewrite_cache.json"
@@ -192,6 +196,11 @@ class QueryProcessor:
             settings.cache_dir / "query_expansion_cache.json"
         )
         self.throttle = RequestThrottle(settings.gemini_min_interval_seconds)
+
+    def _cache_key(self, value: str) -> str:
+        """把租户、知识库、权限版本作用域加入 Cache Key，防止跨边界复用。"""
+        # default 保持 Phase 8 已有 Cache 格式；企业请求一定使用非 default 作用域。
+        return value if self.cache_namespace == "default" else f"{self.cache_namespace}\n{value}"
 
     def _require_model(self) -> Runnable:
         """返回可用模型；需要模型但未配置时抛出明确错误。
@@ -227,7 +236,8 @@ class QueryProcessor:
         """
         if not self.settings.rewrite_enabled:
             return question, False
-        cached = self.rewrite_cache.read().get(question)
+        cache_key = self._cache_key(question)
+        cached = self.rewrite_cache.read().get(cache_key)
         if isinstance(cached, str) and cached.strip():
             return cached.strip(), False
         try:
@@ -237,7 +247,7 @@ class QueryProcessor:
             rewritten = chain.invoke({"question": question}).strip()
             if not rewritten:
                 raise ValueError("Gemini returned an empty rewrite")
-            self.rewrite_cache.set(question, rewritten)
+            self.rewrite_cache.set(cache_key, rewritten)
             return rewritten, False
         except Exception:
             return question, True
@@ -266,7 +276,8 @@ class QueryProcessor:
         """
         if not self.settings.expansion_enabled:
             return [query], False
-        cached = self.expansion_cache.read().get(query)
+        cache_key = self._cache_key(query)
+        cached = self.expansion_cache.read().get(cache_key)
         if isinstance(cached, list):
             cached_queries = [str(item).strip() for item in cached if str(item).strip()]
             if cached_queries:
@@ -285,7 +296,7 @@ class QueryProcessor:
             queries = list(dict.fromkeys([query, *alternatives]))[
                 : self.settings.expansion_count + 1
             ]
-            self.expansion_cache.set(query, queries)
+            self.expansion_cache.set(cache_key, queries)
             return queries, False
         except Exception:
             return [query], True

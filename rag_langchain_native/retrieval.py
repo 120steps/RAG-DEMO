@@ -75,6 +75,11 @@ def document_key(document: Document) -> str:
         str: 用于字典和集合的唯一键。
     """
     metadata = document.metadata
+    # Phase 9 中 document_id 是“逻辑文档”，不能拿它给 Chunk 去重，否则同一 PDF 的
+    # 所有页面都会被误合并。chunk_uid 才是 tenant/version/page/chunk 共同决定的唯一键。
+    chunk_uid = metadata.get("chunk_uid")
+    if chunk_uid:
+        return str(chunk_uid)
     document_id = metadata.get("document_id")
     if document_id:
         return str(document_id)
@@ -114,6 +119,7 @@ class ScoredChromaRetriever(BaseRetriever):
 
     vectorstore: Any
     k: int = 10
+    metadata_filter: dict[str, Any] | None = None
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def _get_relevant_documents(
@@ -142,7 +148,11 @@ class ScoredChromaRetriever(BaseRetriever):
             方法名以下划线开头是 LangChain BaseRetriever 要求实现的内部扩展点；用户
             通常调用公开的 ``invoke()``，而不是直接调用本方法。
         """
-        results = self.vectorstore.similarity_search_with_score(query, k=self.k)
+        results = self.vectorstore.similarity_search_with_score(
+            query,
+            k=self.k,
+            filter=self.metadata_filter,
+        )
         documents = []
         for rank, (document, distance) in enumerate(results, start=1):
             copied = clone_document(document)
@@ -309,12 +319,20 @@ class NativeRetrievalEngine:
         self,
         vectorstore,
         settings: Settings = DEFAULT_SETTINGS,
+        *,
+        metadata_filter: dict[str, Any] | None = None,
+        allowed_chunk_ids: set[str] | None = None,
+        allowed_version_ids: set[str] | None = None,
     ) -> None:
         """初始化 Vector、BM25 与最终 base_retriever。
 
         参数：
             vectorstore: 已连接的 LangChain Chroma。
             settings (Settings): Retrieval 开关、Top-K、权重和 RRF 常数。
+            metadata_filter: 服务端生成的 Chroma tenant/kb/version Filter。
+            allowed_chunk_ids: 可选的精确 Chunk 白名单。
+            allowed_version_ids: Vector 与 BM25 共用的 active/authorized 版本集合；显式空集
+                表示拒绝全部，绝不能解释为“没有过滤条件”。
 
         注意：
             ``get_all_documents`` 会把全库文本载入内存以构建 BM25。新增 PDF 后，API 会
@@ -322,10 +340,34 @@ class NativeRetrievalEngine:
         """
         self.vectorstore = vectorstore
         self.settings = settings
-        self.documents = get_all_documents(vectorstore)
+        self.metadata_filter = metadata_filter
+        self.allowed_chunk_ids = allowed_chunk_ids
+        self.allowed_version_ids = allowed_version_ids
+        self.deny_all = (
+            allowed_chunk_ids is not None and not allowed_chunk_ids
+        ) or (allowed_version_ids is not None and not allowed_version_ids)
+        all_documents = get_all_documents(vectorstore)
+        # BM25 是内存索引，无法让 Chroma 替它过滤。因此在建立 BM25 之前使用与 Vector
+        # Search 相同的授权 chunk_uid 集合，确保两条召回路线拥有完全相同的安全边界。
+        self.documents = (
+            [
+                document
+                for document in all_documents
+                if str(document.metadata.get("chunk_uid")) in allowed_chunk_ids
+            ]
+            if allowed_chunk_ids is not None
+            else all_documents
+        )
+        if allowed_version_ids is not None:
+            self.documents = [
+                document
+                for document in self.documents
+                if str(document.metadata.get("version_id")) in allowed_version_ids
+            ]
         self.vector_retriever = ScoredChromaRetriever(
             vectorstore=vectorstore,
             k=settings.vector_k,
+            metadata_filter=metadata_filter,
         )
         self.bm25_retriever = self._build_bm25()
         self.base_retriever = self._build_base_retriever()
@@ -373,7 +415,7 @@ class NativeRetrievalEngine:
             retrievers=retrievers,
             weights=weights,
             c=self.settings.rrf_k,
-            id_key="document_id",
+            id_key="chunk_uid",
             route_names=names,
         )
 
@@ -383,6 +425,8 @@ class NativeRetrievalEngine:
         ``self.base_retriever.invoke(query)`` 是 LangChain Retriever 的标准同步调用：输入
         ``str``，输出有序 ``list[Document]``。这里只负责候选召回，不执行 Reranker。
         """
+        if self.deny_all:
+            return []
         documents = self.base_retriever.invoke(query)
         return list(documents[: self.settings.candidate_k])
 
@@ -407,7 +451,7 @@ class NativeRetrievalEngine:
         """
         # ``dict`` 在现代 Python 中保留插入顺序，因此这种去重不会打乱 Query 顺序。
         unique_queries = list(dict.fromkeys(query.strip() for query in queries if query.strip()))
-        if not unique_queries:
+        if not unique_queries or self.deny_all:
             return []
         result_sets = self.base_retriever.batch(unique_queries)
         if len(unique_queries) == 1:
@@ -452,6 +496,11 @@ def serialize_document(document: Document, rank: int | None = None) -> dict:
         "page": metadata.get("page"),
         "chunk_id": metadata.get("chunk_id"),
         "document_id": metadata.get("document_id"),
+        "version_id": metadata.get("version_id"),
+        "tenant_id": metadata.get("tenant_id"),
+        "knowledge_base_id": metadata.get("knowledge_base_id"),
+        "classification": metadata.get("classification"),
+        "chunk_uid": metadata.get("chunk_uid"),
         "vector_distance": metadata.get("vector_distance"),
         "fusion_score": metadata.get("fusion_score"),
         "rerank_score": metadata.get("rerank_score"),

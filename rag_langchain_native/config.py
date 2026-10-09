@@ -76,6 +76,28 @@ class Settings:
     chroma_dir: Path = PACKAGE_DIR / "runtime" / "chroma"
     cache_dir: Path = PACKAGE_DIR / "runtime" / "cache"
     upload_dir: Path = PACKAGE_DIR / "runtime" / "uploads"
+    catalog_path: Path = PACKAGE_DIR / "runtime" / "catalog.sqlite3"
+
+    # Phase 9 使用独立 collection，避免企业版生命周期数据与 Phase 8 基线互相污染。
+    enterprise_collection_name: str = os.getenv(
+        "V3_ENTERPRISE_CHROMA_COLLECTION", "company_knowledge_enterprise"
+    )
+    default_knowledge_base_id: str = os.getenv(
+        "V3_DEFAULT_KNOWLEDGE_BASE_ID", "default"
+    )
+
+    # Authentication：密钥只能来自环境变量。未配置时企业 API 会默认拒绝受保护请求，
+    # 而不是使用源码中的弱默认值。测试通过 dataclasses.replace 注入临时密钥。
+    auth_secret: str | None = os.getenv("V3_AUTH_SECRET")
+    auth_token_ttl_seconds: int = int(
+        os.getenv("V3_AUTH_TOKEN_TTL_SECONDS", "3600")
+    )
+
+    # Conversation / Router。History 只取最近若干条，避免 Prompt 无限增长。
+    conversation_history_limit: int = int(
+        os.getenv("V3_CONVERSATION_HISTORY_LIMIT", "10")
+    )
+    query_router_enabled: bool = _bool_env("V3_QUERY_ROUTER_ENABLED", True)
 
     # Ingestion / Chroma：Chunk 参数改变后必须重建 V3 自己的向量库。
     collection_name: str = os.getenv(
@@ -162,6 +184,7 @@ class Settings:
             self.chroma_dir,
             self.cache_dir,
             self.upload_dir,
+            self.catalog_path.parent,
         ):
             directory.mkdir(parents=True, exist_ok=True)
 

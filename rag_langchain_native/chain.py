@@ -144,7 +144,8 @@ def format_context(documents: list[Document]) -> str:
     """
     return "\n\n".join(
         f"[Source: {doc.metadata.get('source')}, Page: {doc.metadata.get('page')}, "
-        f"Chunk: {doc.metadata.get('chunk_id')}]\n{doc.page_content}"
+        f"Chunk: {doc.metadata.get('chunk_id')}, "
+        f"Version: {doc.metadata.get('version_id')}]\n{doc.page_content}"
         for doc in documents
     )
 
@@ -184,6 +185,9 @@ def build_citations(documents: list[Document]) -> list[dict]:
                 "page": key[1],
                 "chunk_id": key[2],
                 "document_id": document.metadata.get("document_id"),
+                "version_id": document.metadata.get("version_id"),
+                "tenant_id": document.metadata.get("tenant_id"),
+                "knowledge_base_id": document.metadata.get("knowledge_base_id"),
             }
         )
     return citations
@@ -247,6 +251,9 @@ class NativeRAGService:
         llm: Runnable | None = None,
         query_model: Runnable | None = None,
         reranker=None,
+        metadata_filter: dict | None = None,
+        allowed_version_ids: set[str] | None = None,
+        cache_namespace: str = "default",
     ) -> None:
         """初始化 V3 Service 和 Retrieval Engine。
 
@@ -256,6 +263,9 @@ class NativeRAGService:
             llm (Runnable | None): 可选 Answer Model，测试可注入 Fake。
             query_model (Runnable | None): 可选 Rewrite/Expansion Model。
             reranker: 可选 Cross-Encoder/Fake compressor。
+            metadata_filter: Phase 9 服务端授权 Chroma Filter。
+            allowed_version_ids: 同时约束内存 BM25 的授权版本集合。
+            cache_namespace: tenant/kb/user/epoch 相关的 Query Cache 作用域。
 
         返回：
             None。构造完成后通过 ``ask_rag``、``retrieve_only`` 等方法使用。
@@ -265,8 +275,14 @@ class NativeRAGService:
         """
         self.settings = settings
         self.vectorstore = vectorstore or create_vectorstore(settings)
+        self.metadata_filter = metadata_filter
+        self.allowed_version_ids = allowed_version_ids
+        self.cache_namespace = cache_namespace
         self.retrieval_engine = NativeRetrievalEngine(
-            self.vectorstore, settings
+            self.vectorstore,
+            settings,
+            metadata_filter=metadata_filter,
+            allowed_version_ids=allowed_version_ids,
         )
         self._llm = llm
         self._query_model = query_model
@@ -281,7 +297,10 @@ class NativeRAGService:
         重新构建 LCEL 图。
         """
         self.retrieval_engine = NativeRetrievalEngine(
-            self.vectorstore, self.settings
+            self.vectorstore,
+            self.settings,
+            metadata_filter=self.metadata_filter,
+            allowed_version_ids=self.allowed_version_ids,
         )
         self._chain = None
 
@@ -300,7 +319,24 @@ class NativeRAGService:
             self.settings.rewrite_enabled or self.settings.expansion_enabled
         ):
             query_model = self._model()
-        return QueryProcessor(query_model, self.settings)
+        return QueryProcessor(
+            query_model,
+            self.settings,
+            cache_namespace=self.cache_namespace,
+        )
+
+    @staticmethod
+    def _normalize_chain_input(value: str | dict) -> dict:
+        """兼容 Phase 8 字符串与 Phase 9 original/retrieval 双 Query 输入。"""
+        if isinstance(value, dict):
+            original = str(value.get("original_question", "")).strip()
+            retrieval = str(value.get("retrieval_question") or original).strip()
+        else:
+            original = str(value).strip()
+            retrieval = original
+        if not original:
+            raise ValueError("Question cannot be empty")
+        return {"original_question": original, "retrieval_question": retrieval}
 
     def _merge_query_state(self, value: dict) -> dict:
         """合并 RunnableParallel 的两路输出。
@@ -450,10 +486,15 @@ class NativeRAGService:
             没有把整套旧 RAG 隐藏在单个 Lambda 中。
         """
         processor = self._prepare_query_processor()
-        # Parallel 的两个分支接收完全相同的输入字符串，输出按键名合并为一个 dict。
+        # Phase 9 输入先被规范化为 dict：Answer 保留 original，检索使用 contextual query。
         query_stage = RunnableParallel(
-            original_question=RunnablePassthrough(),
-            query_processing=processor.as_runnable(),
+            original_question=RunnableLambda(
+                lambda state: state["original_question"]
+            ),
+            query_processing=(
+                RunnableLambda(lambda state: state["retrieval_question"])
+                | processor.as_runnable()
+            ),
         ) | RunnableLambda(self._merge_query_state).with_config(
             run_name="merge_query_state"
         )
@@ -499,7 +540,7 @@ class NativeRAGService:
 
         # 多个 ``|`` 组成顺序执行图；最后的 Branch 只会选择一条分支运行。
         return (
-            RunnableLambda(lambda question: str(question).strip())
+            RunnableLambda(self._normalize_chain_input)
             | query_stage
             | RunnableLambda(self._retrieve).with_config(run_name="retrieval")
             | RunnableLambda(self._rerank).with_config(run_name="reranker")
@@ -518,13 +559,21 @@ class NativeRAGService:
             self._chain = self.build_rag_chain()
         return self._chain
 
-    def ask_rag(self, question: str) -> dict:
+    def ask_rag(
+        self, question: str, *, retrieval_question: str | None = None
+    ) -> dict:
         """同步执行完整 RAG Chain。
 
         输入 ``str``，通过 ``chain.invoke`` 返回完整 ``dict``。FastAPI `/chat` 和 CLI
         ``ask`` 当前都调用本方法，因此会等待整个结果完成后一次性返回。
         """
-        return self.chain.invoke(question)
+        value: str | dict = question
+        if retrieval_question is not None:
+            value = {
+                "original_question": question,
+                "retrieval_question": retrieval_question,
+            }
+        return self.chain.invoke(value)
 
     async def aask_rag(self, question: str) -> dict:
         """异步执行完整 RAG Chain，并返回完整结果。
@@ -547,6 +596,7 @@ class NativeRAGService:
         question: str,
         *,
         top_k: int = 10,
+        retrieval_question: str | None = None,
     ) -> dict:
         """只运行 Query Processing、Retrieval 和 Reranker，不生成 Answer。
 
@@ -567,7 +617,7 @@ class NativeRAGService:
             top_k 与缓存 compressor 的 top_n 不同，会复用同一模型创建轻量 compressor。
         """
         processor = self._prepare_query_processor()
-        query_state = processor.process(question.strip())
+        query_state = processor.process((retrieval_question or question).strip())
         started = time.perf_counter()
         documents = self.retrieval_engine.retrieve_queries(
             query_state["expanded_queries"]

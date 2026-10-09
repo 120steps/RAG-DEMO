@@ -60,7 +60,15 @@ def test_citation_is_metadata_driven_and_refusal_is_structured(v3_settings):
         metadata={"source": "x.pdf", "page": 4, "chunk_id": 2},
     )
     assert build_citations([document]) == [
-        {"source": "x.pdf", "page": 4, "chunk_id": 2, "document_id": None}
+        {
+            "source": "x.pdf",
+            "page": 4,
+            "chunk_id": 2,
+            "document_id": None,
+            "version_id": None,
+            "tenant_id": None,
+            "knowledge_base_id": None,
+        }
     ]
     strict = replace(v3_settings, answerability_guard_enabled=True)
     allowed, reason = assess_answerability([], strict)
