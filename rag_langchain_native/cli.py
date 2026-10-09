@@ -36,6 +36,7 @@ from .enterprise import EnterpriseRAGService
 from .ingestion import ingest_pdf, rebuild_knowledge_base
 from .lifecycle import DocumentLifecycleService
 from .security import AuthService
+from .backup import BackupService
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -64,6 +65,13 @@ def build_parser() -> argparse.ArgumentParser:
     ask.add_argument("question")
 
     commands.add_parser("health", help="Show V3 runtime configuration")
+    backup = commands.add_parser("backup", help="Create a consistent V3 runtime backup")
+    backup.add_argument("destination")
+    verify = commands.add_parser("verify-backup", help="Verify backup hashes")
+    verify.add_argument("backup_dir")
+    restore = commands.add_parser("restore-backup", help="Restore into a new empty directory")
+    restore.add_argument("backup_dir")
+    restore.add_argument("destination")
 
     create_user = commands.add_parser(
         "create-user", help="Create a Phase 9 local development user"
@@ -132,6 +140,12 @@ def main(argv: list[str] | None = None) -> int:
         result = get_service().retrieve_only(args.question, top_k=args.top_k)
     elif args.command == "ask":
         result = get_service().ask_rag(args.question)
+    elif args.command == "backup":
+        result = {"backup_dir": str(BackupService().create(args.destination))}
+    elif args.command == "verify-backup":
+        result = BackupService.verify(args.backup_dir)
+    elif args.command == "restore-backup":
+        result = {"restore_dir": str(BackupService().restore(args.backup_dir, args.destination))}
     elif args.command == "create-user":
         catalog = DocumentCatalog(DEFAULT_SETTINGS.catalog_path)
         auth = AuthService(

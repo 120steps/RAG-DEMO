@@ -1,0 +1,32 @@
+name: V3 Live RAG Evaluation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-evaluation:
+    name: Live Retrieval and Answer Gate
+    runs-on: ubuntu-latest
+    environment: rag-live-evaluation
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
+        with: {python-version: "3.11", cache: pip, cache-dependency-path: rag_langchain_native/requirements.txt}
+      - run: python -m pip install --requirement rag_langchain_native/requirements.txt
+      - name: Require protected secrets
+        env: {GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}", V3_AUTH_SECRET: "${{ secrets.V3_AUTH_SECRET }}"}
+        run: python -c "import os,sys; sys.exit(0 if os.getenv('GEMINI_API_KEY') and os.getenv('V3_AUTH_SECRET') else 2)"
+      - name: Run live evaluation
+        env: {GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}", V3_AUTH_SECRET: "${{ secrets.V3_AUTH_SECRET }}"}
+        run: |
+          python -m rag_langchain_native.eval.enterprise_retrieval_eval
+          python -m rag_langchain_native.eval.enterprise_answer_eval
+          python -m rag_langchain_native.eval.security_eval
+          python -m rag_langchain_native.eval.quality_gate --retrieval rag_langchain_native/eval/results/phase9_retrieval_benchmark.json --answer rag_langchain_native/eval/results/phase9_answer_benchmark.json --security rag_langchain_native/eval/results/phase9_security_evaluation.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with: {name: live-rag-evaluation, path: rag_langchain_native/eval/results/, retention-days: 14}

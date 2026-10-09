@@ -8,7 +8,6 @@ from rag_langchain_native.enterprise import EnterpriseRAGService
 from rag_langchain_native.security import (
     AuthenticationError,
     AuthorizationError,
-    Principal,
     build_authorization_scope,
     require_document_access,
 )
@@ -74,7 +73,7 @@ def test_signed_identity_rbac_acl_and_tamper_detection(enterprise_env, make_pdf_
 def test_group_acl_grants_only_the_named_group(enterprise_env, make_pdf_bytes):
     env = enterprise_env
     admin, _, _ = _user(env, "tenant-a", "admin", ["admin"])
-    analyst = env["auth"].register_user(
+    env["auth"].register_user(
         tenant_id="tenant-a", username="analyst", password="password123",
         roles=["general"], groups=["payroll-project"],
     )

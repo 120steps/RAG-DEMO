@@ -1,0 +1,15 @@
+{
+    admin off
+}
+
+# 生产将 rag.example.com 替换为真实域名；Caddy 才能向 CA 申请证书。
+rag.example.com {
+    encode zstd gzip
+    reverse_proxy rag-v3:8011
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "no-referrer"
+    }
+}

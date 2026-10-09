@@ -118,7 +118,12 @@ def _b64_encode(value: bytes) -> str:
 
 def _b64_decode(value: str) -> bytes:
     padding = "=" * (-len(value) % 4)
-    return base64.urlsafe_b64decode(value + padding)
+    decoded = base64.urlsafe_b64decode(value + padding)
+    # Base64 最后几个未使用 bit 可能产生多个文本表示。只接受规范编码，避免同一签名
+    # 出现不同 Token 字符串，便于撤销、审计和精确比较。
+    if _b64_encode(decoded) != value:
+        raise ValueError("Non-canonical base64 encoding")
+    return decoded
 
 
 class AuthService:
@@ -133,10 +138,14 @@ class AuthService:
         catalog: DocumentCatalog,
         secret: str | None,
         token_ttl_seconds: int = 3600,
+        issuer: str = "rag-langchain-native",
+        audience: str = "rag-api",
     ) -> None:
         self.catalog = catalog
         self._secret = secret.encode("utf-8") if secret else None
         self.token_ttl_seconds = token_ttl_seconds
+        self.issuer = issuer
+        self.audience = audience
 
     def _require_secret(self) -> bytes:
         if not self._secret:
@@ -179,6 +188,8 @@ class AuthService:
             "tv": int(user["token_version"]),
             "iat": now,
             "exp": now + self.token_ttl_seconds,
+            "iss": self.issuer,
+            "aud": self.audience,
         }
         body = _b64_encode(
             json.dumps(payload, separators=(",", ":")).encode("utf-8")
@@ -202,6 +213,8 @@ class AuthService:
             if not hmac.compare_digest(expected, _b64_decode(signature_text)):
                 raise AuthenticationError("Invalid token signature")
             payload = json.loads(_b64_decode(body))
+            if payload.get("iss") != self.issuer or payload.get("aud") != self.audience:
+                raise AuthenticationError("Token issuer or audience mismatch")
             if int(payload["exp"]) < int(time.time()):
                 raise AuthenticationError("Token expired")
             user = self.catalog.get_user(str(payload["sub"]))

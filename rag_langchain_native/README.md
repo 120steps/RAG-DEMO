@@ -1,4 +1,12 @@
-# LangChain Native Enterprise RAG V3（Phase 9）
+# LangChain Native Enterprise RAG V3（Phase 9–12）
+
+Phase 11/12 文档入口：
+
+- [Security & Production](docs/PHASE11_SECURITY_PRODUCTION.md)
+- [Phase 11 初学者指南](docs/PHASE11_BEGINNER_GUIDE.md)
+- [CI/CD 与 Evaluation Gate](docs/PHASE12_CICD_EVALUATION_GATE.md)
+- [Phase 12 初学者指南](docs/PHASE12_BEGINNER_GUIDE.md)
+- [最终项目指南](docs/FINAL_PROJECT_GUIDE.md)
 
 这是与仓库 V1（手写）和 V2（LangChain 包装版）并行的独立实现。V3 不导入旧版
 `ask_rag`、Embedding、Hybrid、Reranker、Rewrite 或 Expansion 业务函数。它只读根目录的

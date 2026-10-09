@@ -19,15 +19,37 @@ from pathlib import Path
 from typing import Any
 
 from langchain_core.documents import Document
+import fitz
 
 from .catalog import ConflictError, DocumentCatalog
 from .config import DEFAULT_SETTINGS, Settings
 from .ingestion import load_pdf_pages, split_pages
 from .observability import get_observability
 from .vectorstore import add_documents, create_vectorstore
+from .runtime_lock import serialized_runtime_write
 
 
 ALLOWED_CLASSIFICATIONS = {"general", "hr", "finance", "admin"}
+
+
+def validate_pdf_content(content: bytes, settings: Settings) -> int:
+    """验证大小、PDF magic bytes、可解析性和页数预算，返回页数。
+
+    扩展名和 Content-Type 都可被伪造，因此服务端必须检查真实字节。这里不执行文件，
+    只让 PyMuPDF 在内存中解析；异常会在创建 Catalog Version 前失败。
+    """
+    if not content or len(content) > settings.max_upload_bytes:
+        raise ValueError("PDF upload is empty or exceeds the configured size limit")
+    if not content.startswith(b"%PDF-"):
+        raise ValueError("Uploaded content is not a PDF")
+    try:
+        with fitz.open(stream=content, filetype="pdf") as document:
+            pages = document.page_count
+    except Exception as error:
+        raise ValueError("Uploaded PDF cannot be parsed safely") from error
+    if pages < 1 or pages > settings.max_pdf_pages:
+        raise ValueError("PDF page count exceeds the configured limit")
+    return pages
 
 
 def enterprise_settings(settings: Settings = DEFAULT_SETTINGS) -> Settings:
@@ -130,6 +152,7 @@ class DocumentLifecycleService:
             / safe_name
         )
 
+    @serialized_runtime_write
     def upload_version(
         self,
         *,
@@ -154,6 +177,7 @@ class DocumentLifecycleService:
             raise ConflictError("Restore the document before uploading a version")
         if not filename.lower().endswith(".pdf"):
             raise ValueError("Only PDF files are supported")
+        validate_pdf_content(content, self.settings)
         content_hash = hashlib.sha256(content).hexdigest()
         existing = next(
             (
@@ -190,6 +214,7 @@ class DocumentLifecycleService:
             trace_data["created"] = created
         return {**version, "created": created}
 
+    @serialized_runtime_write
     def index_version(self, document_id: str, version_id: str) -> dict[str, Any]:
         """解析并索引指定版本，但不自动发布。
 
@@ -267,6 +292,7 @@ class DocumentLifecycleService:
                 self.catalog.set_version_status(version_id, "failed", str(error))
             raise
 
+    @serialized_runtime_write
     def publish_version(self, document_id: str, version_id: str) -> dict[str, Any]:
         """发布已成功索引的版本，使普通检索只看到它。"""
         with get_observability().stage("document.publish"):
@@ -274,6 +300,7 @@ class DocumentLifecycleService:
         get_observability().metric("document.published.count")
         return result
 
+    @serialized_runtime_write
     def rollback_version(self, document_id: str, version_id: str) -> dict[str, Any]:
         """把历史 indexed/retired 版本重新设为 active，Citation 会随之切回该 version。"""
         with get_observability().stage("document.rollback"):
@@ -281,11 +308,13 @@ class DocumentLifecycleService:
         get_observability().metric("document.rollback.count")
         return result
 
+    @serialized_runtime_write
     def soft_delete(self, document_id: str) -> None:
         """只软删除目标文档；向量保留以便恢复，但授权 Scope 会立即排除。"""
         with get_observability().stage("document.delete"):
             self.catalog.soft_delete_document(document_id)
 
+    @serialized_runtime_write
     def restore(self, document_id: str) -> None:
         """恢复逻辑文档；其原 active version 重新进入授权 Scope。"""
         with get_observability().stage("document.restore"):
