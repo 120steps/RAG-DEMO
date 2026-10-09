@@ -1,5 +1,5 @@
 # V3 独立镜像；从仓库根目录构建：docker build -f rag_langchain_native/Dockerfile .
-FROM python:3.11-slim-bookworm AS runtime
+FROM python:3.14-slim-bookworm AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
