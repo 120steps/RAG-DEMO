@@ -5,7 +5,6 @@ import math
 import statistics
 import time
 from pathlib import Path
-from typing import Iterable
 
 from ..config import PACKAGE_DIR, PROJECT_ROOT
 

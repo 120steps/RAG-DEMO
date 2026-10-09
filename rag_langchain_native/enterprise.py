@@ -9,6 +9,7 @@ Citation 二次校验 -> 会话存储。
 from __future__ import annotations
 
 import time
+import warnings
 from typing import Any
 
 from langchain_core.runnables import Runnable
@@ -143,8 +144,13 @@ class EnterpriseRAGService:
         if conversation_id and self.conversations.model is None:
             try:
                 self.conversations.model = get_chat_model(self.settings)
-            except Exception:
-                pass
+            except Exception as error:
+                # 只记录异常类型，避免异常正文意外包含 Prompt、Token 或文档内容。
+                warnings.warn(
+                    f"Contextual rewrite unavailable ({type(error).__name__}); using original question",
+                    RuntimeWarning,
+                    stacklevel=2,
+                )
         return self.conversations.contextualize(
             principal, conversation_id, question
         )

@@ -1,0 +1,74 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "metric": "total_retrieval_cases",
+      "current": 28,
+      "threshold": 28,
+      "result": "PASS"
+    },
+    {
+      "metric": "hit_at_1",
+      "current": 0.9642857142857143,
+      "threshold": 0.94,
+      "result": "PASS"
+    },
+    {
+      "metric": "hit_at_3",
+      "current": 1.0,
+      "threshold": 0.98,
+      "result": "PASS"
+    },
+    {
+      "metric": "hit_at_5",
+      "current": 1.0,
+      "threshold": 0.98,
+      "result": "PASS"
+    },
+    {
+      "metric": "hit_at_10",
+      "current": 1.0,
+      "threshold": 1.0,
+      "result": "PASS"
+    },
+    {
+      "metric": "average_retrieval_latency_ms",
+      "current": 1040.234514345814,
+      "threshold": 1280.6110044350912,
+      "result": "PASS"
+    },
+    {
+      "metric": "answer_accuracy",
+      "current": 0.9642857142857143,
+      "threshold": 0.94,
+      "result": "PASS"
+    },
+    {
+      "metric": "citation_accuracy",
+      "current": 1.0,
+      "threshold": 1.0,
+      "result": "PASS"
+    },
+    {
+      "metric": "refusal_accuracy",
+      "current": 1.0,
+      "threshold": 1.0,
+      "result": "PASS"
+    },
+    {
+      "metric": "security_failures",
+      "current": 0,
+      "threshold": 0,
+      "result": "PASS"
+    }
+  ],
+  "baseline_provenance": {
+    "source": "rag_langchain_native/eval/results/phase9_summary.json",
+    "description": "Phase 9 本地真实测试集结果；延迟不是受控硬件基准。",
+    "retrieval_cases": 28,
+    "answer_cases": 32,
+    "embedding_model": "intfloat/multilingual-e5-base",
+    "chunk_size": 200,
+    "chunk_overlap": 30
+  }
+}

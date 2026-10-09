@@ -41,7 +41,7 @@ def run() -> dict:
             ("tenant-b", "admin-b", ["admin"]),
         ):
             auth.register_user(
-                tenant_id=tenant, username=name, password="password123", roles=roles
+                tenant_id=tenant, username=name, password="password123", roles=roles  # nosec B106
             )
             users[name] = auth.verify_token(auth.login(tenant, name, "password123"))
         general = _publish(catalog, "tenant-a", "general.pdf", "general", users["admin"].user_id)

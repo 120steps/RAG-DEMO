@@ -1,0 +1,12 @@
+{
+  "minimum_total_retrieval_cases": 28,
+  "minimum_hit_at_1": 0.94,
+  "minimum_hit_at_3": 0.98,
+  "minimum_hit_at_5": 0.98,
+  "minimum_hit_at_10": 1.0,
+  "maximum_latency_regression_ratio": 0.25,
+  "minimum_answer_accuracy": 0.94,
+  "minimum_citation_correctness": 1.0,
+  "minimum_refusal_correctness": 1.0,
+  "required_security_failures": 0
+}

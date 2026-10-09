@@ -11,6 +11,7 @@ tenant 字段。管理操作要求 admin，下载和检索使用同一 ACL/RBAC 
 from __future__ import annotations
 
 from pathlib import Path
+import asyncio
 
 from fastapi import (
     Depends,
@@ -19,10 +20,12 @@ from fastapi import (
     Form,
     HTTPException,
     Query,
+    Request,
     Security,
     UploadFile,
 )
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from langchain_core.runnables import Runnable
 from pydantic import BaseModel, Field
@@ -30,7 +33,8 @@ from pydantic import BaseModel, Field
 from .catalog import CatalogError, DocumentCatalog, NotFoundError
 from .config import DEFAULT_SETTINGS, Settings
 from .enterprise import EnterpriseRAGService
-from .lifecycle import DocumentLifecycleService
+from .lifecycle import DocumentLifecycleService, validate_pdf_content
+from .rate_limit import LocalRateLimiter
 from .security import (
     AuthService,
     AuthenticationError,
@@ -51,7 +55,7 @@ class LoginRequest(BaseModel):
 class QueryRequest(BaseModel):
     """客户端只选择知识库与会话，不能声明 tenant 或 role。"""
 
-    question: str = Field(min_length=1)
+    question: str = Field(min_length=1, max_length=4000)
     knowledge_base_id: str = Field(default="default", min_length=1)
     conversation_id: str | None = None
     document_id: str | None = None
@@ -86,19 +90,85 @@ def create_app(
     reranker=None,
 ) -> FastAPI:
     """创建 Phase 9 API；测试可注入临时 Catalog、Chroma 和 Fake LLM。"""
+    settings.validate_security()
     application = FastAPI(
         title="LangChain Native Enterprise RAG V3",
-        version="0.2.0",
+        version="0.4.0",
+        docs_url=None if settings.environment == "production" else "/docs",
+        redoc_url=None if settings.environment == "production" else "/redoc",
     )
+    if settings.cors_origins:
+        application.add_middleware(
+            CORSMiddleware,
+            allow_origins=list(settings.cors_origins),
+            allow_credentials=False,
+            allow_methods=["GET", "POST", "DELETE"],
+            allow_headers=["Authorization", "Content-Type", "X-Request-ID"],
+        )
     document_catalog = catalog or DocumentCatalog(settings.catalog_path)
     auth = AuthService(
         document_catalog,
         settings.auth_secret,
         settings.auth_token_ttl_seconds,
+        settings.auth_issuer,
+        settings.auth_audience,
     )
     bearer = HTTPBearer(auto_error=False)
     lifecycle_instance: DocumentLifecycleService | None = None
     enterprise_instance: EnterpriseRAGService | None = None
+    limiter = LocalRateLimiter(settings.api_rate_limit_per_minute)
+    concurrency = asyncio.Semaphore(settings.max_concurrent_requests)
+
+    def secure_response(response):
+        """统一补充浏览器安全头；包括中间件提前拒绝的 413/429 响应。"""
+        response.headers.update(
+            {
+                "X-Content-Type-Options": "nosniff",
+                "X-Frame-Options": "DENY",
+                "Referrer-Policy": "no-referrer",
+                "Cache-Control": "no-store",
+                "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none'",
+            }
+        )
+        return response
+
+    @application.middleware("http")
+    async def security_middleware(request: Request, call_next):
+        """执行请求大小、单进程限流、并发背压和安全响应头。"""
+        length = request.headers.get("content-length")
+        if length and (not length.isdigit() or int(length) > settings.max_request_bytes):
+            return secure_response(
+                JSONResponse(status_code=413, content={"detail": "Request body too large"})
+            )
+        client = request.client.host if request.client else "unknown"
+        allowed, retry_after = limiter.allow(client)
+        if not allowed:
+            return secure_response(
+                JSONResponse(
+                    status_code=429,
+                    headers={"Retry-After": str(retry_after)},
+                    content={"detail": "Rate limit exceeded"},
+                )
+            )
+        async with concurrency:
+            response = await call_next(request)
+        return secure_response(response)
+
+    async def read_upload(file: UploadFile) -> bytes:
+        """分块读取并在超过预算时立即拒绝，避免一次无限制读入内存。"""
+        chunks: list[bytes] = []
+        total = 0
+        while chunk := await file.read(min(1024 * 1024, settings.max_upload_bytes + 1)):
+            total += len(chunk)
+            if total > settings.max_upload_bytes:
+                raise HTTPException(status_code=413, detail="PDF exceeds upload size limit")
+            chunks.append(chunk)
+        return b"".join(chunks)
+
+    def validate_question(question: str) -> None:
+        """执行可配置字符预算；Pydantic 的静态上限之外还允许生产环境收紧。"""
+        if len(question) > settings.max_query_chars:
+            raise HTTPException(status_code=422, detail="Question exceeds configured limit")
 
     def lifecycle() -> DocumentLifecycleService:
         nonlocal lifecycle_instance
@@ -154,11 +224,21 @@ def create_app(
     def health() -> dict:
         return {
             "status": "ok",
-            "version": "v3-phase9",
+            "version": "v3-phase12",
             "collection": settings.enterprise_collection_name,
-            "runtime": str(settings.runtime_dir),
             "auth_configured": bool(settings.auth_secret),
         }
+
+    @application.get("/ready")
+    def readiness() -> dict:
+        """只检查本地关键依赖，不调用 Gemini 或下载模型。"""
+        try:
+            with document_catalog.connection() as connection:
+                connection.execute("SELECT 1").fetchone()
+            settings.runtime_dir.mkdir(parents=True, exist_ok=True)
+            return {"status": "ready", "catalog": "ok", "runtime": "ok"}
+        except Exception:
+            return JSONResponse(status_code=503, content={"status": "not_ready"})
 
     @application.post("/auth/login")
     def login(request: LoginRequest) -> dict:
@@ -199,6 +279,7 @@ def create_app(
         request: QueryRequest,
         principal: Principal = Depends(current_principal),
     ) -> dict:
+        validate_question(request.question)
         try:
             return enterprise().retrieve_only(
                 principal=principal,
@@ -218,6 +299,7 @@ def create_app(
         request: QueryRequest,
         principal: Principal = Depends(current_principal),
     ) -> dict:
+        validate_question(request.question)
         try:
             return enterprise().chat(
                 principal=principal,
@@ -259,7 +341,7 @@ def create_app(
             knowledge_base_id=document["knowledge_base_id"],
             document_id=document_id,
             filename=Path(file.filename or document["source"]).name,
-            content=await file.read(),
+            content=await read_upload(file),
         )
         if index and result["status"] in {"registered", "failed"}:
             result = lifecycle().index_version(document_id, result["version_id"])
@@ -277,6 +359,12 @@ def create_app(
         filename = Path(file.filename or "").name
         if not filename.lower().endswith(".pdf"):
             raise HTTPException(status_code=400, detail="Only PDF files are supported")
+        # 先完整完成字节级验证，再注册逻辑文档；恶意/损坏文件不会留下空 Catalog 记录。
+        content = await read_upload(file)
+        try:
+            validate_pdf_content(content, settings)
+        except ValueError as error:
+            raise HTTPException(status_code=400, detail=str(error)) from error
         document = lifecycle().register_document(
             tenant_id=principal.tenant_id,
             knowledge_base_id=knowledge_base_id,
@@ -290,7 +378,7 @@ def create_app(
             knowledge_base_id=knowledge_base_id,
             document_id=document["document_id"],
             filename=filename,
-            content=await file.read(),
+            content=content,
         )
         if version["status"] in {"registered", "failed"}:
             version = lifecycle().index_version(

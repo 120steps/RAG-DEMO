@@ -9,7 +9,6 @@ from rag_langchain_native.api import create_app
 from rag_langchain_native.catalog import NotFoundError
 from rag_langchain_native.conversation import ConversationService
 from rag_langchain_native.router import KNOWLEDGE_RAG, NORMAL_CHAT, QueryRouter
-from rag_langchain_native.security import Principal
 
 
 def _register(auth, tenant, username, roles):

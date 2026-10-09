@@ -1,6 +1,9 @@
 .venv/
 # Phase 9 的 Chroma、SQLite Catalog、上传文件、Cache 和日志都是运行数据。
 runtime/
+.env
+.env.*
+!.env.example
 __pycache__/
 *.py[cod]
 .pytest_cache/

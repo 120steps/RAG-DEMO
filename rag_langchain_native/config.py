@@ -77,6 +77,7 @@ class Settings:
     cache_dir: Path = PACKAGE_DIR / "runtime" / "cache"
     upload_dir: Path = PACKAGE_DIR / "runtime" / "uploads"
     catalog_path: Path = PACKAGE_DIR / "runtime" / "catalog.sqlite3"
+    environment: str = os.getenv("V3_ENVIRONMENT", "development").lower()
 
     # Phase 9 使用独立 collection，避免企业版生命周期数据与 Phase 8 基线互相污染。
     enterprise_collection_name: str = os.getenv(
@@ -91,6 +92,20 @@ class Settings:
     auth_secret: str | None = os.getenv("V3_AUTH_SECRET")
     auth_token_ttl_seconds: int = int(
         os.getenv("V3_AUTH_TOKEN_TTL_SECONDS", "3600")
+    )
+    auth_issuer: str = os.getenv("V3_AUTH_ISSUER", "rag-langchain-native")
+    auth_audience: str = os.getenv("V3_AUTH_AUDIENCE", "rag-api")
+
+    # API/上传资源预算。它们限制单个请求，分布式部署仍需网关级全局限流。
+    max_request_bytes: int = int(os.getenv("V3_MAX_REQUEST_BYTES", "26214400"))
+    max_upload_bytes: int = int(os.getenv("V3_MAX_UPLOAD_BYTES", "20971520"))
+    max_pdf_pages: int = int(os.getenv("V3_MAX_PDF_PAGES", "500"))
+    max_query_chars: int = int(os.getenv("V3_MAX_QUERY_CHARS", "4000"))
+    api_rate_limit_per_minute: int = int(os.getenv("V3_RATE_LIMIT_PER_MINUTE", "60"))
+    max_concurrent_requests: int = int(os.getenv("V3_MAX_CONCURRENT_REQUESTS", "8"))
+    llm_timeout_seconds: float = float(os.getenv("V3_LLM_TIMEOUT_SECONDS", "60"))
+    cors_origins: tuple[str, ...] = tuple(
+        item.strip() for item in os.getenv("V3_CORS_ORIGINS", "").split(",") if item.strip()
     )
 
     # Conversation / Router。History 只取最近若干条，避免 Prompt 无限增长。
@@ -162,6 +177,21 @@ class Settings:
         os.getenv("V3_MAX_VECTOR_DISTANCE", "0.24")
     )
     refusal_message: str = "根据当前知识库无法回答该问题。"
+
+    def validate_security(self) -> None:
+        """验证安全相关配置；production 缺少强密钥时 Fail Closed。"""
+        if self.environment not in {"development", "test", "production"}:
+            raise ValueError("V3_ENVIRONMENT must be development, test, or production")
+        if self.environment == "production" and (
+            not self.auth_secret or len(self.auth_secret) < 32
+        ):
+            raise ValueError("Production requires V3_AUTH_SECRET with at least 32 characters")
+        if self.max_upload_bytes <= 0 or self.max_request_bytes < self.max_upload_bytes:
+            raise ValueError("Request/upload size limits are invalid")
+        if not 1 <= self.max_pdf_pages <= 10_000:
+            raise ValueError("V3_MAX_PDF_PAGES is invalid")
+        if not 1 <= self.max_concurrent_requests <= 1024:
+            raise ValueError("V3_MAX_CONCURRENT_REQUESTS is invalid")
 
     def ensure_runtime_dirs(self) -> None:
         """确保 V3 运行时目录存在。

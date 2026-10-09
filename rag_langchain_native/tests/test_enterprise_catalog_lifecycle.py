@@ -102,12 +102,12 @@ def test_failed_ingestion_keeps_old_published_version(enterprise_env, make_pdf_b
     )
     good = _upload_index(env, document, make_pdf_bytes("stable active content"), "failure.pdf")
     lifecycle.publish_version(document["document_id"], good["version_id"])
-    bad = lifecycle.upload_version(
-        tenant_id="tenant-a", knowledge_base_id="default",
-        document_id=document["document_id"], filename="failure.pdf", content=b"not a pdf",
-    )
-    with pytest.raises(Exception):
-        lifecycle.index_version(document["document_id"], bad["version_id"])
-    assert env["catalog"].get_version(bad["version_id"])["status"] == "failed"
+    # Phase 11：非法文件在创建版本前即拒绝，不能污染 Catalog/Chroma。
+    with pytest.raises(ValueError, match="not a PDF"):
+        lifecycle.upload_version(
+            tenant_id="tenant-a", knowledge_base_id="default",
+            document_id=document["document_id"], filename="failure.pdf", content=b"not a pdf",
+        )
+    assert len(env["catalog"].list_versions(document["document_id"])) == 1
     assert env["catalog"].get_document(document["document_id"])["active_version_id"] == good["version_id"]
 

@@ -1,0 +1,26 @@
+services:
+  rag-v3:
+    build:
+      context: ..
+      dockerfile: rag_langchain_native/Dockerfile
+    ports:
+      - "127.0.0.1:8011:8011"
+    env_file:
+      - path: .env.production
+        required: false
+    environment:
+      V3_ENVIRONMENT: production
+    volumes:
+      - rag_v3_runtime:/app/rag_langchain_native/runtime
+    read_only: true
+    tmpfs:
+      - /tmp:size=256m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+    stop_grace_period: 40s
+
+volumes:
+  rag_v3_runtime:

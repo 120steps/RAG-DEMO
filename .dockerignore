@@ -1,0 +1,13 @@
+.git
+.github
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/runtime
+**/.env
+**/.env.*
+data/pdf
+eval/results
+langchain_rag
+chroma_db*
+*.pyc
